@@ -1,0 +1,20 @@
+package Utilities
+{
+   import mx.core.BitmapAsset;
+   
+   [Embed(source="/_assets/405_Utilities.SpriteHandler_miniMap_hwaySmall_hori.png")]
+   public class SpriteHandler_miniMap_hwaySmall_hori extends BitmapAsset
+   {
+       
+      
+      public function SpriteHandler_miniMap_hwaySmall_hori()
+      {
+         var _loc1_:Boolean = true;
+         var _loc2_:Boolean = false;
+         if(!_loc2_)
+         {
+            super();
+         }
+      }
+   }
+}

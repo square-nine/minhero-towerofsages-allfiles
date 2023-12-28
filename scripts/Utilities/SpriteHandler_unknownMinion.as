@@ -1,0 +1,20 @@
+package Utilities
+{
+   import mx.core.BitmapAsset;
+   
+   [Embed(source="/_assets/1023_Utilities.SpriteHandler_unknownMinion.png")]
+   public class SpriteHandler_unknownMinion extends BitmapAsset
+   {
+       
+      
+      public function SpriteHandler_unknownMinion()
+      {
+         var _loc1_:Boolean = true;
+         var _loc2_:Boolean = false;
+         if(_loc1_ || _loc1_)
+         {
+            super();
+         }
+      }
+   }
+}
