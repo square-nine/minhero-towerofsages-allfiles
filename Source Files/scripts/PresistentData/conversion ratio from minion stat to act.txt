@@ -1,0 +1,57 @@
+conversion ratio from minion stat to actual value
+
+
+HP:
+Falcona: 15 -> 95
+Tortastone: 100 -> 605
+Sealast: 75 -> 455
+Biomez: 75 -> 455
+Domisteam: 50 -> 305
+
+create a sequence:
+
+15, 25, 35, 45, 55, 65, 75
+95, 155, 215, 275, 335, 395, 455
+
+1st attempt: try percentages
+
+wrong as 100 - > 605 not 710
+
+2nd attempt: brute-force the equation
+
+155-95 = 60
+215-155 = 60
+
+ans = 6n + 5
+
+is ATK + other stats the same?
+
+ATK:
+Tortastone: 15 -> 50
+Sobek: 100 -> 305
+Cerberus: 90 -> 275
+Titoro: 80 -> 245
+
+formula = 3n + 5
+
+SPD:
+Tortastone: 5 -> 20
+Sobek: 60 -> 185
+formula: 3n + 5
+
+Healing:
+Tortastone: 20 -> 65
+Sobek: 50 -> 155
+Formula: 3n + 5
+
+
+Energy:
+Tortastone: 25 -> 120
+Titoro: 35 -> 165
+healabell: 45 -> 210
+megalotron: 55 -> 255
+Sobek: 75 -> 345
+Destroslime: 95 -> 435
+
+form = 4.5n + 7.5
+
