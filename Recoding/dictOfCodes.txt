@@ -1,0 +1,98 @@
+This file will record my ridiculous comment amountsDATA:
+
+
+MoveList not included as the skill tree
+A minion is represented in the following form:
+
+aMinion = {"ID": int -> the unique number assigned, to prevent multiple of the same name from triggering
+           "name": name
+           "level": level
+           "currEXP": EXP -> the current EXP at a level
+           "EXPUntilNextLevel": EXP -> EXP needed to level up
+           "types": [type1, type2] -> their types
+           "HP": health
+           "ATK": attack
+           "HEALING": defence
+           "ENERGY": energy
+           "SPD": speed
+           "IntrinsicStatBuff": statType -> the stat the minion specialises in
+           "Gems": [[Gem1Buff1], [Gem2Buff1, Gem2Buff2]] -> total equipped gems
+           "Moves": ... -> a long list that details each move in the form below, including passives
+           "CurrDOTs": [DOTName1, DOTName2] -> list of current DOTs
+           "CurrBuffsDeBuffs": [Buff1Name, Debuff1Name] -> list of all received buffs/debuffs
+
+}
+
+ExampleMoveList = [Move1, Move2]
+where:
+
+Actual values
+In the form: "S"/"E"/"A" + "!"/"%" + "+"/"-" + value means MoveForm
+The first symbol is whether this only affects itself, or is treated as part of the power.
+The third symbol determines whether the value is increasing or decreasing that attrbute,
+the second symbol determines whether the value is a percent ("%") or literal value ("!")
+try to abbreviate/shorten all of the dictionary IDs.
+
+might convert it tbh
+First letter: intial/dot
+second: target
+third: stat/effect (15 diff values: heal+ damage same sides of coin, same with energycost/restore, so less datapoints)
+fourth: val type (literal/percent)
+fifth: value (incl.positive/negative)
+
+alternatively;
+first: buff
+second: target
+third: stat/effect (persistent)
+fourth-sixth: chance: i.e 080, 100, 004
+seventh: val type !/%
+eigth: value
+
+example: BES075%-25
+         Buff enemies' speed by -25% (75% chance)
+
+DOT, by standard, defaults to the set TurnsActive. That should be fine?
+
+example: ISD!-20 -> initially damage self by 20 HP
+         DAM!20 -> DOT to allies increases armour by 20 points (it's kinda silly but you get the gist)
+
+this should reduce the amount of lettering?
+
+
+
+Move = {
+    core features
+        "name": movename
+        "Type": [moveType1, moveType2] -> what element(s) it is classified as. It can also be "Passive", which denotes the move as a passive buff
+        "NumTargets": numTargets -> can be 0-4 for selecting, and at 5 defaults to all. The prefix "A"/"E"/"S" stands for "Allies", "Enemies" or "Self"
+        "TurnsActive": numTurnsActive -> number of turns the move acts across
+    bools
+        "VMBuffer": bool -> is there a delay between moves
+        "TargetsAreRandom?": bool -> targeting randomly?
+    buffs
+    if the below two are just "null", then they are not buffs, simpel!. Buffs and debuffs are part of the same coin, so they can be merged
+        "DeBuff": [[type, chance, MoveForm1], [type2, chance2, MoveForm2]] -> can debuff multiple things, or can possibly do extra debuffs
+        "Buff": [[type, chance, MoveForm1], [type2, chance2, MoveForm2]] -> can buff multiple things, or can possibly do extra buffs
+    turn manipulation
+        "Cooldown": int -> turns before move can be used
+        "Exhaust": int -> turns before minion can re-attack
+        "Accuracy": 100 (can change) -> chance of hitting (%)
+    system
+        "Icon": image path -> the icon to display
+        "MV-Icon": image path -> the in-game move asset
+        "MV-Anim": AnimationType -> the animation of the skill    
+    general
+        "MaxMod": [type, MoveForm] -> modifying the maximum of a trait as a buff/debuff
+        "Initial": [[stat, MoveForm], [stat, MoveForm]] -> the instant effect of a move, i.e instant ATK, heal, speed, energyrestore, energycost, 
+        initial can also have [stat, MoveForm, chance] for buffs/Debuffs
+        initial can also have [stat, MoveForm, 100, numTurns] for time-limited buffs/debuffs
+        "DOT": [[stat, MoveForm, extraChance, MoveForm, turns], [stat2, MoveForm2, extraChance2, MoveForm3, turns2]] -> all DOTs triggered by this move
+
+
+ReflectAmount, Armour are all part of Buffs
+Stun, Freeze are part of DeBuffs
+ATK, CurrHeal, EnrgyCost, EnergyRestore, SpeedMod, Recoil, ClearBuffsDebuffs are now part of "Initial"
+REcoil is just "S!-" or "S%-" with the attack var
+ClearBuffsDebuffs is used as the "stat" in "Initial", and then the percentage after
+HealBaseDOT, HealCritDOT, BaseDOT, CritDOT are part of DOT
+}
