@@ -1,7 +1,6 @@
-This file will record my ridiculous comment amountsDATA:
+This file will record my ridiculous comment amounts
 
 
-MoveList not included as the skill tree
 A minion is represented in the following form:
 
 aMinion = {"ID": int -> the unique number assigned, to prevent multiple of the same name from triggering
@@ -58,30 +57,30 @@ example: ISD!-20 -> initially damage self by 20 HP
 
 this should reduce the amount of lettering?
 
-
-
+wait OOP might be better:
+A move can be shown as:
 Move = {
-    core features
-        "name": movename
+core features
+        "name": movename given
         "Type": [moveType1, moveType2] -> what element(s) it is classified as. It can also be "Passive", which denotes the move as a passive buff
         "NumTargets": numTargets -> can be 0-4 for selecting, and at 5 defaults to all. The prefix "A"/"E"/"S" stands for "Allies", "Enemies" or "Self"
         "TurnsActive": numTurnsActive -> number of turns the move acts across
-    bools
+bools
         "VMBuffer": bool -> is there a delay between moves
         "TargetsAreRandom?": bool -> targeting randomly?
-    buffs
-    if the below two are just "null", then they are not buffs, simpel!. Buffs and debuffs are part of the same coin, so they can be merged
+buffs
+if the below two are just "null", then they are not buffs, simpel!. Buffs and debuffs are part of the same coin, so they can be merged
         "DeBuff": [[type, chance, MoveForm1], [type2, chance2, MoveForm2]] -> can debuff multiple things, or can possibly do extra debuffs
         "Buff": [[type, chance, MoveForm1], [type2, chance2, MoveForm2]] -> can buff multiple things, or can possibly do extra buffs
-    turn manipulation
+turn manipulation
         "Cooldown": int -> turns before move can be used
         "Exhaust": int -> turns before minion can re-attack
         "Accuracy": 100 (can change) -> chance of hitting (%)
-    system
+system
         "Icon": image path -> the icon to display
         "MV-Icon": image path -> the in-game move asset
         "MV-Anim": AnimationType -> the animation of the skill    
-    general
+general
         "MaxMod": [type, MoveForm] -> modifying the maximum of a trait as a buff/debuff
         "Initial": [[stat, MoveForm], [stat, MoveForm]] -> the instant effect of a move, i.e instant ATK, heal, speed, energyrestore, energycost, 
         initial can also have [stat, MoveForm, chance] for buffs/Debuffs
@@ -92,7 +91,40 @@ Move = {
 ReflectAmount, Armour are all part of Buffs
 Stun, Freeze are part of DeBuffs
 ATK, CurrHeal, EnrgyCost, EnergyRestore, SpeedMod, Recoil, ClearBuffsDebuffs are now part of "Initial"
-REcoil is just "S!-" or "S%-" with the attack var
+Recoil is just "S!-" or "S%-" with the attack var
 ClearBuffsDebuffs is used as the "stat" in "Initial", and then the percentage after
 HealBaseDOT, HealCritDOT, BaseDOT, CritDOT are part of DOT
-}
+
+
+def ExampleMove():
+    def __init__(self, ID):
+        self.ID = ID
+        #time to get data about this specific move: loads data from a specified move into self.currMove
+        #find in db
+        MovesDB = ProcessDB(self, "ChoooseAPATHSOON") #placeholder for loading the database
+        for item in MovesDB: #for each move
+            if item[0] == ID: #if the IDs match
+                if ID <= 115: self.type = "PASSIVE" #get the move type :saves me a column in the DB
+                elif 115 < ID <= 190: self.type = "NORMAL"
+                elif 190 < ID <= 225: self.type = "FLYING"
+                elif 225 < ID <= 285: self.type = "PLANT"
+                elif 285 < ID <= 330: self.type = "WATER"
+                elif 330 < ID <= 390: self.type = "EARTH"
+                elif 390 < ID <= 440: self.type = "ICE"
+                elif 440 < ID <= 515: self.type = "FIRE"
+                elif 515 < ID <= 556: self.type = "ELECTRIC"
+                elif 556 < ID <= 611: self.type = "ROBOT"
+                elif 611 < ID <= 661: self.type = "DINO"
+                elif 661 < ID <= 726: self.type = "UNDEAD"
+                elif 726 < ID <= 776: self.type = "DEMONIC"
+                elif 776 < ID <= 837: self.type = "HOLY"
+                elif 837 < ID <= 887: self.type = "TITAN"
+                elif ID == 888: self.type = "NONE" #special case for "Desperation"
+                else: raise ValueError("No move type specified!")
+                for i in range(len(item)): #for each column
+                    values[MovesDB[0][i]] = item[i] #add the values into the list as a DB
+                print("Successfully retrieved values!")
+                return values
+            else:
+                continue
+        print("No move loaded!")
