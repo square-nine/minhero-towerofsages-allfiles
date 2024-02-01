@@ -46,10 +46,23 @@ third: stat/effect (15 diff values: heal+ damage same sides of coin, same with e
 fourth: val type (literal/percent)
 fifth: value (incl.positive/negative)
 
+alternatively;
+first: buff
+second: target
+third: stat/effect (persistent)
+fourth-sixth: chance: i.e 080, 100, 004
+seventh: val type !/%
+eigth: value
+
+example: BES075%-25
+         Buff enemies' speed by -25% (75% chance)
+
 DOT, by standard, defaults to the set TurnsActive. That should be fine?
 
 example: ISD!-20 -> initially damage self by 20 HP
-         DAM!20 -> DOT to allies increases armour by 20 points
+         DAM!20 -> DOT to allies increases armour by 20 points (it's kinda silly but you get the gist)
+
+this should reduce the amount of lettering?
 
 
 
