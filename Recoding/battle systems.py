@@ -38,6 +38,21 @@ The first symbol is whether this only affects itself, or is treated as part of t
 The third symbol determines whether the value is increasing or decreasing that attrbute,
 the second symbol determines whether the value is a percent ("%") or literal value ("!")
 try to abbreviate/shorten all of the dictionary IDs.
+
+might convert it tbh
+First letter: intial/dot
+second: target
+third: stat/effect (15 diff values: heal+ damage same sides of coin, same with energycost/restore, so less datapoints)
+fourth: val type (literal/percent)
+fifth: value (incl.positive/negative)
+
+DOT, by standard, defaults to the set TurnsActive. That should be fine?
+
+example: ISD!-20 -> initially damage self by 20 HP
+         DAM!20 -> DOT to allies increases armour by 20 points
+
+
+
 Move = {
     core features
         "name": movename
@@ -65,6 +80,7 @@ Move = {
         initial can also have [stat, MoveForm, chance] for buffs/Debuffs
         initial can also have [stat, MoveForm, 100, numTurns] for time-limited buffs/debuffs
         "DOT": [[stat, MoveForm, extraChance, MoveForm, turns], [stat2, MoveForm2, extraChance2, MoveForm3, turns2]] -> all DOTs triggered by this move
+
 
 ReflectAmount, Armour are all part of Buffs
 Stun, Freeze are part of DeBuffs
