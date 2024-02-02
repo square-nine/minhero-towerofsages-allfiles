@@ -22,27 +22,29 @@ aMinion = {"ID": int -> the unique number assigned, to prevent multiple of the s
 
 }
 
-ExampleMoveList = [Move1, Move2]
-where:
 
-Actual values
-In the form: "S"/"E"/"A" + "!"/"%" + "+"/"-" + value means MoveForm
-The first symbol is whether this only affects itself, or is treated as part of the power.
-The third symbol determines whether the value is increasing or decreasing that attrbute,
-the second symbol determines whether the value is a percent ("%") or literal value ("!")
-try to abbreviate/shorten all of the dictionary IDs.
 
-might convert it tbh
-First letter: intial/dot
-second: target
+wait OOP might be better:
+Moves v2 representedations:
+Move = {ID, name, property1, property2...}
+
+if ID is passive, apply all propertys at start
+
+A property is just a cost/effect done by a move, recorded in this format:
+
+First letter: intial/dot (I/D)
+second: target (S/E/A)
 third: stat/effect (15 diff values: heal+ damage same sides of coin, same with energycost/restore, so less datapoints)
-fourth: val type (literal/percent)
-fifth: value (incl.positive/negative)
+fourth: val type (literal(!)/percent(%))
+fifth: value (incl.positive/negative) i.e -20, 50
+
+example: ISD!-20 -> initially damage self by 20 HP
+         DAM!20 -> DOT to allies increases armour by 20 points (it's kinda silly but you get the gist)
 
 alternatively;
-first: buff
-second: target
-third: stat/effect (persistent)
+first: buff (B)
+second: target (S/E/A)
+third: stat (what stat is modified)
 fourth-sixth: chance: i.e 080, 100, 004
 seventh: val type !/%
 eigth: value
@@ -52,12 +54,17 @@ example: BES075%-25
 
 DOT, by standard, defaults to the set TurnsActive. That should be fine?
 
-example: ISD!-20 -> initially damage self by 20 HP
-         DAM!20 -> DOT to allies increases armour by 20 points (it's kinda silly but you get the gist)
+
 
 this should reduce the amount of lettering?
 
-wait OOP might be better:
+Minion (in save file:)
+Minion = [ID, name, level, statBonus, gems (list), moveID1, moveID2..]
+
+
+Minion (in DB):
+Minion = [ID, starting name, HP, ATK, Speed, Energy, Healing, GemMaxAmount, startMovesList]
+
 A move can be shown as:
 Move = {
 core features
@@ -127,4 +134,4 @@ def ExampleMove():
                 return values
             else:
                 continue
-        print("No move loaded!")
+        print("No move loaded!")                                                                                                                                     
