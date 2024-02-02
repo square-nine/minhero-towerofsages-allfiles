@@ -1,12 +1,12 @@
 This file will record my ridiculous comment amounts
 
 
-A minion is represented in the following form:
 
+STORING DATA:
+A minion is represented in the following form:
 aMinion = {"ID": int -> the unique number assigned, to prevent multiple of the same name from triggering
            "name": name
            "level": level
-           "currEXP": EXP -> the current EXP at a level
            "EXPUntilNextLevel": EXP -> EXP needed to level up
            "types": [type1, type2] -> their types
            "HP": health
@@ -23,8 +23,6 @@ aMinion = {"ID": int -> the unique number assigned, to prevent multiple of the s
 }
 
 
-
-wait OOP might be better:
 Moves v2 representedations:
 Move = {ID, name, property1, property2...}
 
@@ -56,14 +54,12 @@ DOT, by standard, defaults to the set TurnsActive. That should be fine?
 
 
 
-this should reduce the amount of lettering?
-
 Minion (in save file:)
 Minion = [ID, name, level, statBonus, gems (list), moveID1, moveID2..]
 
 
 Minion (in DB):
-Minion = [ID, starting name, HP, ATK, Speed, Energy, Healing, GemMaxAmount, startMovesList]
+Minion = [ID, type(s), starting name, HP, ATK, Speed, Energy, Healing, GemMaxAmount, startMovesList]
 
 A move can be shown as:
 Move = {
@@ -101,6 +97,63 @@ ATK, CurrHeal, EnrgyCost, EnergyRestore, SpeedMod, Recoil, ClearBuffsDebuffs are
 Recoil is just "S!-" or "S%-" with the attack var
 ClearBuffsDebuffs is used as the "stat" in "Initial", and then the percentage after
 HealBaseDOT, HealCritDOT, BaseDOT, CritDOT are part of DOT
+
+
+
+GAMEPLAY MECHS
+
+Using OOP for the game:
+
+declare a list of player & enemy minions.
+
+Each minion is now an object
+the constructor may look like this, for a game-ready minion:
+def __init__(self, ID, name, level, statBonus, gems, moves, currEXP):
+        self.ID = ID  #unique identifier for a minion
+        self.name = name #the name given
+        self._level = level #the current level
+        self._currEXP = currEXP #the EXP within the level
+        self._gems = gems #the equipped gems
+        self._moveIDList = moves #the IDs of all available moves
+
+        #-----
+        #process ID to get the below stats, including modifying for statBonus, gems, and level
+        self.HP = health
+        self.ATK = attack
+        self.energy = energy
+        self.speed = speed
+        self.healing = healing
+
+        #------
+        #other game constants
+
+        self.currEffects = [] #a list containing all temporary boosts
+
+private functions will need to be:
+
+PlayMove(self, moveID) -> actually does a move
+ProcessMoveIDList(self) -> converts MoveIDs in a list into Move objects
+
+a minion can also have an "archival" state, where they will not need to play moves but instead just reveal their data
+
+
+for the moves, they also get a unique object to represented
+it acts more like an index than an object, but it's easier conceptually to think of a move as an item instead of  
+def __init__(self, ID):
+        self.ID = ID #the unique ID of the move
+
+        #------
+        #process the move to get the details
+        self.initial = initials
+        self.DOT = DOTs
+        self.buffs = buffs
+        self.type = types
+        self.name = name
+
+some functions include:
+IDToStats(self), converts the ID into the required stats
+
+
 
 
 def ExampleMove():
