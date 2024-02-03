@@ -51,38 +51,6 @@ class Game():
 
     def AddToQueue(self): #adds delayed states, which are Exhaust/Stun/Frozen/Charge
         pass
-    
-    def LoadAMove(self, ID): #loads data from a specified move into self.currMove
-        #find in db
-        MovesDB = ProcessDB(self, "ChoooseAPATHSOON") #gets the movesDB
-        for item in MovesDB: #for each move
-            if item[0] == ID: #if the IDs match
-                values = {}   #reset values
-                #get the move type :saves me a column in the DB
-                if ID <= 115: values["Type"] = "PASSIVE"
-                elif 115 < ID <= 190: values["Type"] = "NORMAL"
-                elif 190 < ID <= 225: values["Type"] = "FLYING"
-                elif 225 < ID <= 285: values["Type"] = "PLANT"
-                elif 285 < ID <= 330: values["Type"] = "WATER"
-                elif 330 < ID <= 390: values["Type"] = "EARTH"
-                elif 390 < ID <= 440: values["Type"] = "ICE"
-                elif 440 < ID <= 515: values["Type"] = "FIRE"
-                elif 515 < ID <= 556: values["Type"] = "ELECTRIC"
-                elif 556 < ID <= 611: values["Type"] = "ROBOT"
-                elif 611 < ID <= 661: values["Type"] = "DINO"
-                elif 661 < ID <= 726: values["Type"] = "UNDEAD"
-                elif 726 < ID <= 776: values["Type"] = "DEMONIC"
-                elif 776 < ID <= 837: values["Type"] = "HOLY"
-                elif 837 < ID <= 887: values["Type"] = "TITAN"
-                elif ID == 888: values["Type"] = "NONE" #special case for "Desperation"
-                else: raise ValueError("No move type specified!")
-                for i in range(len(item)): #for each column
-                    values[MovesDB[0][i]] = item[i] #add the values into the list as a DB
-                print("Successfully retrieved values!")
-                return values
-            else:
-                continue
-        print("No move loaded!")
 
 
     def GetPercentageFromTarget(self, target, percent_value, stat): #gets the percentage from the enemy
@@ -126,10 +94,6 @@ class Game():
                     elif MV_Item[1][1] == "%":
                         self._damage = [minionID, GetPercentageFromTarget(self, GetMinionFromID(self, minionID), currvalue, "Health")]
                     
-                    
-                    
-                    
-                
             elif MV_Item[0] == "Heal":
 
             elif MV_Item[0] == "ClearBuffsDebuffs":
@@ -247,6 +211,129 @@ class Game():
                     self._count2 += 1
                 self._count += 1
 
+
+class Minion():
+    "A class to be used for a minion"
+    def __init__(self, ID, name, level, statBonus, gems, moves, currEXP):
+        self.ID = ID  #unique identifier for a minion
+        self.name = name #the name given
+        self._level = level #the current level
+        self._currEXP = currEXP #the EXP within the level
+        self._gems = gems #the equipped gems
+        self._moveIDList = moves #the IDs of all available moves
+
+        #-----
+        #process ID to get the below stats, including modifying for statBonus, gems, and level
+        self.HP = health
+        self.ATK = attack
+        self.energy = energy
+        self.speed = speed
+        self.healing = healing
+
+        #------
+        #other game constants
+
+        self.currEffects = [] #a list containing all temporary boosts
+    def ProcessID(self):
+        "Processes the ID in the minion database to get the stats."
+
+
+class Move():
+    "A class used to represent a move, to aid comprehension"
+    def __init__(self, ID):
+        self.ID = ID #UID
+
+        #--------
+        #placeholders
+
+        self.type = None
+        self.TurnsActive = 0 #amount of turns to trigger DOT
+        self.initials = [] #Costs at start of move
+        self.DOT = [] #lasting effects that trigger after each turn for X turns
+        self.buffs = [] #game-lasting effects
+
+    def ProcessID(self):
+        "Gets the actual move data from the database"
+
+    def ProcessDB(self):
+        "Loads the database for use"
+
+    def LoadAMove(self): #loads data from a specified move into self.currMove
+        #find in db
+        MovesDB = open("MoveDBToUse.csv", "r") #gets the movesDB
+        for item in MovesDB: #for each move
+            if item[0] == self.ID: #if the IDs match
+                self._rawMove = item.removesuffix("\n").split(",") #gets the raw data
+                for i in range(len(self._rawMove)): self._rawMove[i] = self._rawMove[i].split("@")  #splits for 2nd div in case
+                MovesDB.close() #save data by clearing usage
+        #gets move type
+        if self.ID <= 115: self.type = "PASSIVE"
+        elif 115 < self.ID <= 190: self.type = "NORMAL"
+        elif 190 < self.ID <= 225: self.type = "FLYING"
+        elif 225 < self.ID <= 285: self.type = "PLANT"
+        elif 285 < self.ID <= 330: self.type = "WATER"
+        elif 330 < self.ID <= 390: self.type = "EARTH"
+        elif 390 < self.ID <= 440: self.type = "ICE"
+        elif 440 < self.ID <= 515: self.type = "FIRE"
+        elif 515 < self.ID <= 556: self.type = "ELECTRIC"
+        elif 556 < self.ID <= 611: self.type = "ROBOT"
+        elif 611 < self.ID <= 661: self.type = "DINO"
+        elif 661 < self.ID <= 726: self.type = "UNDEAD"
+        elif 726 < self.ID <= 776: self.type = "DEMONIC"
+        elif 776 < self.ID <= 837: self.type = "HOLY"
+        elif 837 < self.ID <= 887: self.type = "TITAN"
+        elif self.ID == 888: self.type = "NONE" #special case for "Desperation"
+        else: raise ValueError("No move type specified!")
+        #gets name
+        self.name = self._rawMove[1]
+        for i in range(2,len(self._rawMove)): #for each item property
+            self.ToAdd = {} #the dictionary to represent a property
+            self.currProperty = self._rawMove[i] #select the property from the rawMove
+            self.ToAdd["target"] = self.currProperty[1] #adds target group
+            
+            #sort out depending on type
+            if self.currProperty[0] == "D": #if it's a DOT
+                self.ToAdd["value"] = int(self.currProperty[4:])
+                self.ToAdd["statType"] = self.currProperty[3]
+                self.DOT.append(self.ToAdd)
+            elif self.currProperty[0] == "I": #if it's an initial
+                self.ToAdd["value"] = int(self.currProperty[4:])
+                self.ToAdd["statType"] = self.currProperty[3]
+                self.initials.append(self.ToAdd)
+            elif self.currProperty[0] == "B":
+                self.ToAdd["value"] = int(self.currProperty[7:])
+                self.ToAdd["statType"] = self.currProperty[6]
+                self.ToAdd["chance"] = int(self.currProperty[3:5]) #gets chance as well
+                self.buffs.append(self.ToAdd)
+            
+            #gets what stat it affects:
+            self.ToAdd["targetStat"] == self.currProperty[2]
+            """
+            A -> Armour
+            C -> ClearBuffsDebuffs
+            D -> Damage(-), healing (+)
+            E -> Energy Cost (-), Energy restore (+)
+            S -> Speed
+            M -> EnergyMaxStat
+            L -> HealStat
+            H -> Health Stat
+            K -> ATKStat
+            G -> CritStat
+            F -> Freeze
+            J -> Stun
+            P -> Shield
+            X -> Exhaust
+            K -> Cooldown
+            Z -> Charge
+            """
+            
+
+
+
+
+            
+
+            
 '''
 calculating minion stats::
 
