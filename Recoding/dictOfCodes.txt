@@ -1,6 +1,4 @@
-This file will record my ridiculous comment amounts
-
-
+This file will record my ridiculous comment amounts, and data that is linked to my progress redoing the battle code.
 
 STORING DATA:
 A minion is represented in the following form:
@@ -19,18 +17,14 @@ aMinion = {"ID": int -> the unique number assigned, to prevent multiple of the s
            "Moves": ... -> a long list that details each move in the form below, including passives
            "CurrDOTs": [DOTName1, DOTName2] -> list of current DOTs
            "CurrBuffsDeBuffs": [Buff1Name, Debuff1Name] -> list of all received buffs/debuffs
-
 }
-
-
 Moves v2 representedations:
 Move = {ID, name, turnsActive, property1, property2...}
 1st div (separating moves) = \n or Newline
 2nd div (separating properties) = "," or Comma (CSV)
-3rd div is 
+3rd div is "@" and might not be needed, but nevertheless there in case.
 
 if ID is passive, apply all propertys at start
-
 A property is just a cost/effect done by a move, recorded in this format:
 
 First letter: intial/dot (I/D)
@@ -54,8 +48,6 @@ example: BES075%-25
          Buff enemies' speed by -25% (75% chance)
 
 DOT, by standard, defaults to the set TurnsActive. That should be fine?
-
-
 
 Minion (in save file:)
 Minion = [ID, name, level, statBonus, gems (list), moveID1, moveID2..]
@@ -126,11 +118,7 @@ how am i going to store them...
 well, gems can be stored in a list like this:
 Gem = [Level, [Stat, Value], [Stat, Value]...]
 where the level is the current level of the gem
-the sublists record which stat and the literal value to modify by
-
-
-
-
+the sublists record which stat and the literal value to modify by.
 
 
 Noting stuff here (as to why, why not?)
@@ -179,3 +167,16 @@ BaseTalentTreeContainer: a beeg file (10k lines) designed to create the trees. I
 
 All it does is create the moves, which I can look to the wiki for instead
 
+
+Some code files seem important:
+BaseMoveSystem -> seems to be very important (4k lines)
+
+A basic overview includes:
+Queuing Stun/Freeze/Exhaust/Charge animations
+ApplyEffectsOfCurrentMove -> actually does a move -> try to analyse
+Adding/Removing allies/enemies from TargetsAreRandom
+LoadUpTheQueueAndPlayMoves -> around 1k lines of just executing a moves
+
+overall, seems too cumbersome, and hopefully I can rework around it
+
+PlayerMoveSystem, however, seems interesting.
