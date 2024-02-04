@@ -26,6 +26,7 @@ if(!_loc6_)
 §§goto(addr47);
 
 all the goto does is makes sure that the TrainerStarCount is always added to the dynamicData regardless of the conditions to get there.
+soo, why do those conditions still exist, if they can just be skipped?
 
 
 also, speaking of dynamicData:
