@@ -245,6 +245,15 @@ class Minion():
         self.stats["energy"] = int(self._rawMinion[3]) #eenrgy
         self.stats["speed"] = int(self._rawMinion[5]) #speed
         self.stats["healing"] = int(self._rawMinion[6]) #healing
+
+        #i need to also include some other stats:
+        self.maxGems #easy enough
+        self.EXPGainRate #welp
+        self.startingMoves #i can try
+        self.talentTrees #this will be a long one. for all three trees too 💀
+
+
+
         try: self.type = [self._rawMinion[7], self._rawMinion[8]] #if multi-type
         except: self.type = [self._rawMinion[7]] #else
 

@@ -5,7 +5,7 @@ All credits and rights go to Toy Chest Games, who are the orignal developers of 
 inside the 'recoding' folder is my current progress in converting the source code from action script to python.
 
 
-message me if you are interested:
+message me if you are interested in contributing or supporting:
 discord: square_nine
 Reddit: u/square_nine
 GitHub: right here

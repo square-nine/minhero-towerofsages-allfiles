@@ -127,3 +127,55 @@ well, gems can be stored in a list like this:
 Gem = [Level, [Stat, Value], [Stat, Value]...]
 where the level is the current level of the gem
 the sublists record which stat and the literal value to modify by
+
+
+
+
+
+
+Noting stuff here (as to why, why not?)
+
+Seems that AllMinionsContainer also has a minion called "BattleMod", that I think is used for the minions that spawn when there are replaced minions
+
+OwnedMinion: will lose my mind looking at it, so here's a brief summary:
+IT deals with saving and getting minions, and also with getting/setting values, like crit, health etc 
+The helpful areas include (or at least the ones that sound interesting):
+IsTalentPointEarnedOnLevel
+m_maxTalentPoints
+AddShield
+SetLevel
+GetPassiveIncreasePercentageForStat
+CalculateHealingStat
+CalculateAttackStat
+CalculateCurrStats
+CalculateEnergyStat
+CalculateSpeedStat
+CalculateHealthStat
+GetHealthStatDivisor
+GetRandomIVs
+TickTurn
+SetupForCombat
+
+MinionTalentTreeDataNode: Very small, just handles the trees.
+The few functions do:
+Check if all moves unlocked (DoesTheMinionHaveAllTheMovesInNode)
+Resets a tree (ResetNode)
+Adds a move to the tree (AddMoveToTree)
+
+BaseMinion: not as painful, but still important
+The few functions do:
+Adds base moves
+gets/sets talent tree
+SetSpeacilizaionMoves -> gets unique moves (?)
+BaseMinion -> initialises a blank slate for the minion to use 
+
+MinionTalentTree: Also quite small, helps manage the tree. can be ignored/reworked
+
+Gets move dependencies (IsMoveDependantAt)
+Gets a move at a spot in an array (GetMovesAt)
+Adds moves to the tree (AddMoveToTree)
+
+BaseTalentTreeContainer: a beeg file (10k lines) designed to create the trees. I'll probably store them in a DB
+
+All it does is create the moves, which I can look to the wiki for instead
+
