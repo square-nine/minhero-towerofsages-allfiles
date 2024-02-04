@@ -24,7 +24,7 @@ aMinion = {"ID": int -> the unique number assigned, to prevent multiple of the s
 
 
 Moves v2 representedations:
-Move = {ID, name, property1, property2...}
+Move = {ID, name, turnsActive, property1, property2...}
 1st div (separating moves) = \n or Newline
 2nd div (separating properties) = "," or Comma (CSV)
 3rd div is 

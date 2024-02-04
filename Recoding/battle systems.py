@@ -235,7 +235,9 @@ class Minion():
 
         self.currEffects = [] #a list containing all temporary boosts
     def ProcessID(self):
-        "Processes the ID in the minion database to get the stats."
+        "Processes the ID in the minion database to get the stats, good for when a level-up occurs mid-game"
+        self._minDB = open("MinionDB.csv", "r")
+        
 
 
 class Move():
@@ -245,20 +247,13 @@ class Move():
 
         #--------
         #placeholders
-
         self.type = None
         self.TurnsActive = 0 #amount of turns to trigger DOT
         self.initials = [] #Costs at start of move
         self.DOT = [] #lasting effects that trigger after each turn for X turns
         self.buffs = [] #game-lasting effects
 
-    def ProcessID(self):
-        "Gets the actual move data from the database"
-
-    def ProcessDB(self):
-        "Loads the database for use"
-
-    def LoadAMove(self): #loads data from a specified move into self.currMove
+    def ProcessID(self): #loads data from a specified move into self.currMove
         #find in db
         MovesDB = open("MoveDBToUse.csv", "r") #gets the movesDB
         for item in MovesDB: #for each move
@@ -285,8 +280,9 @@ class Move():
         elif self.ID == 888: self.type = "NONE" #special case for "Desperation"
         else: raise ValueError("No move type specified!")
         #gets name
-        self.name = self._rawMove[1]
-        for i in range(2,len(self._rawMove)): #for each item property
+        self.name = self._rawMove[1] #name of move
+        self.TurnsActive = self._rawMove[2] #turn active, in case there are several DOTs
+        for i in range(3,len(self._rawMove)): #for each item property
             self.ToAdd = {} #the dictionary to represent a property
             self.currProperty = self._rawMove[i] #select the property from the rawMove
             self.ToAdd["target"] = self.currProperty[1] #adds target group
@@ -294,15 +290,15 @@ class Move():
             #sort out depending on type
             if self.currProperty[0] == "D": #if it's a DOT
                 self.ToAdd["value"] = int(self.currProperty[4:])
-                self.ToAdd["statType"] = self.currProperty[3]
+                self.ToAdd["statType"] = self.currProperty[3] #!/%
                 self.DOT.append(self.ToAdd)
             elif self.currProperty[0] == "I": #if it's an initial
                 self.ToAdd["value"] = int(self.currProperty[4:])
-                self.ToAdd["statType"] = self.currProperty[3]
+                self.ToAdd["statType"] = self.currProperty[3] #!/%
                 self.initials.append(self.ToAdd)
             elif self.currProperty[0] == "B":
                 self.ToAdd["value"] = int(self.currProperty[7:])
-                self.ToAdd["statType"] = self.currProperty[6]
+                self.ToAdd["statType"] = self.currProperty[6] #!/%
                 self.ToAdd["chance"] = int(self.currProperty[3:5]) #gets chance as well
                 self.buffs.append(self.ToAdd)
             
@@ -326,7 +322,8 @@ class Move():
             K -> Cooldown
             Z -> Charge
             """
-            
+        
+
 
 
 
