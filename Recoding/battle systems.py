@@ -221,14 +221,11 @@ class Minion():
         self._currEXP = currEXP #the EXP within the level
         self._gems = gems #the equipped gems
         self._moveIDList = moves #the IDs of all available moves
-
+        self.stats = {} #list of stats, to better modifiy/access
+        self.statBonus = statBonus #stat bonus
         #-----
         #process ID to get the below stats, including modifying for statBonus, gems, and level
-        self.HP = health
-        self.ATK = attack
-        self.energy = energy
-        self.speed = speed
-        self.healing = healing
+
 
         #------
         #other game constants
@@ -236,7 +233,33 @@ class Minion():
         self.currEffects = [] #a list containing all temporary boosts
     def ProcessID(self):
         "Processes the ID in the minion database to get the stats, good for when a level-up occurs mid-game"
-        self._minDB = open("MinionDB.csv", "r")
+        self._minDB = open("MinionDB.csv", "r") #opens the database
+        self._minDB = self._minDB.split(",")
+        for item in self._minDB: #for each minion
+            if self.ID == item[0]: #if IDs match
+                self._rawMinion = item #store base data
+        self._minDB = None #clear data to save RAM usage
+        self._blankName = self._rawMinion[1] = #the default name
+        self.stats["HP"] = int(self._rawMinion[2]) #HP
+        self.stats["ATK"] = int(self._rawMinion[4]) #attack
+        self.stats["energy"] = int(self._rawMinion[3]) #eenrgy
+        self.stats["speed"] = int(self._rawMinion[5]) #speed
+        self.stats["healing"] = int(self._rawMinion[6]) #healing
+        try: self.type = [self._rawMinion[7], self._rawMinion[8]] #if multi-type
+        except: self.type = [self._rawMinion[7]] #else
+
+        #adjust for level, idk how
+
+
+
+
+        self.stats[self.statBonus] *= 1.05 #adjust for stat bonus
+        
+        #adjust for gems
+        for gem in self._gems: #for each gem
+            for i in range(1,len(gem)): #need to omit level val
+                self.stats[gem[i][0]] += gem[i][1] #adds stat to 
+        
         
 
 

@@ -109,85 +109,21 @@ Using OOP for the game:
 
 declare a list of player & enemy minions.
 
-Each minion is now an object
-the constructor may look like this, for a game-ready minion:
-def __init__(self, ID, name, level, statBonus, gems, moves, currEXP):
-        self.ID = ID  #unique identifier for a minion
-        self.name = name #the name given
-        self._level = level #the current level
-        self._currEXP = currEXP #the EXP within the level
-        self._gems = gems #the equipped gems
-        self._moveIDList = moves #the IDs of all available moves
-
-        #-----
-        #process ID to get the below stats, including modifying for statBonus, gems, and level
-        self.HP = health
-        self.ATK = attack
-        self.energy = energy
-        self.speed = speed
-        self.healing = healing
-
-        #------
-        #other game constants
-
-        self.currEffects = [] #a list containing all temporary boosts
-
-private functions will need to be:
-
-PlayMove(self, moveID) -> actually does a move
-ProcessMoveIDList(self) -> converts MoveIDs in a list into Move objects
+Each minion is now an object to better conceptulaise the playing field.
 
 a minion can also have an "archival" state, where they will not need to play moves but instead just reveal their data
 
 
 for the moves, they also get a unique object to represented
 it acts more like an index than an object, but it's easier conceptually to think of a move as an item instead of  
-def __init__(self, ID):
-        self.ID = ID #the unique ID of the move
-
-        #------
-        #process the move to get the details
-        self.initial = initials
-        self.DOT = DOTs
-        self.buffs = buffs
-        self.type = types
-        self.name = name
-
-some functions include:
-IDToStats(self), converts the ID into the required stats
 
 
 
+Gems:
 
-def ExampleMove():
-    def __init__(self, ID):
-        self.ID = ID
-        #time to get data about this specific move: loads data from a specified move into self.currMove
-        #find in db
-        MovesDB = ProcessDB(self, "ChoooseAPATHSOON") #placeholder for loading the database
-        for item in MovesDB: #for each move
-            if item[0] == ID: #if the IDs match
-                if ID <= 115: self.type = "PASSIVE" #get the move type :saves me a column in the DB
-                elif 115 < ID <= 190: self.type = "NORMAL"
-                elif 190 < ID <= 225: self.type = "FLYING"
-                elif 225 < ID <= 285: self.type = "PLANT"
-                elif 285 < ID <= 330: self.type = "WATER"
-                elif 330 < ID <= 390: self.type = "EARTH"
-                elif 390 < ID <= 440: self.type = "ICE"
-                elif 440 < ID <= 515: self.type = "FIRE"
-                elif 515 < ID <= 556: self.type = "ELECTRIC"
-                elif 556 < ID <= 611: self.type = "ROBOT"
-                elif 611 < ID <= 661: self.type = "DINO"
-                elif 661 < ID <= 726: self.type = "UNDEAD"
-                elif 726 < ID <= 776: self.type = "DEMONIC"
-                elif 776 < ID <= 837: self.type = "HOLY"
-                elif 837 < ID <= 887: self.type = "TITAN"
-                elif ID == 888: self.type = "NONE" #special case for "Desperation"
-                else: raise ValueError("No move type specified!")
-                for i in range(len(item)): #for each column
-                    values[MovesDB[0][i]] = item[i] #add the values into the list as a DB
-                print("Successfully retrieved values!")
-                return values
-            else:
-                continue
-        print("No move loaded!")                                                                                                                                     
+how am i going to store them...
+
+well, gems can be stored in a list like this:
+Gem = [Level, [Stat, Value], [Stat, Value]...]
+where the level is the current level of the gem
+the sublists record which stat and the literal value to modify by
