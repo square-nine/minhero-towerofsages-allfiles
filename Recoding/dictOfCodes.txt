@@ -44,8 +44,7 @@ fourth-sixth: chance: i.e 080, 100, 004
 seventh: val type !/%
 eigth: value
 
-example: BES075%-25
-         Buff enemies' speed by -25% (75% chance)
+example: BES075%-25 -> Buff enemies speed by -25% at a 75% chance
 
 DOT, by standard, defaults to the set TurnsActive. That should be fine?
 
@@ -66,14 +65,10 @@ core features
 bools
         "VMBuffer": bool -> is there a delay between moves
         "TargetsAreRandom?": bool -> targeting randomly?
-buffs
-if the below two are just "null", then they are not buffs, simpel!. Buffs and debuffs are part of the same coin, so they can be merged
+buffs - if the below two are just "null", then they are not buffs, simpel!. Buffs and debuffs are part of the same coin, so they can be merged
         "DeBuff": [[type, chance, MoveForm1], [type2, chance2, MoveForm2]] -> can debuff multiple things, or can possibly do extra debuffs
         "Buff": [[type, chance, MoveForm1], [type2, chance2, MoveForm2]] -> can buff multiple things, or can possibly do extra buffs
-turn manipulation
-        "Cooldown": int -> turns before move can be used
-        "Exhaust": int -> turns before minion can re-attack
-        "Accuracy": 100 (can change) -> chance of hitting (%)
+turn manipulation - removed as integrated into general
 system
         "Icon": image path -> the icon to display
         "MV-Icon": image path -> the in-game move asset

@@ -8,8 +8,6 @@ see dictofCodes
 
 """
 
-
-
 class Game():
     def __init__(self, playerMinions, opponentMinions):
         self.QueueStack = []  #a queue for time-delayed moves
@@ -23,8 +21,6 @@ class Game():
         self.Targets = [] #the list of selected targets
         self.currMinion = {} #the current minion
         self.currMove = {} #the current move to do
-
-
 
     def ProcessDB(self, path): #loads a .csv, with separators "\n" then "," then "@" then "£"
         print(f"Loading DB at {path}...")
