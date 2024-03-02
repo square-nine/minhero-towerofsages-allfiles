@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_modStone_shieldStone()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(!_loc2_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

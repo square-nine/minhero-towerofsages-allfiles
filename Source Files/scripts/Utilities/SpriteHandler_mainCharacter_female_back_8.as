@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_mainCharacter_female_back_8()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

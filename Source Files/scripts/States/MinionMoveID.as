@@ -1,6 +1,5 @@
 package States
 {
-   // assigns a number for EACH MOVE
    public class MinionMoveID
    {
       
@@ -1795,12 +1794,7 @@ package States
       
       public function MinionMoveID()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(!(_loc2_ && _loc2_))
-         {
-            super();
-         }
+         super();
       }
    }
 }

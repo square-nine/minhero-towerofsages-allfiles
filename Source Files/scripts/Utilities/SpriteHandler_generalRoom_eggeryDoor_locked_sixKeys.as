@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_generalRoom_eggeryDoor_locked_sixKeys()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_ || Boolean(this))
-         {
-            super();
-         }
+         super();
       }
    }
 }

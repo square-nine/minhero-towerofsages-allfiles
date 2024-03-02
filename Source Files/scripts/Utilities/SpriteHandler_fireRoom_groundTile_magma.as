@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_fireRoom_groundTile_magma()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_ || _loc1_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

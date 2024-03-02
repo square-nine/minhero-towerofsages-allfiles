@@ -8,42 +8,17 @@ package TopDown.LevelObjects
       
       public function GemChestTopLayer()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_ || Boolean(this))
-         {
-            super();
-            if(_loc1_)
-            {
-               addr24:
-               this.m_hasBeenUsed = false;
-            }
-            return;
-         }
-         §§goto(addr24);
+         super();
+         this.m_hasBeenUsed = false;
       }
       
       override public function AddSprite() : void
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!_loc1_)
+         super.AddSprite();
+         if(this.m_hasBeenUsed)
          {
-            super.AddSprite();
-            if(!_loc1_)
-            {
-               addr20:
-               if(this.m_hasBeenUsed)
-               {
-                  if(_loc2_)
-                  {
-                     m_currSprite.alpha = 0;
-                  }
-               }
-            }
-            return;
+            m_currSprite.alpha = 0;
          }
-         §§goto(addr20);
       }
    }
 }

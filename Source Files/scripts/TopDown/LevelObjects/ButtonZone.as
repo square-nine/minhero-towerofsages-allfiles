@@ -10,33 +10,14 @@ package TopDown.LevelObjects
       
       public function ButtonZone()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_ || Boolean(this))
-         {
-            super();
-            if(!_loc1_)
-            {
-               this.m_buttonZoneID = 0;
-            }
-         }
+         super();
+         this.m_buttonZoneID = 0;
       }
       
       override public function OnColl() : void
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!(_loc1_ && _loc2_))
-         {
-            super.OnColl();
-            if(!_loc1_)
-            {
-               addr25:
-               Singleton.staticData.GetCurrentLevel().InButtonCollZone(this.m_buttonZoneID);
-            }
-            return;
-         }
-         §§goto(addr25);
+         super.OnColl();
+         Singleton.staticData.GetCurrentLevel().InButtonCollZone(this.m_buttonZoneID);
       }
    }
 }

@@ -111,9 +111,8 @@ package com.google.analytics.debug
       
       public function init() : void
       {
-         var _loc1_:int = 10;
-         var _loc2_:uint = uint(_display.stage.stageWidth - _loc1_ * 2);
-         var _loc3_:uint = uint(_display.stage.stageHeight - _loc1_ * 2);
+         var _loc2_:uint = uint(_display.stage.stageWidth - 10 * 2);
+         var _loc3_:uint = uint(_display.stage.stageHeight - 10 * 2);
          var _loc4_:Panel;
          (_loc4_ = new Panel("analytics",_loc2_,_loc3_)).alignement = Align.top;
          _loc4_.stickToEdge = false;
@@ -155,9 +154,8 @@ package com.google.analytics.debug
       private function _filterMaxChars(param1:String, param2:int = 0) : String
       {
          var _loc6_:String = null;
-         var _loc3_:String = "\n";
          var _loc4_:Array = [];
-         var _loc5_:Array = param1.split(_loc3_);
+         var _loc5_:Array = param1.split("\n");
          if(param2 == 0)
          {
             param2 = _maxCharPerLine;
@@ -174,7 +172,7 @@ package com.google.analytics.debug
             _loc4_.push(_loc6_);
             _loc7_++;
          }
-         return _loc4_.join(_loc3_);
+         return _loc4_.join("\n");
       }
       
       private function _clearGRAlert(param1:Event) : void

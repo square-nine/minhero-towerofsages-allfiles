@@ -15,56 +15,20 @@ package Utilities
       
       public function Singleton()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!_loc1_)
+         super();
+         if(m_dynamicData != null)
          {
-            super();
-            if(_loc2_ || _loc1_)
-            {
-               if(m_dynamicData != null)
-               {
-                  if(!(_loc1_ && _loc1_))
-                  {
-                     §§goto(addr42);
-                  }
-               }
-               return;
-            }
+            throw new Error("Singleton can only be accessed by Singleton.Instance");
          }
-         addr42:
-         throw new Error("Singleton can only be accessed by Singleton.Instance");
       }
       
       public static function CreateObjects() : void
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!_loc1_)
-         {
-            m_utility = new Utility();
-            if(!(_loc1_ && _loc2_))
-            {
-               m_staticData = new StaticData();
-               if(_loc2_)
-               {
-                  m_staticData.CreateObjects();
-                  if(_loc1_ && _loc1_)
-                  {
-                  }
-                  addr62:
-                  m_dynamicData.CreateObjects();
-                  §§goto(addr64);
-               }
-               m_dynamicData = new DynamicData();
-               if(_loc1_)
-               {
-               }
-               addr64:
-               return;
-            }
-         }
-         §§goto(addr62);
+         m_utility = new Utility();
+         m_staticData = new StaticData();
+         m_staticData.CreateObjects();
+         m_dynamicData = new DynamicData();
+         m_dynamicData.CreateObjects();
       }
       
       public static function get dynamicData() : DynamicData

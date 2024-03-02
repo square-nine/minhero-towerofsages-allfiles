@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_mv_inflame()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_mainCharacter_male_front_9()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_ || Boolean(this))
-         {
-            super();
-         }
+         super();
       }
    }
 }

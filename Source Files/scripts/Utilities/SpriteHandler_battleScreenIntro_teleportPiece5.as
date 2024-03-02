@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_battleScreenIntro_teleportPiece5()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

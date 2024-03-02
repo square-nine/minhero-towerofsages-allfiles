@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_menus_statsBars_cap_attack()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!_loc1_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

@@ -44,47 +44,21 @@ package Minions
       
       public function BaseMinion()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(!(_loc2_ && Boolean(this)))
-         {
-            super();
-            if(!_loc2_)
-            {
-               this.m_talentTrees = new Vector.<MinionTalentTree>(3);
-            }
-            this.m_startingMoves = new Vector.<int>();
-         }
+         super();
+         this.m_talentTrees = new Vector.<MinionTalentTree>(3);
+         this.m_startingMoves = new Vector.<int>();
          this.m_spealizationMoves = new Vector.<int>(3);
          this.m_expGainRate = 1;
-         if(_loc1_ || _loc1_)
-         {
-            this.m_evolutionLevel = 999;
-         }
+         this.m_evolutionLevel = 999;
          this.m_numberOfGems = 0;
          this.m_numberOfLockedGems = 0;
       }
       
       public function SetSpeacilizaionMoves(param1:int, param2:int, param3:int) : void
       {
-         var _loc4_:Boolean = false;
-         var _loc5_:Boolean = true;
-         if(!(_loc4_ && Boolean(param3)))
-         {
-            this.m_spealizationMoves[0] = param1;
-            if(!(_loc4_ && Boolean(param3)))
-            {
-               §§goto(addr47);
-            }
-            §§goto(addr59);
-         }
-         addr47:
+         this.m_spealizationMoves[0] = param1;
          this.m_spealizationMoves[1] = param2;
-         if(!(_loc4_ && Boolean(param2)))
-         {
-            addr59:
-            this.m_spealizationMoves[2] = param3;
-         }
+         this.m_spealizationMoves[2] = param3;
       }
       
       public function GetTalentTree(param1:int) : MinionTalentTree
@@ -94,22 +68,12 @@ package Minions
       
       public function SetTalentTree(param1:int, param2:MinionTalentTree) : void
       {
-         var _loc3_:Boolean = false;
-         var _loc4_:Boolean = true;
-         if(!_loc3_)
-         {
-            this.m_talentTrees[param1] = param2;
-         }
+         this.m_talentTrees[param1] = param2;
       }
       
       public function AddStartingMove(param1:int) : void
       {
-         var _loc2_:Boolean = true;
-         var _loc3_:Boolean = false;
-         if(_loc2_)
-         {
-            this.m_startingMoves.push(param1);
-         }
+         this.m_startingMoves.push(param1);
       }
    }
 }

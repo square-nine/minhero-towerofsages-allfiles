@@ -28,242 +28,70 @@ package SharedObjects.BaseInterfacePieces
       
       public function ConformationBox(param1:String = "Are you sure?")
       {
-         var _loc3_:Boolean = true;
-         var _loc4_:Boolean = false;
          var _loc2_:TextFormat = null;
-         if(_loc3_ || Boolean(param1))
-         {
-            super();
-            if(!_loc4_)
-            {
-               this.m_background = Singleton.utility.m_spriteHandler.CreateSprite("conformationBox_background");
-               if(!(_loc4_ && Boolean(_loc2_)))
-               {
-                  addr41:
-                  addChild(this.m_background);
-               }
-               _loc2_ = new TextFormat();
-               _loc2_.color = 16382457;
-               _loc2_.size = 16;
-               _loc2_.font = "BurbinCasual";
-               _loc2_.align = TextFormatAlign.CENTER;
-               if(_loc3_)
-               {
-                  this.m_questionText = new TextField();
-                  this.m_questionText.x = 7;
-                  if(_loc3_)
-                  {
-                     this.m_questionText.y = 11;
-                     this.m_questionText.embedFonts = true;
-                     if(!(_loc4_ && Boolean(this)))
-                     {
-                        this.m_questionText.defaultTextFormat = _loc2_;
-                        if(!_loc4_)
-                        {
-                           this.m_questionText.wordWrap = true;
-                           this.m_questionText.autoSize = TextFieldAutoSize.CENTER;
-                           if(!(_loc4_ && _loc3_))
-                           {
-                              this.m_questionText.text = param1;
-                              this.m_questionText.width = 200;
-                              if(!(_loc4_ && _loc3_))
-                              {
-                                 this.m_questionText.selectable = false;
-                                 if(!_loc4_)
-                                 {
-                                    addr139:
-                                    addChild(this.m_questionText);
-                                    if(!_loc4_)
-                                    {
-                                       this.m_yesButton = new TCButton(this.OnYesPressed,"conformationBox_yesButton");
-                                       if(_loc3_)
-                                       {
-                                          §§push(this.m_yesButton);
-                                          if(!(_loc4_ && Boolean(this)))
-                                          {
-                                             §§push(5);
-                                             if(_loc3_)
-                                             {
-                                                §§pop().x = §§pop();
-                                                addr169:
-                                                §§push(this.m_yesButton);
-                                                §§push(42);
-                                             }
-                                             §§pop().y = §§pop();
-                                             if(_loc3_ || Boolean(_loc2_))
-                                             {
-                                                addr178:
-                                                addChild(this.m_yesButton);
-                                                if(!(_loc4_ && Boolean(param1)))
-                                                {
-                                                   addr189:
-                                                   this.m_noButton = new TCButton(this.OnNoPressed,"conformationBox_noButton");
-                                                   addr196:
-                                                   §§push(this.m_noButton);
-                                                   if(!_loc4_)
-                                                   {
-                                                      §§push(105);
-                                                      if(!(_loc4_ && Boolean(this)))
-                                                      {
-                                                         §§pop().x = §§pop();
-                                                         addr218:
-                                                         §§push(this.m_noButton);
-                                                         §§push(42);
-                                                      }
-                                                      §§pop().y = §§pop();
-                                                      addChild(this.m_noButton);
-                                                      §§goto(addr224);
-                                                   }
-                                                   §§goto(addr218);
-                                                }
-                                             }
-                                             §§goto(addr224);
-                                          }
-                                          §§goto(addr169);
-                                       }
-                                       §§goto(addr229);
-                                    }
-                                 }
-                                 §§goto(addr196);
-                              }
-                              §§goto(addr189);
-                           }
-                           §§goto(addr218);
-                        }
-                        §§goto(addr139);
-                     }
-                     addr224:
-                     this.m_isOpen = false;
-                     if(_loc3_)
-                     {
-                        addr229:
-                        this.visible = false;
-                        §§goto(addr232);
-                     }
-                     addr232:
-                     return;
-                  }
-                  §§goto(addr178);
-               }
-               §§goto(addr229);
-            }
-         }
-         §§goto(addr41);
+         super();
+         this.m_background = Singleton.utility.m_spriteHandler.CreateSprite("conformationBox_background");
+         addChild(this.m_background);
+         _loc2_ = new TextFormat();
+         _loc2_.color = 16382457;
+         _loc2_.size = 16;
+         _loc2_.font = "BurbinCasual";
+         _loc2_.align = TextFormatAlign.CENTER;
+         this.m_questionText = new TextField();
+         this.m_questionText.x = 7;
+         this.m_questionText.y = 11;
+         this.m_questionText.embedFonts = true;
+         this.m_questionText.defaultTextFormat = _loc2_;
+         this.m_questionText.wordWrap = true;
+         this.m_questionText.autoSize = TextFieldAutoSize.CENTER;
+         this.m_questionText.text = param1;
+         this.m_questionText.width = 200;
+         this.m_questionText.selectable = false;
+         addChild(this.m_questionText);
+         this.m_yesButton = new TCButton(this.OnYesPressed,"conformationBox_yesButton");
+         this.m_yesButton.x = 5;
+         this.m_yesButton.y = 42;
+         addChild(this.m_yesButton);
+         this.m_noButton = new TCButton(this.OnNoPressed,"conformationBox_noButton");
+         this.m_noButton.x = 105;
+         this.m_noButton.y = 42;
+         addChild(this.m_noButton);
+         this.m_isOpen = false;
+         this.visible = false;
       }
       
       public function BringIn(param1:Function = null, param2:Function = null) : void
       {
-         var _loc3_:Boolean = true;
-         var _loc4_:Boolean = false;
-         if(_loc3_)
-         {
-            this.m_onYesFunction = param1;
-            if(_loc3_ || Boolean(param2))
-            {
-               this.m_onNoFunction = param2;
-               if(!_loc4_)
-               {
-                  §§goto(addr44);
-               }
-               §§goto(addr49);
-            }
-            addr44:
-            this.m_isOpen = true;
-            if(_loc3_)
-            {
-               addr49:
-               this.visible = true;
-            }
-            this.m_yesButton.m_alwaysActive = true;
-            if(_loc3_)
-            {
-               this.m_noButton.m_alwaysActive = true;
-            }
-            §§goto(addr62);
-         }
-         addr62:
+         this.m_onYesFunction = param1;
+         this.m_onNoFunction = param2;
+         this.m_isOpen = true;
+         this.visible = true;
+         this.m_yesButton.m_alwaysActive = true;
+         this.m_noButton.m_alwaysActive = true;
       }
       
       private function OnYesPressed(param1:MouseEvent) : void
       {
-         var _loc2_:Boolean = false;
-         var _loc3_:Boolean = true;
-         if(!_loc2_)
+         this.m_isOpen = false;
+         this.visible = false;
+         this.m_yesButton.m_alwaysActive = false;
+         this.m_noButton.m_alwaysActive = false;
+         if(this.m_onYesFunction != null)
          {
-            this.m_isOpen = false;
-            this.visible = false;
-            if(_loc3_ || Boolean(param1))
-            {
-               this.m_yesButton.m_alwaysActive = false;
-               if(_loc3_ || Boolean(param1))
-               {
-                  this.m_noButton.m_alwaysActive = false;
-                  if(_loc2_ && Boolean(this))
-                  {
-                  }
-                  §§goto(addr86);
-               }
-               §§push(this.m_onYesFunction);
-               if(_loc3_ || _loc3_)
-               {
-                  if(§§pop() != null)
-                  {
-                     if(_loc3_ || _loc3_)
-                     {
-                        addr83:
-                        §§push(this.m_onYesFunction);
-                     }
-                  }
-                  §§goto(addr86);
-               }
-               §§pop().call();
-               §§goto(addr86);
-            }
-            §§goto(addr83);
+            this.m_onYesFunction.call();
          }
-         addr86:
       }
       
       private function OnNoPressed(param1:MouseEvent) : void
       {
-         var _loc2_:Boolean = false;
-         var _loc3_:Boolean = true;
-         if(!(_loc2_ && _loc3_))
+         this.m_isOpen = false;
+         this.visible = false;
+         this.m_yesButton.m_alwaysActive = false;
+         this.m_noButton.m_alwaysActive = false;
+         if(this.m_onNoFunction != null)
          {
-            this.m_isOpen = false;
-            if(!(_loc2_ && _loc3_))
-            {
-               addr38:
-               this.visible = false;
-               this.m_yesButton.m_alwaysActive = false;
-               if(!_loc2_)
-               {
-                  this.m_noButton.m_alwaysActive = false;
-                  if(_loc3_ || _loc2_)
-                  {
-                  }
-                  addr75:
-                  this.m_onNoFunction.call();
-                  addr76:
-                  return;
-                  addr73:
-               }
-               §§push(this.m_onNoFunction);
-               if(_loc3_)
-               {
-                  if(§§pop() != null)
-                  {
-                     if(!_loc2_)
-                     {
-                        §§goto(addr73);
-                     }
-                  }
-                  §§goto(addr76);
-               }
-            }
-            §§goto(addr75);
+            this.m_onNoFunction.call();
          }
-         §§goto(addr38);
       }
    }
 }

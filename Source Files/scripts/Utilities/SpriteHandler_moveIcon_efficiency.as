@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_moveIcon_efficiency()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

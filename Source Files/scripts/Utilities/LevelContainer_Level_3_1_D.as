@@ -9,12 +9,7 @@ package Utilities
       
       public function LevelContainer_Level_3_1_D()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!(_loc1_ && Boolean(this)))
-         {
-            super();
-         }
+         super();
       }
    }
 }

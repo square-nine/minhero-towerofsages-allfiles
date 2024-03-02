@@ -26,44 +26,11 @@ package States
       public static const TRAINER_GYM_6:int = 10;
       
       public static const TRAINER_GRAND_SAGE:int = 11;
-      
-      {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_ || TrainerType)
-         {
-            NO_TRAINER = 0;
-            NORMAL_TRAINER = 1;
-            BOSS_TRAINER = 2;
-            HARD_TRAINER = 3;
-            EXPERT_TRAINER = 4;
-            if(_loc2_ || _loc1_)
-            {
-               TRAINER_GYM_1 = 5;
-               TRAINER_GYM_2 = 6;
-               addr53:
-            }
-            TRAINER_GYM_3 = 7;
-            TRAINER_GYM_4 = 8;
-            TRAINER_GYM_5 = 9;
-            if(!(_loc1_ && _loc1_))
-            {
-               TRAINER_GYM_6 = 10;
-               TRAINER_GRAND_SAGE = 11;
-            }
-            return;
-         }
-         §§goto(addr53);
-      }
+       
       
       public function TrainerType()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!(_loc1_ && Boolean(this)))
-         {
-            super();
-         }
+         super();
       }
    }
 }

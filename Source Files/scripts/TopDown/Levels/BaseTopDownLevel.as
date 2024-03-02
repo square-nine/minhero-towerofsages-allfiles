@@ -84,42 +84,20 @@ package TopDown.Levels
       
       public function BaseTopDownLevel(param1:Class = null)
       {
-         var _loc2_:Boolean = false;
-         var _loc3_:Boolean = true;
-         if(!_loc2_)
-         {
-            super();
-            if(!_loc2_)
-            {
-               this.m_visualObjects = new Vector.<VisualLevelObject>();
-               this.m_visualObjectWithHeight = new Vector.<VisualLevelObjectWithHeight>();
-               this.m_collObjects = new Vector.<BaseLevelCollObject>();
-               this.m_wallCollObjects = new Vector.<BaseLevelCollObject>();
-               if(!_loc2_)
-               {
-                  this.m_interactionObjects = new Vector.<BaseInGameInteractionObject>();
-                  this.m_soundDistanceObjects = new Vector.<SoundDistanceObject>();
-                  if(_loc3_ || Boolean(param1))
-                  {
-                     addr72:
-                     this.m_animationObjects = new Vector.<FireTorch>();
-                  }
-                  this.m_allObjects = new Vector.<VisualLevelObject>();
-                  if(_loc3_ || Boolean(param1))
-                  {
-                     addr98:
-                     this.m_roomBounds = new Sprite();
-                     this.m_isFirstLoad = true;
-                     this.m_initialDirection = OrientationState.ORIENTATION_UP;
-                     this.m_xmlFile = param1;
-                  }
-                  this.m_extraHardModeFloors = Singleton.staticData.NUM_OF_FLOORS_IN_THE_STANDARD_TOWER;
-                  return;
-               }
-            }
-            §§goto(addr72);
-         }
-         §§goto(addr98);
+         super();
+         this.m_visualObjects = new Vector.<VisualLevelObject>();
+         this.m_visualObjectWithHeight = new Vector.<VisualLevelObjectWithHeight>();
+         this.m_collObjects = new Vector.<BaseLevelCollObject>();
+         this.m_wallCollObjects = new Vector.<BaseLevelCollObject>();
+         this.m_interactionObjects = new Vector.<BaseInGameInteractionObject>();
+         this.m_soundDistanceObjects = new Vector.<SoundDistanceObject>();
+         this.m_animationObjects = new Vector.<FireTorch>();
+         this.m_allObjects = new Vector.<VisualLevelObject>();
+         this.m_roomBounds = new Sprite();
+         this.m_isFirstLoad = true;
+         this.m_initialDirection = OrientationState.ORIENTATION_UP;
+         this.m_xmlFile = param1;
+         this.m_extraHardModeFloors = Singleton.staticData.NUM_OF_FLOORS_IN_THE_STANDARD_TOWER;
       }
       
       public function AddExtraVarsToObjects() : void
@@ -128,1327 +106,1563 @@ package TopDown.Levels
       
       public function CreateObjects() : void
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!(_loc1_ && _loc1_))
+         if(this.m_xmlFile != null)
          {
-            if(this.m_xmlFile != null)
-            {
-               if(_loc2_ || _loc1_)
-               {
-                  addr39:
-                  this.LoadLevelFromXMLObject();
-               }
-            }
-            return;
+            this.LoadLevelFromXMLObject();
          }
-         §§goto(addr39);
       }
       
       public function PreLoadSprites() : Boolean
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_)
+         if(!this.m_isFirstLoad)
          {
-            §§push(this.m_isFirstLoad);
-            if(!_loc1_)
-            {
-               if(!§§pop())
-               {
-                  if(!(_loc1_ && _loc1_))
-                  {
-                     addr35:
-                     §§push(false);
-                     if(_loc2_ || _loc1_)
-                     {
-                        return §§pop();
-                     }
-                     §§goto(addr66);
-                  }
-                  else
-                  {
-                     addr62:
-                     this.m_isFirstLoad = false;
-                  }
-                  §§goto(addr66);
-               }
-               else
-               {
-                  this.CreateObjects();
-                  if(_loc2_)
-                  {
-                     §§goto(addr62);
-                  }
-               }
-               §§push(true);
-            }
-            addr66:
-            return §§pop();
+            return false;
          }
-         §§goto(addr35);
+         this.CreateObjects();
+         this.m_isFirstLoad = false;
+         return true;
       }
       
       public function LoadSprites() : void
       {
-         var _loc2_:Boolean = true;
-         var _loc3_:Boolean = false;
          var _loc1_:int = 0;
-         if(!(_loc3_ && Boolean(_loc1_)))
+         this.m_displayKeyPress = true;
+         if(!this.m_isFirstLoad)
          {
-            this.m_displayKeyPress = true;
-            if(!_loc3_)
+            Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer.addChild(this.m_roomBounds);
+            _loc1_ = 0;
+            while(_loc1_ < this.m_allObjects.length)
             {
-               addr27:
-               if(!this.m_isFirstLoad)
-               {
-                  if(!(_loc3_ && Boolean(_loc1_)))
-                  {
-                     Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer.addChild(this.m_roomBounds);
-                     if(_loc2_)
-                     {
-                        _loc1_ = 0;
-                        addr50:
-                        while(true)
-                        {
-                           §§push(_loc1_);
-                           if(!_loc3_)
-                           {
-                              if(§§pop() >= this.m_allObjects.length)
-                              {
-                                 §§push(Singleton.utility);
-                                 if(!_loc3_)
-                                 {
-                                    §§push(§§pop().m_soundController);
-                                    if(_loc2_ || _loc3_)
-                                    {
-                                       §§push(this.m_backgroundMusic);
-                                       if(!(_loc3_ && _loc2_))
-                                       {
-                                          §§pop().ChangeMusicTrack(§§pop());
-                                          §§push(Singleton.dynamicData);
-                                          if(!_loc3_)
-                                          {
-                                             §§push(§§pop().m_currRoomOfTower);
-                                             if(_loc2_)
-                                             {
-                                                break;
-                                             }
-                                             §§goto(addr244);
-                                          }
-                                          §§goto(addr258);
-                                       }
-                                       addr233:
-                                       §§pop().FadeCurrentMusic(§§pop(),2);
-                                       §§goto(addr235);
-                                    }
-                                    addr218:
-                                    §§pop().FadeCurrentMusic(0.4,3);
-                                    if(_loc2_)
-                                    {
-                                       addr235:
-                                       §§push(this.m_backgroundMusic);
-                                       if(_loc2_ || Boolean(_loc1_))
-                                       {
-                                          addr244:
-                                          §§push(BackgroundMusicTracks.MUSIC_HALLWAY);
-                                          if(_loc2_)
-                                          {
-                                             addr248:
-                                             if(§§pop() != §§pop())
-                                             {
-                                                addr249:
-                                                §§push(Singleton.dynamicData);
-                                                if(_loc2_ || _loc2_)
-                                                {
-                                                   addr258:
-                                                   §§pop().m_prevBackgroundMusic = this.m_backgroundMusic;
-                                                   this.m_isFirstLoad = false;
-                                                   if(_loc2_)
-                                                   {
-                                                      §§goto(addr278);
-                                                   }
-                                                   §§goto(addr289);
-                                                   addr261:
-                                                }
-                                                addr278:
-                                                §§goto(addr281);
-                                             }
-                                             §§goto(addr261);
-                                          }
-                                          addr281:
-                                          §§goto(addr279);
-                                       }
-                                       addr279:
-                                       §§goto(addr276);
-                                    }
-                                    §§goto(addr249);
-                                 }
-                                 addr231:
-                                 §§goto(addr233);
-                                 §§push(§§pop().m_soundController);
-                                 §§push(1);
-                              }
-                              else
-                              {
-                                 this.m_allObjects[_loc1_].AddSprite();
-                                 _loc1_++;
-                                 if(_loc2_)
-                                 {
-                                    continue;
-                                 }
-                              }
-                              addr276:
-                              if(Singleton.dynamicData.m_currTransitionID == SpecialRoom.LOBBY_ELEVATOR)
-                              {
-                                 if(!(_loc3_ && Boolean(_loc1_)))
-                                 {
-                                    addr291:
-                                    Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_mainChar.SetDirectionForStill(OrientationState.ORIENTATION_DOWN);
-                                    addr289:
-                                 }
-                              }
-                              return;
-                           }
-                           break;
-                        }
-                        §§push(0);
-                        if(!(_loc3_ && Boolean(this)))
-                        {
-                           §§push(§§pop() == §§pop());
-                           if(_loc2_)
-                           {
-                              if(§§pop())
-                              {
-                                 if(_loc2_ || Boolean(this))
-                                 {
-                                    §§pop();
-                                    if(_loc2_ || Boolean(this))
-                                    {
-                                       §§push(Singleton.dynamicData);
-                                       if(_loc2_ || Boolean(_loc1_))
-                                       {
-                                          §§push(§§pop().m_currFloorOfTower);
-                                          if(!(_loc3_ && Boolean(_loc1_)))
-                                          {
-                                             §§push(0);
-                                             if(_loc2_)
-                                             {
-                                                addr151:
-                                                §§push(§§pop() == §§pop());
-                                                if(!_loc3_)
-                                                {
-                                                   addr154:
-                                                   if(§§pop())
-                                                   {
-                                                      if(_loc2_ || Boolean(_loc1_))
-                                                      {
-                                                         §§push(Singleton.utility);
-                                                         if(_loc2_ || Boolean(_loc1_))
-                                                         {
-                                                            §§push(§§pop().m_soundController);
-                                                            if(!(_loc3_ && Boolean(this)))
-                                                            {
-                                                               §§push(0.1);
-                                                               if(_loc2_)
-                                                               {
-                                                                  §§push(3);
-                                                                  if(!(_loc3_ && Boolean(_loc1_)))
-                                                                  {
-                                                                     §§pop().FadeCurrentMusic(§§pop(),§§pop());
-                                                                     if(!_loc3_)
-                                                                     {
-                                                                        addr193:
-                                                                        §§goto(addr233);
-                                                                     }
-                                                                     §§goto(addr258);
-                                                                  }
-                                                                  else
-                                                                  {
-                                                                     §§goto(addr218);
-                                                                  }
-                                                               }
-                                                               else
-                                                               {
-                                                                  §§goto(addr218);
-                                                               }
-                                                            }
-                                                            §§goto(addr218);
-                                                         }
-                                                      }
-                                                      §§goto(addr258);
-                                                   }
-                                                   else
-                                                   {
-                                                      addr196:
-                                                      if(this.m_isBackgroundMusicVolumeLowered)
-                                                      {
-                                                         if(_loc2_)
-                                                         {
-                                                            §§push(Singleton.utility);
-                                                            if(_loc2_ || _loc3_)
-                                                            {
-                                                               §§push(§§pop().m_soundController);
-                                                               if(_loc2_ || _loc2_)
-                                                               {
-                                                                  §§goto(addr218);
-                                                               }
-                                                               §§goto(addr233);
-                                                            }
-                                                            else
-                                                            {
-                                                               §§goto(addr231);
-                                                            }
-                                                         }
-                                                         §§goto(addr233);
-                                                      }
-                                                      else
-                                                      {
-                                                         §§push(Singleton.utility);
-                                                         if(_loc2_ || _loc3_)
-                                                         {
-                                                            §§goto(addr231);
-                                                         }
-                                                      }
-                                                   }
-                                                   §§goto(addr291);
-                                                }
-                                                §§goto(addr196);
-                                             }
-                                             §§goto(addr248);
-                                          }
-                                       }
-                                       §§goto(addr278);
-                                    }
-                                    §§goto(addr193);
-                                 }
-                              }
-                              §§goto(addr154);
-                           }
-                           §§goto(addr196);
-                        }
-                        §§goto(addr151);
-                     }
-                  }
-                  §§goto(addr50);
-               }
-               else
-               {
-                  this.CreateObjects();
-               }
-               §§goto(addr258);
+               this.m_allObjects[_loc1_].AddSprite();
+               _loc1_++;
             }
-            §§goto(addr50);
+            Singleton.utility.m_soundController.ChangeMusicTrack(this.m_backgroundMusic);
+            if(Singleton.dynamicData.m_currRoomOfTower == 0 && Singleton.dynamicData.m_currFloorOfTower == 0)
+            {
+               Singleton.utility.m_soundController.FadeCurrentMusic(0.1,3);
+            }
+            else if(this.m_isBackgroundMusicVolumeLowered)
+            {
+               Singleton.utility.m_soundController.FadeCurrentMusic(0.4,3);
+            }
+            else
+            {
+               Singleton.utility.m_soundController.FadeCurrentMusic(1,2);
+            }
+            if(this.m_backgroundMusic != BackgroundMusicTracks.MUSIC_HALLWAY)
+            {
+               Singleton.dynamicData.m_prevBackgroundMusic = this.m_backgroundMusic;
+            }
          }
-         §§goto(addr27);
+         else
+         {
+            this.CreateObjects();
+         }
+         this.m_isFirstLoad = false;
+         if(Singleton.dynamicData.m_currTransitionID == SpecialRoom.LOBBY_ELEVATOR)
+         {
+            Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_mainChar.SetDirectionForStill(OrientationState.ORIENTATION_DOWN);
+         }
       }
       
       public function CleanUpSprites() : void
       {
-         var _loc2_:Boolean = false;
-         var _loc3_:Boolean = true;
          var _loc1_:int = 0;
-         while(true)
+         while(_loc1_ < this.m_allObjects.length)
          {
-            if(_loc1_ >= this.m_allObjects.length)
-            {
-               if(_loc3_)
-               {
-                  Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer.removeChild(this.m_roomBounds);
-                  break;
-               }
-               break;
-            }
             this.m_allObjects[_loc1_].Cleanup();
-            if(_loc2_ && _loc3_)
-            {
-               break;
-            }
             _loc1_++;
-            if(!_loc3_)
-            {
-               break;
-            }
          }
+         Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer.removeChild(this.m_roomBounds);
       }
       
       private function LoadLevelFromXMLObject() : void
       {
-         var _loc6_:Boolean = false;
-         var _loc7_:Boolean = true;
          var _loc3_:XML = null;
          var _loc1_:ByteArray = new this.m_xmlFile() as ByteArray;
-         if(_loc7_)
-         {
-            _loc1_.uncompress();
-         }
+         _loc1_.uncompress();
          var _loc2_:XML = new XML(_loc1_);
-         if(_loc7_)
+         _loc2_.ignoreWhite = true;
+         this.m_roomBounds.graphics.beginFill(0);
+         this.m_roomBounds.graphics.drawRect(0,0,_loc2_.@width,_loc2_.@height);
+         this.m_roomBounds.graphics.endFill();
+         Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer.addChild(this.m_roomBounds);
+         for each(_loc3_ in _loc2_.levelObject)
          {
-            _loc2_.ignoreWhite = true;
-            if(!(_loc6_ && Boolean(this)))
-            {
-               addr44:
-               this.m_roomBounds.graphics.beginFill(0);
-               if(_loc7_ || Boolean(this))
-               {
-                  this.m_roomBounds.graphics.drawRect(0,0,_loc2_.@width,_loc2_.@height);
-                  §§goto(addr56);
-               }
-               §§goto(addr86);
-            }
-            addr56:
-            if(_loc7_ || Boolean(_loc3_))
-            {
-               this.m_roomBounds.graphics.endFill();
-               if(!_loc6_)
-               {
-                  addr86:
-                  Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer.addChild(this.m_roomBounds);
-               }
-            }
-            for each(_loc3_ in _loc2_.levelObject)
-            {
-               if(!(_loc6_ && Boolean(_loc2_)))
-               {
-                  this.AddObject(_loc3_.@spriteName,_loc3_.@xPos,_loc3_.@yPos,_loc3_.@xScale,_loc3_.@yScale,_loc3_.@rotation);
-               }
-            }
-            return;
+            this.AddObject(_loc3_.@spriteName,_loc3_.@xPos,_loc3_.@yPos,_loc3_.@xScale,_loc3_.@yScale,_loc3_.@rotation);
          }
-         §§goto(addr44);
       }
       
       protected function AddObject(param1:String, param2:int = 0, param3:int = 0, param4:Number = 1, param5:Number = 1, param6:Number = 0) : Object
       {
-         /*
-          * Decompilation error
-          * Timeout (1 minute) was reached
-          * Instruction count: 6857
-          */
-         throw new flash.errors.IllegalOperationError("Not decompiled due to timeout");
+         var _loc8_:RoomTransitionObject = null;
+         var _loc9_:RoomTransitionEntryPointObject = null;
+         var _loc10_:String = null;
+         var _loc11_:StandardChatBox = null;
+         var _loc7_:Object = null;
+         if(param1 == "generalHallway_testTopWall8" || param1 == "test2")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "room_teleporterOff")
+         {
+            this.AddExpertVisualObjectBase(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_river_sparkle1")
+         {
+            this.AddSplashObject(param1,param2,param3,param4,param5,param6,1,1,false);
+         }
+         else if(param1 == "plantRoom_river_sparkle2")
+         {
+            this.AddSplashObject(param1,param2,param3,param4,param5,param6,3,1,false);
+         }
+         else if(param1 == "plantRoom_river_splash")
+         {
+            this.AddSplashObject(param1,param2,param3,param4,param5,param6,2,0.6,true);
+         }
+         else if(param1 == "plantRoom_river_splash2")
+         {
+            this.AddSplashObject("plantRoom_river_splash",param2,param3,param4,param5,param6,3,0.6,true);
+         }
+         else if(param1 == "plantRoom_river_splash3")
+         {
+            this.AddSplashObject("plantRoom_river_splash",param2,param3,param4,param5,param6,4,0.6,true);
+         }
+         else if(param1 == "generalRoom_gymDoor")
+         {
+            this.AddBackgroundSoundDistanceObject(param1,param2,param3,param4,param5,param6,575,0.1,0.6);
+         }
+         else if(param1 == "eggery_fireplace")
+         {
+            this.AddFireTorch("eggery_fireplaceFire",param2 + 95,param3 + 59,param4,param5,param6,7);
+            this.AddBackgroundSoundDistanceObject(param1,param2,param3,param4,param5,param6,1000,0,0.35,BackgroundMusicTracks.MUSIC_FIREPLACE);
+         }
+         else if(param1 == "sound3D_plantMusic")
+         {
+            this.AddBackgroundSoundDistanceObject("entryObject",param2,param3,param4,param5,param6,600,0,0.6,BackgroundMusicTracks.MUSIC_GRASS_LEVEL,false);
+         }
+         else if(param1 == "sound3D_river")
+         {
+            this.AddBackgroundSoundDistanceObject("entryObject",param2,param3,param4,param5,param6,650,0,0.7,BackgroundMusicTracks.MUSIC_RIVER_FULL,false);
+         }
+         else if(param1 == "buttonZoneObject")
+         {
+            _loc7_ = this.AddButtonZoneCollObject("buttonZoneObject",param2,param3,param4,param5,param6);
+         }
+         else if(param1.slice(0,16) == "buttonZoneObject")
+         {
+            _loc7_ = this.AddButtonZoneCollObject("buttonZoneObject",param2,param3,param4,param5,param6,int(param1.slice(16)));
+         }
+         else if(param1 == "collRect")
+         {
+            this.AddInvisibleWallCollObject(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "wallRect_eggeryExit")
+         {
+            this.AddEggeryWallCollObject("collRect",param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "wallRect_courtyardExit")
+         {
+            this.AddCourtyardWallCollObject("collRect",param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "elevatorEntrance")
+         {
+            this.AddElevatorWallCollObject("roomTransitionObject",param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "regularDoor")
+         {
+            _loc7_ = this.AddRegularDoorObject(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "regularDoor_eggery")
+         {
+            _loc7_ = this.AddEggeryDoorObject("regularDoor",param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "expert_roomTransitionObject")
+         {
+            (_loc8_ = (_loc7_ = this.AddExpertRoomTransitionCollObject("roomTransitionObject",param2,param3,param4,param5,param6)) as RoomTransitionObject).m_transitionID = SpecialRoom.EXPERT_ROOM;
+         }
+         else if(param1 == "roomTransitionObject_lobbyFromEggery")
+         {
+            (_loc8_ = (_loc7_ = this.AddRoomTransitionCollObject("roomTransitionObject",param2,param3,param4,param5,param6)) as RoomTransitionObject).m_transitionID = SpecialRoom.LOBBY_START;
+         }
+         else if(param1 == "roomTransitionObject_startingRoomToLobby" || param1 == "roomTransition_startingRoomToLobby")
+         {
+            (_loc8_ = (_loc7_ = this.AddRoomTransitionCollObject("roomTransitionObject",param2,param3,param4,param5,param6)) as RoomTransitionObject).m_transitionID = SpecialRoom.LOBBY_ELEVATOR;
+            this.m_wallCollObjects.push(_loc8_);
+         }
+         else if(param1.slice(0,28) == "telport_roomTransitionObject")
+         {
+            _loc7_ = this.AddRoomTransitionCollObject("roomTransitionObject",param2,param3,param4,param5,param6);
+            if(param1.length > 28)
+            {
+               (_loc8_ = _loc7_ as RoomTransitionObject).m_isTeleportTransitionObject = true;
+               _loc8_.m_transitionID = int(param1.slice(28));
+            }
+         }
+         else if(param1.slice(0,29) == "teleport_roomTransitionObject")
+         {
+            _loc7_ = this.AddRoomTransitionCollObject("roomTransitionObject",param2,param3,param4,param5,param6);
+            if(param1.length > 29)
+            {
+               (_loc8_ = _loc7_ as RoomTransitionObject).m_isTeleportTransitionObject = true;
+               _loc8_.m_transitionID = int(param1.slice(29));
+            }
+         }
+         else if(param1.slice(0,20) == "roomTransitionObject")
+         {
+            _loc7_ = this.AddRoomTransitionCollObject("roomTransitionObject",param2,param3,param4,param5,param6);
+            if(param1.length > 20)
+            {
+               (_loc8_ = _loc7_ as RoomTransitionObject).m_transitionID = int(param1.slice(20));
+            }
+         }
+         else if(param1 == "plantRoom_bridgeTrees_bottomLeft")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_expertStatue")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,-35,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_bridgeTrees_bottomRight")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_bridgeTrees_topLeft")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_bridgeTrees_topRight")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_fountain")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,210,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_titanDoorGaurd1")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_titanDoorGaurd2")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_titanStatue")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_goldFloorVase")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_silverFloorVase")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_candelabra")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,26,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_statuePedestal")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,25,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_plantMedallionStatue" || param1 == "generalRoom_fireMedallionStatue" || param1 == "generalRoom_electricMedallionStatue" || param1 == "generalRoom_undeadMedallionStatue" || param1 == "generalRoom_plantWizardMedallionStatue" || param1 == "generalRoom_undeadWizardMedallionStatue")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,-38,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_plantGymStatue" || param1 == "generalRoom_fireGymStatue" || param1 == "generalRoom_electricGymStatue" || param1 == "generalRoom_undeadGymStatue")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,-38,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_gemCombiner")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_minionKeeper")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,40,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_gemSalesman")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_largePillar")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,40,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_barrel")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,12,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_bookshelf")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,12,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_bookshelf_beakers")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,-10,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_bookshelf_books")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,-15,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_crate")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,25,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_beakerSet1")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,25,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_beakerSet2")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,30,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_emptyVat")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,30,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_occupiedVat")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,30,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_machine")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,25,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_teslaCoil")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,28,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_junkPile")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,133,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_skull")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,10,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_ribs")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_thornBush")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,4,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_willow")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,15,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_oak")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,23,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_mushrooms")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,4,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_headstones3")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,4,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_headstones2")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,4,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_headstones1")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,18,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_grassPatch3")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,8,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_grassPatch4")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,13,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_cattails")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,0,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_bush")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,5,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_altar")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,78,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_berryBushes")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,5,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_boulder")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,35,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_boulderSmall")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,11,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_flowers1")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,0,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_flowers2")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,0,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_flowers3")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,0,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_bush")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,10,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_mushrooms")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,12,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_oakTree")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,35,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_oakTree2")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,22,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_pineTree1")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,25,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_pineTree2")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,10,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_pond")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,160,param2,param3,param4,param5,param6);
+            this.AddSplashObject("plantRoom_river_sparkle1",param2 + 170,param3 + 134,0.9,0.9,90,1,2,false);
+            this.AddSplashTopObject("plantRoom_river_sparkle1",0,param2 + 170,param3 + 134,0.9,0.9,90,1,2,false);
+         }
+         else if(param1 == "plantRoom_stump")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,15,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_forestEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_forestEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_forestEnemyBoy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_forestEnemyGirl_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_outdoorEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_outdoorEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_waterEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "plantRoom_waterEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_bossEnemy")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_hardEnemy")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_expertEnemy")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "grassRoom_testTree8")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,42,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "room_expertTeleporter_glow")
+         {
+            this.AddExpertVisualObjectGlow(param1,0,param2,param3,param4,param5,param6,true);
+         }
+         else if(param1 == "room_generalTeleporter_glow")
+         {
+            this.AddExpertVisualObjectGlow(param1,0,param2,param3,param4,param5,param6,false);
+         }
+         else if(param1 == "fireRoom_flowers")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,7,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_groundCover")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,15,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_palmTrees")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_tiki1")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_tiki2")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_firePit")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,30,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_gysers")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,30,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_rocks")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_femaleFireEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_femaleFireEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,6,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_musclesEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_musclesEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_voodooEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "fireRoom_voodooEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_cyborgEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_cyborgEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_femaleEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_femaleEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_labcoatEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_labcoatEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "electricRoom_labcoatEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_costumeEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_costumeEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_gothEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_gothEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_necromancerEnemy_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "undeadRoom_necromancerEnemy_side")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_electricGymEnemy")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_fireGymEnemy")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_plantWizard")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_grandWizard")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_plantGymEnemy")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_undeadGymEnemy")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_undeadWizard")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "room_goldChest")
+         {
+            if(Singleton.dynamicData.GetTotalSageSeals() > 0)
+            {
+               if(Math.random() * 100 > 50)
+               {
+                  this.AddGoldChestCollObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+         }
+         else if(param1 == "room_gemChest")
+         {
+            if(Singleton.dynamicData.GetTotalSageSeals() > 3)
+            {
+               if(Math.random() * 100 > 70)
+               {
+                  this.AddGemChestCollObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+         }
+         else if(param1 == "generalRoom_partialWall")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,10,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_rocks2")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,40,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_healStone")
+         {
+            this.AddHealStoneObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,16,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_specialDoor_open")
+         {
+            this.AddVisualsForBossDoorObject(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_eggeryDoor_open")
+         {
+            this.AddVisualsForEggeryDoorObject(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "room_expertTeleporter")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "room_generalTeleporter")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,60,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "eggery_eggPit_back")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "eggery_eggPit_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,40,param2,param3,param4,param5,param6);
+         }
+         else if(param1.slice(0,10) == "eggery_egg")
+         {
+            this.AddEggVisualObject("eggery_egg",40,param2,param3,param4,param5,param6,int(param1.slice(10)));
+         }
+         else if(param1 == "generalRoom_titanEggPit_back")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_titanEggPit_front")
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            this.AddJustVisualTopObject(param1,40,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_titanEgg")
+         {
+            this.AddTitanEggVisualObject(param1,40,param2,param3,param4,param5,param6,0);
+         }
+         else if(param1 == "expert_entryObject")
+         {
+            (_loc9_ = (_loc7_ = this.AddRoomTransitionGoToPointObject("entryObject",param2,param3,param4,param5,param6)) as RoomTransitionEntryPointObject).m_roomComingFrom = SpecialRoom.EXPERT_ROOM;
+         }
+         else if(param1 == "entryObject_lobbyFromEggery")
+         {
+            (_loc9_ = (_loc7_ = this.AddRoomTransitionGoToPointObject("entryObject",param2,param3,param4,param5,param6)) as RoomTransitionEntryPointObject).m_roomComingFrom = SpecialRoom.LOBBY_START;
+         }
+         else if(param1 == "entryObject_startingRoomToLobby")
+         {
+            (_loc9_ = (_loc7_ = this.AddRoomTransitionGoToPointObject("entryObject",param2,param3,param4,param5,param6)) as RoomTransitionEntryPointObject).m_roomComingFrom = SpecialRoom.LOBBY_ELEVATOR;
+         }
+         else if(param1.slice(0,11) == "entryObject")
+         {
+            _loc7_ = this.AddRoomTransitionGoToPointObject("entryObject",param2,param3,param4,param5,param6);
+            if(param1.length > 11)
+            {
+               (_loc9_ = _loc7_ as RoomTransitionEntryPointObject).m_roomComingFrom = int(param1.slice(11));
+            }
+            if(param1.length > 13)
+            {
+               if((_loc10_ = param1.slice(13)) == "left")
+               {
+                  this.m_initialDirection = OrientationState.ORIENTATION_LEFT;
+               }
+               else if(_loc10_ == "right")
+               {
+                  this.m_initialDirection = OrientationState.ORIENTATION_RIGHT;
+               }
+               else if(_loc10_ == "down")
+               {
+                  this.m_initialDirection = OrientationState.ORIENTATION_DOWN;
+               }
+               else if(_loc10_ == "up")
+               {
+                  this.m_initialDirection = OrientationState.ORIENTATION_UP;
+               }
+            }
+         }
+         else if(param1 == "menus_speechBubble")
+         {
+            this.AddChatBox(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1.slice(0,18) == "menus_speechBubble")
+         {
+            (_loc11_ = this.AddChatBox("menus_speechBubble",param2,param3,param4,param5,param6)).m_chatBoxID = int(param1.slice(18));
+         }
+         else if(param1 == "plantRoom_groundTile")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_GRASS_LEVEL;
+            this.m_isBackgroundMusicVolumeLowered = false;
+            if(Singleton.dynamicData.m_currFloorOfTower == 3 || Singleton.dynamicData.m_currFloorOfTower == 3 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(20);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 50)
+               {
+                  this.AddJustVisualObject("plantRoom_groundTile_dandelion",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 1 || Singleton.dynamicData.m_currFloorOfTower == 1 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 50)
+               {
+                  this.AddJustVisualObject("plantRoom_groundTile_clover",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 20 || Singleton.dynamicData.m_currFloorOfTower == 20 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 30)
+               {
+                  this.AddJustVisualObject("plantRoom_groundTile_deadPatches",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 21 || Singleton.dynamicData.m_currFloorOfTower == 21 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 50)
+               {
+                  this.AddJustVisualObject("plantRoom_groundTile_flowers",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else
+            {
+               this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            }
+         }
+         else if(param1 == "fireRoom_groundTile")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_FIRE_LEVEL;
+            this.m_isBackgroundMusicVolumeLowered = false;
+            if(Singleton.dynamicData.m_currFloorOfTower == 6 || Singleton.dynamicData.m_currFloorOfTower == 6 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 0)
+               {
+                  this.AddJustVisualObject("fireRoom_groundTile_foliage",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 7 || Singleton.dynamicData.m_currFloorOfTower == 7 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 5)
+               {
+                  this.AddJustVisualObject("fireRoom_groundTile_magma",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 8 || Singleton.dynamicData.m_currFloorOfTower == 8 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 50)
+               {
+                  this.AddJustVisualObject("fireRoom_groundTile_fossils",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 22 || Singleton.dynamicData.m_currFloorOfTower == 22 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 0)
+               {
+                  this.AddJustVisualObject("fireRoom_groundTile_foliage",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 23 || Singleton.dynamicData.m_currFloorOfTower == 23 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 50)
+               {
+                  this.AddJustVisualObject("fireRoom_groundTile_fossils",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else
+            {
+               this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            }
+         }
+         else if(param1 == "electricRoom_floorTile")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_ELECTRIC_LEVEL;
+            this.m_isBackgroundMusicVolumeLowered = false;
+            if(Singleton.dynamicData.m_currFloorOfTower == 11 || Singleton.dynamicData.m_currFloorOfTower == 11 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(15);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 20)
+               {
+                  this.AddJustVisualObject("electricRoom_floorTile_pipes",param2,param3,param4,param5,param6);
+               }
+               else if(this.m_randomNumberGenerator.nextNumber() * 100 > 0)
+               {
+                  this.AddJustVisualObject("electricRoom_floorTile_pipesWithGauge",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 12 || Singleton.dynamicData.m_currFloorOfTower == 12 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 0)
+               {
+                  this.AddJustVisualObject("electricRoom_floorTile_blackAndWhite",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 13 || Singleton.dynamicData.m_currFloorOfTower == 13 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 0)
+               {
+                  this.AddJustVisualObject("electricRoom_floorTile_metalLitter",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 25 || Singleton.dynamicData.m_currFloorOfTower == 25 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 26 || Singleton.dynamicData.m_currFloorOfTower == 26 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 0)
+               {
+                  this.AddJustVisualObject("electricRoom_floorTile_blackAndWhite",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else
+            {
+               this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            }
+         }
+         else if(param1 == "undeadRoom_groundTile")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_UNDEAD_LEVEL;
+            this.m_isBackgroundMusicVolumeLowered = false;
+            if(Singleton.dynamicData.m_currFloorOfTower == 16 || Singleton.dynamicData.m_currFloorOfTower == 16 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 0)
+               {
+                  this.AddJustVisualObject("undeadRoom_groundTile_moss",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 17 || Singleton.dynamicData.m_currFloorOfTower == 17 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(15);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 15)
+               {
+                  this.AddJustVisualObject("undeadRoom_groundTile_purpleCracks",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 18 || Singleton.dynamicData.m_currFloorOfTower == 18 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 50)
+               {
+                  this.AddJustVisualObject("undeadRoom_groundTile_debris",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 27 || Singleton.dynamicData.m_currFloorOfTower == 27 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 0)
+               {
+                  this.AddJustVisualObject("undeadRoom_groundTile_cobwebs",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else if(Singleton.dynamicData.m_currFloorOfTower == 28 || Singleton.dynamicData.m_currFloorOfTower == 28 + this.m_extraHardModeFloors)
+            {
+               this.CheckForCreateRandomNumberGeneratorWithSeed(10);
+               if(this.m_randomNumberGenerator.nextNumber() * 100 > 0)
+               {
+                  this.AddJustVisualObject("undeadRoom_groundTile_moss",param2,param3,param4,param5,param6);
+               }
+               else
+               {
+                  this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+               }
+            }
+            else
+            {
+               this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+            }
+         }
+         else if(param1 == "generalRoom_floorTile")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_HALLWAY;
+            this.m_isBackgroundMusicVolumeLowered = true;
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+         }
+         else if(param1 == "generalRoom_topTorch")
+         {
+            this.AddFireTorch("generalRoom_topTorch",param2,param3,param4,param5,param6,7);
+         }
+         else if(param1 == "generalRoom_sideTorch")
+         {
+            this.AddFireTorch("generalRoom_sideTorch",param2,param3,param4,param5,param6,6);
+         }
+         else if(param1 == "generalRoom_bottomTorch")
+         {
+            this.AddFireTorch("generalRoom_bottomTorch",param2,param3,param4,param5,param6,6);
+         }
+         else if(param1 == "grass_music_override")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_GRASS_LEVEL;
+         }
+         else if(param1 == "fire_music_override")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_FIRE_LEVEL;
+         }
+         else if(param1 == "electric_music_override")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_ELECTRIC_LEVEL;
+         }
+         else if(param1 == "undead_music_override")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_UNDEAD_LEVEL;
+         }
+         else if(param1 == "introMusic_music_override")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_RIVER;
+         }
+         else if(param1 == "riverMusic_music_override")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_RIVER;
+         }
+         else if(param1 == "mainMenu_music_override")
+         {
+            this.m_backgroundMusic = BackgroundMusicTracks.MUSIC_TITLE;
+         }
+         else if(param1 == "halfVolume_music_override")
+         {
+            this.m_isBackgroundMusicVolumeLowered = true;
+         }
+         else if(param1 == "fullVolume_music_override")
+         {
+            this.m_isBackgroundMusicVolumeLowered = false;
+         }
+         else if(param1 == "generalRoom_genericTapestrySide_plant ")
+         {
+            this.AddJustVisualObject("generalRoom_genericTapestrySide_plant",param2,param3,param4,param5,param6);
+         }
+         else
+         {
+            this.AddJustVisualObject(param1,param2,param3,param4,param5,param6);
+         }
+         return _loc7_;
       }
       
       protected function AddInvisibleWallCollObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : void
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:WallCollObject;
          (_loc7_ = new WallCollObject()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer,false);
-         if(_loc9_ || Boolean(param2))
-         {
-            this.m_wallCollObjects.push(_loc7_);
-            if(!(_loc8_ && Boolean(param3)))
-            {
-               addr65:
-               this.m_allObjects.push(_loc7_);
-            }
-            return;
-         }
-         §§goto(addr65);
+         this.m_wallCollObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
       }
       
       protected function AddEggeryWallCollObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : void
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:EggeryExitBlockade;
          (_loc7_ = new EggeryExitBlockade()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer,false);
-         if(_loc9_)
-         {
-            this.m_wallCollObjects.push(_loc7_);
-            if(!_loc8_)
-            {
-               this.m_allObjects.push(_loc7_);
-            }
-         }
+         this.m_wallCollObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
       }
       
       protected function AddCourtyardWallCollObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : void
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:CourtyardExitBlockade;
          (_loc7_ = new CourtyardExitBlockade()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer,false);
-         if(!_loc8_)
-         {
-            this.m_wallCollObjects.push(_loc7_);
-            if(!(_loc8_ && Boolean(this)))
-            {
-               addr60:
-               this.m_allObjects.push(_loc7_);
-            }
-            return;
-         }
-         §§goto(addr60);
+         this.m_wallCollObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
       }
       
       protected function AddElevatorWallCollObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : void
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:ElevatorObject;
          (_loc7_ = new ElevatorObject()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer,false);
-         if(!(_loc8_ && Boolean(this)))
-         {
-            this.m_wallCollObjects.push(_loc7_);
-            if(!_loc8_)
-            {
-               addr60:
-               this.m_allObjects.push(_loc7_);
-            }
-            return;
-         }
-         §§goto(addr60);
+         this.m_wallCollObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
       }
       
       protected function AddWallCollVisualObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : void
       {
-         var _loc8_:Boolean = true;
-         var _loc9_:Boolean = false;
          var _loc7_:WallCollObject;
          (_loc7_ = new WallCollObject()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(_loc8_ || Boolean(param2))
-         {
-            this.m_wallCollObjects.push(_loc7_);
-            if(!_loc9_)
-            {
-               this.m_allObjects.push(_loc7_);
-            }
-         }
+         this.m_wallCollObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
       }
       
       protected function AddRegularDoorObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : RegularKeyDoor
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:RegularKeyDoor;
          (_loc7_ = new RegularKeyDoor()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer,false);
-         if(_loc9_)
-         {
-            _loc7_.m_interationID = 2;
-            if(_loc9_)
-            {
-               this.m_wallCollObjects.push(_loc7_);
-               if(_loc9_ || Boolean(this))
-               {
-                  this.m_interactionObjects.push(_loc7_);
-                  if(_loc9_ || Boolean(param3))
-                  {
-                     this.m_allObjects.push(_loc7_);
-                  }
-               }
-            }
-         }
+         _loc7_.m_interationID = 2;
+         this.m_wallCollObjects.push(_loc7_);
+         this.m_interactionObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
          return _loc7_;
       }
       
       protected function AddEggeryDoorObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : BossToEggeryDoorWall
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:BossToEggeryDoorWall;
          (_loc7_ = new BossToEggeryDoorWall()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer,false);
-         if(!(_loc8_ && Boolean(this)))
-         {
-            _loc7_.m_interationID = 2;
-            if(!_loc8_)
-            {
-               this.m_wallCollObjects.push(_loc7_);
-               if(_loc9_ || Boolean(param3))
-               {
-                  this.m_interactionObjects.push(_loc7_);
-                  if(!(_loc8_ && Boolean(param2)))
-                  {
-                     addr81:
-                     this.m_allObjects.push(_loc7_);
-                  }
-               }
-               §§goto(addr81);
-            }
-            return _loc7_;
-         }
-         §§goto(addr81);
+         _loc7_.m_interationID = 2;
+         this.m_wallCollObjects.push(_loc7_);
+         this.m_interactionObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
+         return _loc7_;
       }
       
       protected function AddJustVisualTopObject(param1:String, param2:int, param3:int, param4:int, param5:Number, param6:Number, param7:Number) : void
       {
-         var _loc9_:Boolean = false;
-         var _loc10_:Boolean = true;
          var _loc8_:VisualLevelObjectWithHeight;
          (_loc8_ = new VisualLevelObjectWithHeight()).AddSpriteFirstTime(param1,param3,param4,param5,param6,param7,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_topVisualLayer);
-         if(!(_loc9_ && Boolean(param1)))
-         {
-            _loc8_.m_activationHieghtPoint = param2;
-            if(_loc10_ || Boolean(param1))
-            {
-               addr63:
-               _loc8_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
-               if(_loc10_)
-               {
-                  this.m_visualObjectWithHeight.push(_loc8_);
-                  if(_loc10_ || Boolean(this))
-                  {
-                  }
-                  §§goto(addr86);
-               }
-               this.m_allObjects.push(_loc8_);
-            }
-            addr86:
-            return;
-         }
-         §§goto(addr63);
+         _loc8_.m_activationHieghtPoint = param2;
+         _loc8_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
+         this.m_visualObjectWithHeight.push(_loc8_);
+         this.m_allObjects.push(_loc8_);
       }
       
       protected function AddRoomTransitionCollObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : RoomTransitionObject
       {
-         var _loc8_:Boolean = true;
-         var _loc9_:Boolean = false;
          var _loc7_:RoomTransitionObject;
          (_loc7_ = new RoomTransitionObject()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer,false);
-         if(!(_loc9_ && Boolean(param1)))
-         {
-            this.m_collObjects.push(_loc7_);
-            if(_loc8_)
-            {
-               addr59:
-               this.m_allObjects.push(_loc7_);
-            }
-            return _loc7_;
-         }
-         §§goto(addr59);
+         this.m_collObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
+         return _loc7_;
       }
       
       protected function AddExpertRoomTransitionCollObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : ExpertRoomTransitionObject
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:ExpertRoomTransitionObject;
          (_loc7_ = new ExpertRoomTransitionObject()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer,false);
-         if(_loc9_ || Boolean(param2))
-         {
-            _loc7_.m_transitionID = 1;
-            if(!(_loc8_ && Boolean(param1)))
-            {
-               this.m_collObjects.push(_loc7_);
-               if(!_loc8_)
-               {
-                  addr70:
-                  this.m_allObjects.push(_loc7_);
-               }
-               return _loc7_;
-            }
-         }
-         §§goto(addr70);
+         _loc7_.m_transitionID = 1;
+         this.m_collObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
+         return _loc7_;
       }
       
       protected function AddButtonZoneCollObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number, param7:int = 0) : ButtonZone
       {
-         var _loc9_:Boolean = false;
-         var _loc10_:Boolean = true;
          var _loc8_:ButtonZone;
          (_loc8_ = new ButtonZone()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer,false);
-         if(!(_loc9_ && Boolean(param1)))
-         {
-            _loc8_.m_buttonZoneID = param7;
-            if(_loc10_)
-            {
-               this.m_collObjects.push(_loc8_);
-               if(_loc9_)
-               {
-               }
-               §§goto(addr69);
-            }
-            this.m_allObjects.push(_loc8_);
-         }
-         addr69:
+         _loc8_.m_buttonZoneID = param7;
+         this.m_collObjects.push(_loc8_);
+         this.m_allObjects.push(_loc8_);
          return _loc8_;
       }
       
       protected function AddGoldChestCollObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number, param7:int = 0) : GoldChest
       {
-         var _loc10_:Boolean = true;
-         var _loc11_:Boolean = false;
          var _loc8_:GoldChest;
          (_loc8_ = new GoldChest()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(_loc10_)
-         {
-            _loc8_.m_arraySpotOfTopObject = this.m_allObjects.length + 1;
-            if(!(_loc11_ && Boolean(param2)))
-            {
-               this.m_collObjects.push(_loc8_);
-               if(!(_loc11_ && Boolean(this)))
-               {
-                  addr65:
-                  this.m_allObjects.push(_loc8_);
-               }
-            }
-            var _loc9_:GoldChestTopLayer;
-            (_loc9_ = new GoldChestTopLayer()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_topVisualLayer);
-            if(!_loc11_)
-            {
-               _loc9_.m_activationHieghtPoint = 8;
-               if(!(_loc11_ && Boolean(param3)))
-               {
-                  addr106:
-                  _loc9_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
-                  if(!_loc11_)
-                  {
-                     §§goto(addr114);
-                  }
-                  §§goto(addr120);
-               }
-               addr114:
-               this.m_visualObjectWithHeight.push(_loc9_);
-               if(!_loc11_)
-               {
-                  addr120:
-                  this.m_allObjects.push(_loc9_);
-               }
-               return _loc8_;
-            }
-            §§goto(addr106);
-         }
-         §§goto(addr65);
+         _loc8_.m_arraySpotOfTopObject = this.m_allObjects.length + 1;
+         this.m_collObjects.push(_loc8_);
+         this.m_allObjects.push(_loc8_);
+         var _loc9_:GoldChestTopLayer;
+         (_loc9_ = new GoldChestTopLayer()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_topVisualLayer);
+         _loc9_.m_activationHieghtPoint = 8;
+         _loc9_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
+         this.m_visualObjectWithHeight.push(_loc9_);
+         this.m_allObjects.push(_loc9_);
+         return _loc8_;
       }
       
       protected function AddGemChestCollObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number, param7:int = 0) : GemChest
       {
-         var _loc10_:Boolean = false;
-         var _loc11_:Boolean = true;
          var _loc8_:GemChest;
          (_loc8_ = new GemChest()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(!_loc10_)
-         {
-            _loc8_.m_arraySpotOfTopObject = this.m_allObjects.length + 1;
-            if(_loc11_ || Boolean(this))
-            {
-               this.m_collObjects.push(_loc8_);
-               if(_loc10_)
-               {
-               }
-               §§goto(addr65);
-            }
-            this.m_allObjects.push(_loc8_);
-         }
-         addr65:
+         _loc8_.m_arraySpotOfTopObject = this.m_allObjects.length + 1;
+         this.m_collObjects.push(_loc8_);
+         this.m_allObjects.push(_loc8_);
          var _loc9_:GemChestTopLayer;
          (_loc9_ = new GemChestTopLayer()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_topVisualLayer);
-         if(_loc11_ || Boolean(this))
-         {
-            _loc9_.m_activationHieghtPoint = 8;
-            if(!(_loc10_ && Boolean(this)))
-            {
-               _loc9_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
-               if(_loc10_ && Boolean(this))
-               {
-               }
-               §§goto(addr130);
-            }
-            this.m_visualObjectWithHeight.push(_loc9_);
-            if(_loc11_)
-            {
-               this.m_allObjects.push(_loc9_);
-            }
-         }
-         addr130:
+         _loc9_.m_activationHieghtPoint = 8;
+         _loc9_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
+         this.m_visualObjectWithHeight.push(_loc9_);
+         this.m_allObjects.push(_loc9_);
          return _loc8_;
       }
       
       protected function AddRoomTransitionGoToPointObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : RoomTransitionEntryPointObject
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:RoomTransitionEntryPointObject;
          (_loc7_ = new RoomTransitionEntryPointObject()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer,false);
-         if(_loc9_)
-         {
-            this.m_visualObjects.push(_loc7_);
-            if(_loc9_ || Boolean(param2))
-            {
-               addr60:
-               this.m_allObjects.push(_loc7_);
-            }
-            return _loc7_;
-         }
-         §§goto(addr60);
+         this.m_visualObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
+         return _loc7_;
       }
       
       protected function AddHealStoneObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : void
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:HealStone;
          (_loc7_ = new HealStone()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(!(_loc8_ && Boolean(param1)))
-         {
-            this.m_visualObjects.push(_loc7_);
-            if(_loc9_ || Boolean(this))
-            {
-               this.m_interactionObjects.push(_loc7_);
-               if(!(_loc8_ && Boolean(param3)))
-               {
-                  this.m_allObjects.push(_loc7_);
-               }
-            }
-         }
+         this.m_visualObjects.push(_loc7_);
+         this.m_interactionObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
       }
       
       protected function AddChatBox(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : StandardChatBox
       {
-         var _loc8_:Boolean = true;
-         var _loc9_:Boolean = false;
          var _loc7_:StandardChatBox;
          (_loc7_ = new StandardChatBox()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_topVisualLayer,false);
-         if(_loc8_ || Boolean(this))
-         {
-            this.m_visualObjects.push(_loc7_);
-            if(!_loc9_)
-            {
-               this.m_allObjects.push(_loc7_);
-            }
-         }
+         this.m_visualObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
          return _loc7_;
       }
       
       protected function AddExpertVisualObjectBase(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : void
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:ExpertRoomVisualObjectBase;
          (_loc7_ = new ExpertRoomVisualObjectBase()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(_loc9_ || Boolean(this))
-         {
-            this.m_visualObjects.push(_loc7_);
-            if(_loc9_ || Boolean(this))
-            {
-               this.m_allObjects.push(_loc7_);
-            }
-         }
+         this.m_visualObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
       }
       
       protected function AddExpertVisualObjectGlow(param1:String, param2:int, param3:int, param4:int, param5:Number, param6:Number, param7:Number, param8:Boolean) : void
       {
-         var _loc11_:Boolean = false;
-         var _loc12_:Boolean = true;
          var _loc9_:ExpertRoomVisualObjectGlow;
          (_loc9_ = new ExpertRoomVisualObjectGlow(param8)).AddSpriteFirstTime(param1,param3,param4,param5,param6,param7,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(!_loc11_)
-         {
-            this.m_visualObjects.push(_loc9_);
-            if(!(_loc11_ && Boolean(this)))
-            {
-               this.m_allObjects.push(_loc9_);
-            }
-         }
+         this.m_visualObjects.push(_loc9_);
+         this.m_allObjects.push(_loc9_);
          var _loc10_:ExpertRoomVisualObjectGlow;
          (_loc10_ = new ExpertRoomVisualObjectGlow(param8)).AddSpriteFirstTime(param1,param3,param4,param5,param6,param7,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_topVisualLayer);
-         if(_loc12_)
-         {
-            _loc10_.m_activationHieghtPoint = param2;
-            if(!_loc11_)
-            {
-               _loc10_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
-               if(!_loc11_)
-               {
-                  this.m_visualObjectWithHeight.push(_loc10_);
-                  if(!(_loc11_ && Boolean(param3)))
-                  {
-                     addr109:
-                     this.m_allObjects.push(_loc10_);
-                  }
-               }
-               return;
-            }
-         }
-         §§goto(addr109);
+         _loc10_.m_activationHieghtPoint = param2;
+         _loc10_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
+         this.m_visualObjectWithHeight.push(_loc10_);
+         this.m_allObjects.push(_loc10_);
       }
       
       protected function AddEggVisualObject(param1:String, param2:int, param3:int, param4:int, param5:Number, param6:Number, param7:Number, param8:int) : void
       {
-         var _loc11_:Boolean = false;
-         var _loc12_:Boolean = true;
          var _loc9_:VisualsForEgg;
          (_loc9_ = new VisualsForEgg()).AddSpriteFirstTime(param1,param3,param4,param5,param6,param7,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(_loc12_)
-         {
-            _loc9_.m_eggID = param8;
-            if(_loc12_)
-            {
-               §§goto(addr39);
-            }
-            §§goto(addr45);
-         }
-         addr39:
+         _loc9_.m_eggID = param8;
          this.m_visualObjects.push(_loc9_);
-         if(!_loc11_)
-         {
-            addr45:
-            this.m_allObjects.push(_loc9_);
-         }
+         this.m_allObjects.push(_loc9_);
          var _loc10_:VisualsForEgg;
          (_loc10_ = new VisualsForEgg()).AddSpriteFirstTime(param1,param3,param4,param5,param6,param7,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_topVisualLayer);
-         if(!(_loc11_ && Boolean(this)))
-         {
-            _loc10_.m_activationHieghtPoint = param2;
-            if(_loc12_)
-            {
-               _loc10_.m_eggID = param8;
-               if(_loc12_ || Boolean(param3))
-               {
-               }
-               §§goto(addr121);
-            }
-            _loc10_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
-            if(_loc12_)
-            {
-               this.m_visualObjectWithHeight.push(_loc10_);
-               if(_loc12_)
-               {
-               }
-               §§goto(addr121);
-            }
-            this.m_allObjects.push(_loc10_);
-         }
-         addr121:
+         _loc10_.m_activationHieghtPoint = param2;
+         _loc10_.m_eggID = param8;
+         _loc10_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
+         this.m_visualObjectWithHeight.push(_loc10_);
+         this.m_allObjects.push(_loc10_);
       }
       
       protected function AddTitanEggVisualObject(param1:String, param2:int, param3:int, param4:int, param5:Number, param6:Number, param7:Number, param8:int) : void
       {
-         var _loc11_:Boolean = true;
-         var _loc12_:Boolean = false;
          var _loc9_:TitanVisualsForEgg;
          (_loc9_ = new TitanVisualsForEgg()).AddSpriteFirstTime(param1,param3,param4,param5,param6,param7,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(_loc11_)
-         {
-            _loc9_.m_eggID = param8;
-            if(!_loc12_)
-            {
-               addr38:
-               this.m_visualObjects.push(_loc9_);
-               if(!_loc12_)
-               {
-                  addr44:
-                  this.m_allObjects.push(_loc9_);
-               }
-               var _loc10_:TitanVisualsForEgg;
-               (_loc10_ = new TitanVisualsForEgg()).AddSpriteFirstTime(param1,param3,param4,param5,param6,param7,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_topVisualLayer);
-               if(!_loc12_)
-               {
-                  _loc10_.m_activationHieghtPoint = param2;
-                  if(!(_loc12_ && Boolean(param3)))
-                  {
-                     _loc10_.m_eggID = param8;
-                     if(!_loc12_)
-                     {
-                        _loc10_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
-                        if(!(_loc12_ && Boolean(this)))
-                        {
-                           addr110:
-                           this.m_visualObjectWithHeight.push(_loc10_);
-                           if(_loc12_)
-                           {
-                           }
-                           §§goto(addr120);
-                        }
-                        this.m_allObjects.push(_loc10_);
-                     }
-                     addr120:
-                     return;
-                  }
-               }
-               §§goto(addr110);
-            }
-            §§goto(addr44);
-         }
-         §§goto(addr38);
+         _loc9_.m_eggID = param8;
+         this.m_visualObjects.push(_loc9_);
+         this.m_allObjects.push(_loc9_);
+         var _loc10_:TitanVisualsForEgg;
+         (_loc10_ = new TitanVisualsForEgg()).AddSpriteFirstTime(param1,param3,param4,param5,param6,param7,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_topVisualLayer);
+         _loc10_.m_activationHieghtPoint = param2;
+         _loc10_.m_eggID = param8;
+         _loc10_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
+         this.m_visualObjectWithHeight.push(_loc10_);
+         this.m_allObjects.push(_loc10_);
       }
       
       protected function AddVisualsForBossDoorObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : void
       {
-         var _loc8_:Boolean = false;
-         var _loc9_:Boolean = true;
          var _loc7_:VisualsForBossDoor;
          (_loc7_ = new VisualsForBossDoor()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(_loc9_ || Boolean(param3))
-         {
-            this.m_visualObjects.push(_loc7_);
-            if(!(_loc8_ && Boolean(this)))
-            {
-               §§goto(addr64);
-            }
-            §§goto(addr70);
-         }
-         addr64:
+         this.m_visualObjects.push(_loc7_);
          this.m_interactionObjects.push(_loc7_);
-         if(!_loc8_)
-         {
-            addr70:
-            this.m_allObjects.push(_loc7_);
-         }
+         this.m_allObjects.push(_loc7_);
       }
       
       protected function AddVisualsForEggeryDoorObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : void
       {
-         var _loc8_:Boolean = true;
-         var _loc9_:Boolean = false;
          var _loc7_:BossToEggeryDoorVisuals;
          (_loc7_ = new BossToEggeryDoorVisuals()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(!_loc9_)
-         {
-            this.m_visualObjects.push(_loc7_);
-            if(_loc8_ || Boolean(this))
-            {
-               this.m_interactionObjects.push(_loc7_);
-               if(_loc9_)
-               {
-               }
-               §§goto(addr68);
-            }
-            this.m_allObjects.push(_loc7_);
-         }
-         addr68:
+         this.m_visualObjects.push(_loc7_);
+         this.m_interactionObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
       }
       
       protected function AddBackgroundSoundDistanceObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number, param7:int, param8:Number, param9:Number, param10:int = -99, param11:Boolean = true) : void
       {
-         var _loc13_:Boolean = false;
-         var _loc14_:Boolean = true;
          var _loc12_:SoundDistanceObject;
          (_loc12_ = new SoundDistanceObject(param7,param8,param9,param10)).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(_loc14_ || Boolean(this))
-         {
-            _loc12_.m_isVisible = param11;
-            if(_loc14_)
-            {
-               this.m_visualObjects.push(_loc12_);
-               if(!(_loc13_ && Boolean(param3)))
-               {
-                  this.m_allObjects.push(_loc12_);
-                  if(!_loc13_)
-                  {
-                     this.m_soundDistanceObjects.push(_loc12_);
-                  }
-               }
-            }
-         }
+         _loc12_.m_isVisible = param11;
+         this.m_visualObjects.push(_loc12_);
+         this.m_allObjects.push(_loc12_);
+         this.m_soundDistanceObjects.push(_loc12_);
       }
       
       protected function AddFireTorch(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number, param7:int) : void
       {
-         var _loc9_:Boolean = false;
-         var _loc10_:Boolean = true;
          var _loc8_:FireTorch;
          (_loc8_ = new FireTorch()).m_numberOfFrames = param7;
-         if(_loc10_ || Boolean(param2))
-         {
-            _loc8_.AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-            if(!_loc9_)
-            {
-               addr58:
-               this.m_animationObjects.push(_loc8_);
-               if(!_loc9_)
-               {
-                  this.m_visualObjects.push(_loc8_);
-                  if(!(_loc9_ && Boolean(param3)))
-                  {
-                     addr75:
-                     this.m_allObjects.push(_loc8_);
-                  }
-                  return;
-               }
-            }
-            §§goto(addr75);
-         }
-         §§goto(addr58);
+         _loc8_.AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
+         this.m_animationObjects.push(_loc8_);
+         this.m_visualObjects.push(_loc8_);
+         this.m_allObjects.push(_loc8_);
       }
       
       protected function AddJustVisualObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number) : void
       {
-         var _loc8_:Boolean = true;
-         var _loc9_:Boolean = false;
          var _loc7_:VisualLevelObject;
          (_loc7_ = new VisualLevelObject()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(!_loc9_)
-         {
-            this.m_visualObjects.push(_loc7_);
-            if(_loc8_)
-            {
-               addr46:
-               this.m_allObjects.push(_loc7_);
-            }
-            return;
-         }
-         §§goto(addr46);
+         this.m_visualObjects.push(_loc7_);
+         this.m_allObjects.push(_loc7_);
       }
       
       protected function AddSplashObject(param1:String, param2:int, param3:int, param4:Number, param5:Number, param6:Number, param7:Number, param8:Number, param9:Boolean) : void
       {
-         var _loc11_:Boolean = true;
-         var _loc12_:Boolean = false;
          var _loc10_:RiverSplashObject;
          (_loc10_ = new RiverSplashObject()).AddSpriteFirstTime(param1,param2,param3,param4,param5,param6,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_bottomVisualLayer);
-         if(!(_loc12_ && Boolean(param1)))
-         {
-            _loc10_.m_initialDelay = param7;
-            if(_loc11_ || Boolean(param1))
-            {
-               _loc10_.m_fadeTime = param8;
-               if(_loc11_ || Boolean(param1))
-               {
-               }
-               §§goto(addr88);
-            }
-            _loc10_.m_isImpact = param9;
-            if(!_loc12_)
-            {
-               this.m_visualObjects.push(_loc10_);
-               if(_loc11_ || Boolean(param3))
-               {
-                  §§goto(addr88);
-               }
-            }
-            §§goto(addr88);
-         }
-         addr88:
+         _loc10_.m_initialDelay = param7;
+         _loc10_.m_fadeTime = param8;
+         _loc10_.m_isImpact = param9;
+         this.m_visualObjects.push(_loc10_);
          this.m_allObjects.push(_loc10_);
       }
       
       protected function AddSplashTopObject(param1:String, param2:int, param3:int, param4:int, param5:Number, param6:Number, param7:Number, param8:Number, param9:Number, param10:Boolean) : void
       {
-         var _loc12_:Boolean = false;
-         var _loc13_:Boolean = true;
          var _loc11_:RiverSplashObject;
          (_loc11_ = new RiverSplashObject()).AddSpriteFirstTime(param1,param3,param4,param5,param6,param7,Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_topVisualLayer);
-         if(!(_loc12_ && Boolean(param1)))
-         {
-            _loc11_.m_activationHieghtPoint = param2;
-            _loc11_.m_initialDelay = param8;
-            _loc11_.m_fadeTime = param9;
-            _loc11_.m_isImpact = param10;
-         }
+         _loc11_.m_activationHieghtPoint = param2;
+         _loc11_.m_initialDelay = param8;
+         _loc11_.m_fadeTime = param9;
+         _loc11_.m_isImpact = param10;
          _loc11_.m_arraySpotOfBottomObject = this.m_allObjects.length - 1;
-         if(_loc13_)
-         {
-            this.m_visualObjectWithHeight.push(_loc11_);
-         }
+         this.m_visualObjectWithHeight.push(_loc11_);
          this.m_allObjects.push(_loc11_);
       }
       
       public function CheckForLevelCollisionsWithObject(param1:Sprite) : void
       {
-         var _loc3_:Boolean = true;
-         var _loc4_:Boolean = false;
-         if(!_loc4_)
-         {
-            Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_actionIcon.visible = false;
-         }
+         Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_actionIcon.visible = false;
          var _loc2_:int = 0;
          while(_loc2_ < this.m_collObjects.length)
          {
             if(Singleton.utility.m_collController.RectDisplayObjectCollision(param1,this.m_collObjects[_loc2_].m_currSprite))
             {
-               if(_loc3_)
-               {
-                  this.m_collObjects[_loc2_].OnColl();
-                  if(!_loc3_)
-                  {
-                     continue;
-                  }
-               }
+               this.m_collObjects[_loc2_].OnColl();
             }
             _loc2_++;
-            if(_loc4_)
-            {
-               break;
-            }
          }
       }
       
       public function CheckForWallCollisionsWithObject(param1:Sprite) : Rectangle
       {
-         var _loc4_:Boolean = false;
-         var _loc5_:Boolean = true;
          var _loc2_:Rectangle = null;
          var _loc3_:int = 0;
-         while(true)
+         while(_loc3_ < this.m_wallCollObjects.length)
          {
-            if(_loc3_ < this.m_wallCollObjects.length)
+            if(this.m_wallCollObjects[_loc3_].m_isSolid)
             {
-               if(this.m_wallCollObjects[_loc3_].m_isSolid)
+               _loc2_ = Singleton.utility.m_collController.RectDisplayObjectCollisionReturnIntersectRect(param1,this.m_wallCollObjects[_loc3_].m_currSprite);
+               if(_loc2_.x != 0 && _loc2_.y != 0 && _loc2_.width != 0 && _loc2_.height != 0)
                {
-                  if(_loc4_ && Boolean(param1))
-                  {
-                     continue;
-                  }
-                  _loc2_ = Singleton.utility.m_collController.RectDisplayObjectCollisionReturnIntersectRect(param1,this.m_wallCollObjects[_loc3_].m_currSprite);
-                  §§push(_loc2_.x == 0);
-                  if(!(_loc4_ && Boolean(param1)))
-                  {
-                     §§push(!§§pop());
-                     if(_loc5_ || Boolean(this))
-                     {
-                        §§push(§§pop());
-                        if(_loc5_ || Boolean(_loc2_))
-                        {
-                           if(§§pop())
-                           {
-                              addr81:
-                              §§pop();
-                              §§push(_loc2_.y != 0);
-                              if(!_loc4_)
-                              {
-                                 addr89:
-                                 §§push(§§pop());
-                                 if(_loc5_)
-                                 {
-                                    addr92:
-                                    if(§§pop())
-                                    {
-                                       addr124:
-                                       if(!(_loc4_ && Boolean(_loc2_)))
-                                       {
-                                          §§pop();
-                                          addr105:
-                                          §§push(_loc2_.width != 0);
-                                       }
-                                       if(!§§pop())
-                                       {
-                                          addr126:
-                                          this.m_wallCollObjects[_loc3_].OnColl();
-                                          if(_loc5_)
-                                          {
-                                             break;
-                                          }
-                                          addr135:
-                                          _loc3_++;
-                                          if(!_loc5_)
-                                          {
-                                             §§goto(addr143);
-                                          }
-                                          continue;
-                                       }
-                                       §§goto(addr135);
-                                    }
-                                    §§push(§§pop());
-                                 }
-                                 if(§§pop())
-                                 {
-                                    if(_loc5_)
-                                    {
-                                       §§pop();
-                                       if(!_loc4_)
-                                       {
-                                          §§goto(addr124);
-                                          §§push(_loc2_.height == 0);
-                                       }
-                                       §§goto(addr126);
-                                    }
-                                 }
-                                 §§goto(addr124);
-                              }
-                              §§goto(addr105);
-                           }
-                           §§goto(addr89);
-                        }
-                        §§goto(addr92);
-                     }
-                     §§goto(addr81);
-                  }
-                  §§goto(addr124);
+                  this.m_wallCollObjects[_loc3_].OnColl();
+                  return _loc2_;
                }
-               §§goto(addr135);
             }
-            addr143:
-            return null;
+            _loc3_++;
          }
-         return _loc2_;
+         return null;
       }
       
       public function CheckForHeightCollisionsWithObject(param1:Sprite) : void
       {
-         var _loc5_:Boolean = true;
-         var _loc6_:Boolean = false;
          var _loc3_:Rectangle = null;
          var _loc2_:Rectangle = param1.getRect(Singleton.utility.m_stage);
          var _loc4_:int = 0;
          while(_loc4_ < this.m_visualObjectWithHeight.length)
          {
             _loc3_ = this.m_visualObjectWithHeight[_loc4_].m_currSprite.getRect(Singleton.utility.m_stage);
-            if(!(_loc6_ && Boolean(_loc2_)))
+            if(_loc2_.y + _loc2_.height > _loc3_.y + _loc3_.height - this.m_visualObjectWithHeight[_loc4_].m_activationHieghtPoint)
             {
-               if(_loc2_.y + _loc2_.height > _loc3_.y + _loc3_.height - this.m_visualObjectWithHeight[_loc4_].m_activationHieghtPoint)
-               {
-                  addr69:
-                  this.m_visualObjectWithHeight[_loc4_].m_currSprite.visible = false;
-                  if(!(_loc6_ && Boolean(_loc2_)))
-                  {
-                     this.m_allObjects[this.m_visualObjectWithHeight[_loc4_].m_arraySpotOfBottomObject].m_currSprite.visible = true;
-                     if(!(_loc5_ || Boolean(this)))
-                     {
-                        this.m_allObjects[this.m_visualObjectWithHeight[_loc4_].m_arraySpotOfBottomObject].m_currSprite.visible = false;
-                        addr109:
-                        if(!(_loc5_ || Boolean(_loc3_)))
-                        {
-                           continue;
-                        }
-                     }
-                  }
-                  _loc4_++;
-                  continue;
-               }
-               this.m_visualObjectWithHeight[_loc4_].m_currSprite.visible = true;
-               §§goto(addr109);
+               this.m_visualObjectWithHeight[_loc4_].m_currSprite.visible = false;
+               this.m_allObjects[this.m_visualObjectWithHeight[_loc4_].m_arraySpotOfBottomObject].m_currSprite.visible = true;
             }
-            §§goto(addr69);
+            else
+            {
+               this.m_visualObjectWithHeight[_loc4_].m_currSprite.visible = true;
+               this.m_allObjects[this.m_visualObjectWithHeight[_loc4_].m_arraySpotOfBottomObject].m_currSprite.visible = false;
+            }
+            _loc4_++;
          }
       }
       
       public function DoesHaveRoomTransitionObject(param1:int) : Boolean
       {
-         var _loc4_:Boolean = false;
-         var _loc5_:Boolean = true;
          var _loc3_:RoomTransitionEntryPointObject = null;
          var _loc2_:int = 0;
          while(_loc2_ < this.m_visualObjects.length)
          {
-            §§push(this.m_visualObjects[_loc2_] is RoomTransitionEntryPointObject);
-            if(!_loc5_)
+            if(this.m_visualObjects[_loc2_] is RoomTransitionEntryPointObject)
             {
-               return §§pop();
-            }
-            if(§§pop())
-            {
-               if(!(_loc5_ || Boolean(this)))
-               {
-                  continue;
-               }
                _loc3_ = this.m_visualObjects[_loc2_] as RoomTransitionEntryPointObject;
-               if(!(_loc4_ && Boolean(param1)))
+               if(_loc3_.m_roomComingFrom == param1)
                {
-                  if(_loc3_.m_roomComingFrom == param1)
-                  {
-                     if(_loc5_)
-                     {
-                        return true;
-                     }
-                  }
+                  return true;
                }
             }
             _loc2_++;
-            if(!(_loc5_ || Boolean(this)))
-            {
-               break;
-            }
          }
-         §§goto(addr88);
-         §§push(false);
+         return false;
       }
       
       public function GetTheGotoPositionForTheRoom() : Point
       {
-         var _loc4_:Boolean = true;
-         var _loc5_:Boolean = false;
          var _loc2_:RoomTransitionEntryPointObject = null;
          var _loc3_:MainChar = null;
          var _loc1_:int = 0;
@@ -1456,763 +1670,264 @@ package TopDown.Levels
          {
             if(this.m_visualObjects[_loc1_] is RoomTransitionEntryPointObject)
             {
-               if(!(_loc4_ || Boolean(_loc1_)))
-               {
-                  break;
-               }
                _loc2_ = this.m_visualObjects[_loc1_] as RoomTransitionEntryPointObject;
-               if(_loc4_ || Boolean(_loc3_))
+               if(_loc2_.m_roomComingFrom == Singleton.dynamicData.m_currTransitionID)
                {
-                  if(_loc2_.m_roomComingFrom != Singleton.dynamicData.m_currTransitionID)
-                  {
-                     continue;
-                  }
-               }
-               _loc3_ = Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_mainChar;
-               if(!_loc5_)
-               {
+                  _loc3_ = Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_mainChar;
                   return new Point(_loc2_.m_currSprite.x - 15,_loc2_.m_currSprite.y - 93 + 27);
                }
             }
             _loc1_++;
-            if(!_loc4_)
-            {
-               break;
-            }
          }
          return new Point(1,1);
       }
       
       public function InButtonCollZone(param1:int) : void
       {
-         var _loc5_:Boolean = false;
-         var _loc6_:Boolean = true;
          var _loc3_:BaseInGameInteractionObject = null;
-         §§push(this.m_displayKeyPress);
-         if(!_loc5_)
+         var _loc2_:Boolean = this.m_displayKeyPress;
+         var _loc4_:int = 0;
+         while(_loc4_ < this.m_interactionObjects.length)
          {
-            §§push(§§pop());
-         }
-         var _loc2_:* = §§pop();
-         var _loc4_:* = 0;
-         while(true)
-         {
-            §§push(_loc4_);
-            if(!(_loc5_ && Boolean(param1)))
+            if(this.m_interactionObjects[_loc4_].m_interationID == param1)
             {
-               if(§§pop() >= this.m_interactionObjects.length)
-               {
-                  if(!(_loc5_ && _loc2_))
-                  {
-                     §§push(_loc3_ is HealStone);
-                     if(!_loc5_)
-                     {
-                        if(§§pop())
-                        {
-                           if(!(_loc5_ && Boolean(param1)))
-                           {
-                              _loc2_ = false;
-                              addr82:
-                              §§push(_loc3_ is RegularKeyDoor);
-                              if(_loc6_)
-                              {
-                                 if(§§pop())
-                                 {
-                                    if(_loc6_ || Boolean(this))
-                                    {
-                                       §§push(Singleton.dynamicData);
-                                       if(!(_loc5_ && _loc2_))
-                                       {
-                                          §§push(§§pop().m_hasUnlockedBossDoor);
-                                          if(!(_loc5_ && Boolean(_loc3_)))
-                                          {
-                                             §§push(§§pop());
-                                             if(!_loc5_)
-                                             {
-                                                if(!§§pop())
-                                                {
-                                                   addr117:
-                                                   §§pop();
-                                                   §§push(Singleton.dynamicData);
-                                                   if(_loc6_)
-                                                   {
-                                                      §§push(§§pop().m_currFloorOfTower);
-                                                      if(_loc6_ || Boolean(this))
-                                                      {
-                                                         break;
-                                                      }
-                                                      addr233:
-                                                      _loc4_ = §§pop();
-                                                      §§goto(addr234);
-                                                   }
-                                                   addr157:
-                                                   §§push(§§pop().m_hasUnlockedEggeryDoor);
-                                                   if(!_loc5_)
-                                                   {
-                                                      addr160:
-                                                      if(§§pop())
-                                                      {
-                                                         if(!(_loc5_ && Boolean(this)))
-                                                         {
-                                                            addr169:
-                                                            _loc2_ = false;
-                                                         }
-                                                         addr234:
-                                                         loop1:
-                                                         while(true)
-                                                         {
-                                                            §§push(_loc4_);
-                                                            addr259:
-                                                            while(true)
-                                                            {
-                                                               if(§§pop() >= this.m_interactionObjects.length)
-                                                               {
-                                                                  if(!(_loc5_ && Boolean(_loc3_)))
-                                                                  {
-                                                                     break loop1;
-                                                                  }
-                                                                  §§goto(addr273);
-                                                               }
-                                                               if(this.m_interactionObjects[_loc4_].m_interationID == param1)
-                                                               {
-                                                                  this.m_interactionObjects[_loc4_].OnInteration();
-                                                                  if(!_loc6_)
-                                                                  {
-                                                                     break loop1;
-                                                                  }
-                                                               }
-                                                               continue loop1;
-                                                            }
-                                                         }
-                                                         this.PreformButtonAction(param1);
-                                                         §§goto(addr273);
-                                                      }
-                                                      §§goto(addr170);
-                                                   }
-                                                   §§goto(addr178);
-                                                }
-                                                addr141:
-                                                if(§§pop())
-                                                {
-                                                   addr143:
-                                                   _loc2_ = false;
-                                                   addr144:
-                                                   §§push(_loc3_ is BossToEggeryDoorWall);
-                                                   if(!(_loc5_ && Boolean(this)))
-                                                   {
-                                                      if(§§pop())
-                                                      {
-                                                         addr155:
-                                                         §§goto(addr157);
-                                                         §§push(Singleton.dynamicData);
-                                                      }
-                                                      addr170:
-                                                      §§push(_loc2_);
-                                                      if(!(_loc5_ && Boolean(_loc3_)))
-                                                      {
-                                                         addr178:
-                                                         if(§§pop())
-                                                         {
-                                                            §§push(Singleton.utility);
-                                                            if(_loc6_)
-                                                            {
-                                                               §§push(§§pop().m_screenControllers);
-                                                               if(!_loc5_)
-                                                               {
-                                                                  §§push(§§pop().m_topDownScreen);
-                                                                  if(_loc6_ || Boolean(_loc3_))
-                                                                  {
-                                                                     §§push(§§pop().m_topDownMovementScreen);
-                                                                     if(_loc6_ || Boolean(param1))
-                                                                     {
-                                                                        §§push(§§pop().m_actionIcon);
-                                                                        if(!(_loc5_ && Boolean(param1)))
-                                                                        {
-                                                                           §§pop().TryAndReStartAnimation(param1);
-                                                                           addr217:
-                                                                           §§push(Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_actionIcon);
-                                                                        }
-                                                                        §§pop().visible = true;
-                                                                        §§goto(addr220);
-                                                                     }
-                                                                  }
-                                                               }
-                                                            }
-                                                            §§goto(addr217);
-                                                         }
-                                                      }
-                                                      §§goto(addr220);
-                                                   }
-                                                   §§goto(addr160);
-                                                   addr142:
-                                                }
-                                                §§goto(addr144);
-                                             }
-                                             §§goto(addr117);
-                                          }
-                                          §§goto(addr169);
-                                       }
-                                       §§goto(addr117);
-                                    }
-                                    §§goto(addr155);
-                                 }
-                                 §§goto(addr144);
-                              }
-                              §§goto(addr143);
-                           }
-                           §§goto(addr233);
-                        }
-                        §§goto(addr82);
-                     }
-                     §§goto(addr160);
-                  }
-                  §§goto(addr142);
-               }
-               else
-               {
-                  if(this.m_interactionObjects[_loc4_].m_interationID != param1)
-                  {
-                     continue;
-                  }
-                  if(!_loc5_)
-                  {
-                     this.m_interactionObjects[_loc4_].OnPotentialInteration();
-                     _loc3_ = this.m_interactionObjects[_loc4_];
-                     continue;
-                  }
-               }
-               addr220:
-               if(Input.kp("ENTER","SPACE"))
-               {
-                  §§push(0);
-                  if(_loc6_ || Boolean(this))
-                  {
-                     §§goto(addr233);
-                  }
-                  §§goto(addr259);
-               }
-               addr273:
-               return;
+               this.m_interactionObjects[_loc4_].OnPotentialInteration();
+               _loc3_ = this.m_interactionObjects[_loc4_];
             }
-            break;
+            _loc4_++;
          }
-         §§goto(addr141);
-         §§push(§§pop() >= Singleton.staticData.NUM_OF_FLOORS_IN_THE_STANDARD_TOWER);
+         if(_loc3_ is HealStone)
+         {
+            _loc2_ = false;
+         }
+         if(_loc3_ is RegularKeyDoor)
+         {
+            if(Singleton.dynamicData.m_hasUnlockedBossDoor || Singleton.dynamicData.m_currFloorOfTower >= Singleton.staticData.NUM_OF_FLOORS_IN_THE_STANDARD_TOWER)
+            {
+               _loc2_ = false;
+            }
+         }
+         if(_loc3_ is BossToEggeryDoorWall)
+         {
+            if(Singleton.dynamicData.m_hasUnlockedEggeryDoor)
+            {
+               _loc2_ = false;
+            }
+         }
+         if(_loc2_)
+         {
+            Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_actionIcon.TryAndReStartAnimation(param1);
+            Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_actionIcon.visible = true;
+         }
+         if(Input.kp("ENTER","SPACE"))
+         {
+            _loc4_ = 0;
+            while(_loc4_ < this.m_interactionObjects.length)
+            {
+               if(this.m_interactionObjects[_loc4_].m_interationID == param1)
+               {
+                  this.m_interactionObjects[_loc4_].OnInteration();
+               }
+               _loc4_++;
+            }
+            this.PreformButtonAction(param1);
+         }
       }
       
       public function GetChatBoxForButtonZone(param1:int) : StandardChatBox
       {
-         var _loc4_:Boolean = false;
-         var _loc5_:Boolean = true;
          var _loc3_:StandardChatBox = null;
          var _loc2_:int = 0;
          while(_loc2_ < this.m_visualObjects.length)
          {
             if(this.m_visualObjects[_loc2_] is StandardChatBox)
             {
-               if(_loc4_)
-               {
-                  continue;
-               }
                _loc3_ = this.m_visualObjects[_loc2_] as StandardChatBox;
-               if(_loc5_)
+               if(_loc3_.m_chatBoxID == param1)
                {
-                  if(_loc3_.m_chatBoxID == param1)
-                  {
-                     if(!(_loc4_ && Boolean(param1)))
-                     {
-                        return _loc3_;
-                     }
-                  }
+                  return _loc3_;
                }
             }
             _loc2_++;
-            if(!(_loc5_ || Boolean(_loc3_)))
-            {
-               break;
-            }
          }
          return null;
       }
       
       public function GetEggForButtonZone(param1:int) : VisualsForEgg
       {
-         var _loc4_:Boolean = true;
-         var _loc5_:Boolean = false;
          var _loc3_:VisualsForEgg = null;
          var _loc2_:int = 0;
          while(_loc2_ < this.m_visualObjects.length)
          {
             if(this.m_visualObjects[_loc2_] is VisualsForEgg)
             {
-               if(!_loc5_)
+               _loc3_ = this.m_visualObjects[_loc2_] as VisualsForEgg;
+               if(_loc3_.m_eggID == param1)
                {
-                  _loc3_ = this.m_visualObjects[_loc2_] as VisualsForEgg;
-                  if(!_loc5_)
-                  {
-                     if(_loc3_.m_eggID != param1)
-                     {
-                        continue;
-                     }
-                     if(_loc5_)
-                     {
-                        continue;
-                     }
-                  }
                   return _loc3_;
                }
-               break;
             }
             _loc2_++;
-            if(!_loc4_)
-            {
-               break;
-            }
          }
          return null;
       }
       
       public function GetEggOnTopLayerForButtonZone(param1:int) : VisualsForEgg
       {
-         var _loc4_:Boolean = false;
-         var _loc5_:Boolean = true;
          var _loc3_:VisualsForEgg = null;
          var _loc2_:int = 0;
          while(_loc2_ < this.m_visualObjectWithHeight.length)
          {
             if(this.m_visualObjectWithHeight[_loc2_] is VisualsForEgg)
             {
-               if(_loc4_)
-               {
-                  continue;
-               }
                _loc3_ = this.m_visualObjectWithHeight[_loc2_] as VisualsForEgg;
-               if(!(_loc4_ && Boolean(param1)))
+               if(_loc3_.m_eggID == param1)
                {
-                  if(_loc3_.m_eggID == param1)
-                  {
-                     if(!_loc4_)
-                     {
-                        return _loc3_;
-                     }
-                  }
+                  return _loc3_;
                }
             }
             _loc2_++;
-            if(!(_loc5_ || Boolean(_loc3_)))
-            {
-               break;
-            }
          }
          return null;
       }
       
       public function GetTitanEggForButtonZone(param1:int) : TitanVisualsForEgg
       {
-         var _loc4_:Boolean = false;
-         var _loc5_:Boolean = true;
          var _loc3_:TitanVisualsForEgg = null;
          var _loc2_:int = 0;
          while(_loc2_ < this.m_visualObjects.length)
          {
             if(this.m_visualObjects[_loc2_] is TitanVisualsForEgg)
             {
-               if(_loc4_)
-               {
-                  break;
-               }
                _loc3_ = this.m_visualObjects[_loc2_] as TitanVisualsForEgg;
-               if(_loc5_)
+               if(_loc3_.m_eggID == param1)
                {
-                  if(_loc3_.m_eggID == param1)
-                  {
-                     if(!_loc4_)
-                     {
-                        return _loc3_;
-                     }
-                  }
+                  return _loc3_;
                }
             }
             _loc2_++;
-            if(_loc4_)
-            {
-               break;
-            }
          }
          return null;
       }
       
       public function GetTitanEggOnTopLayerForButtonZone(param1:int) : TitanVisualsForEgg
       {
-         var _loc4_:Boolean = false;
-         var _loc5_:Boolean = true;
          var _loc3_:TitanVisualsForEgg = null;
          var _loc2_:int = 0;
          while(_loc2_ < this.m_visualObjectWithHeight.length)
          {
             if(this.m_visualObjectWithHeight[_loc2_] is TitanVisualsForEgg)
             {
-               if(_loc4_ && Boolean(this))
-               {
-                  break;
-               }
                _loc3_ = this.m_visualObjectWithHeight[_loc2_] as TitanVisualsForEgg;
-               if(_loc5_)
+               if(_loc3_.m_eggID == param1)
                {
-                  if(_loc3_.m_eggID == param1)
-                  {
-                     if(!(_loc4_ && Boolean(_loc3_)))
-                     {
-                        return _loc3_;
-                     }
-                  }
+                  return _loc3_;
                }
             }
             _loc2_++;
-            if(!(_loc5_ || Boolean(param1)))
-            {
-               break;
-            }
          }
          return null;
       }
       
       public function UpdateSoundDistanceObjects(param1:int, param2:int) : void
       {
-         var _loc4_:Boolean = false;
-         var _loc5_:Boolean = true;
          var _loc3_:int = 0;
          while(_loc3_ < this.m_soundDistanceObjects.length)
          {
             this.m_soundDistanceObjects[_loc3_].OnCharMovement(param1,param2);
-            if(!_loc4_)
-            {
-               _loc3_++;
-               if(!_loc5_)
-               {
-                  break;
-               }
-            }
+            _loc3_++;
          }
       }
       
       public function UpdateChatBoxes() : void
       {
-         var _loc3_:Boolean = false;
-         var _loc4_:Boolean = true;
          var _loc2_:StandardChatBox = null;
          var _loc1_:int = 0;
          while(_loc1_ < this.m_visualObjects.length)
          {
             if(this.m_visualObjects[_loc1_] is StandardChatBox)
             {
-               if(_loc3_)
-               {
-                  continue;
-               }
                _loc2_ = this.m_visualObjects[_loc1_] as StandardChatBox;
-               if(_loc4_)
-               {
-                  _loc2_.Update();
-               }
+               _loc2_.Update();
             }
             _loc1_++;
-            if(_loc3_ && Boolean(_loc1_))
-            {
-               break;
-            }
          }
       }
       
       public function UpdateAnimationObjects() : void
       {
-         var _loc2_:Boolean = false;
-         var _loc3_:Boolean = true;
          var _loc1_:int = 0;
          while(_loc1_ < this.m_animationObjects.length)
          {
             this.m_animationObjects[_loc1_].Update();
-            if(!_loc2_)
-            {
-               _loc1_++;
-               if(!_loc3_)
-               {
-                  break;
-               }
-            }
+            _loc1_++;
          }
       }
       
       protected function PreformButtonAction(param1:int) : void
       {
-         var _loc5_:Boolean = true;
-         var _loc6_:Boolean = false;
          var _loc2_:TrainerDataObject = null;
          var _loc3_:StandardChatBox = null;
-         var _loc4_:* = 0;
-         if(_loc5_ || Boolean(this))
+         var _loc4_:int = 0;
+         if(param1 == 0)
          {
-            if(param1 == 0)
+            Singleton.utility.m_soundController.FadeCurrentMusic(0.5,0.5);
+            _loc2_ = Singleton.staticData.m_trainerSystem.LoadTrianer(Singleton.dynamicData.m_currFloorOfTower,Singleton.dynamicData.m_currRoomOfTower);
+            _loc3_ = this.GetChatBoxForButtonZone(param1);
+            if(_loc2_.m_trainerType == TrainerType.HARD_TRAINER && Singleton.dynamicData.m_currFloorOfTower < Singleton.staticData.NUM_OF_FLOORS_IN_THE_STANDARD_TOWER)
             {
-               if(!_loc6_)
+               if(Singleton.dynamicData.IsMapUnlocked())
                {
-                  addr33:
-                  Singleton.utility.m_soundController.FadeCurrentMusic(0.5,0.5);
+                  _loc3_.SetFunctions(this.BringTheMusicVolumeBackup);
+                  _loc3_.BringInWithText("Use the map well.","Qui-tel Trainer");
                }
-               _loc2_ = Singleton.staticData.m_trainerSystem.LoadTrianer(Singleton.dynamicData.m_currFloorOfTower,Singleton.dynamicData.m_currRoomOfTower);
-               _loc3_ = this.GetChatBoxForButtonZone(param1);
-               §§push(_loc2_.m_trainerType);
-               if(!_loc6_)
+               else
                {
-                  §§push(TrainerType.HARD_TRAINER);
-                  if(_loc5_)
-                  {
-                     §§push(§§pop() == §§pop());
-                     if(_loc5_)
-                     {
-                        if(§§pop())
-                        {
-                           if(_loc5_ || Boolean(this))
-                           {
-                              §§pop();
-                              if(_loc5_ || Boolean(param1))
-                              {
-                                 §§push(Singleton.dynamicData);
-                                 if(_loc5_ || Boolean(param1))
-                                 {
-                                    §§push(§§pop().m_currFloorOfTower);
-                                    if(_loc5_ || Boolean(_loc2_))
-                                    {
-                                       §§push(Singleton.staticData.NUM_OF_FLOORS_IN_THE_STANDARD_TOWER);
-                                       if(!(_loc6_ && Boolean(param1)))
-                                       {
-                                          §§push(§§pop() < §§pop());
-                                          if(_loc5_ || Boolean(_loc3_))
-                                          {
-                                             addr119:
-                                             if(§§pop())
-                                             {
-                                                §§push(Singleton.dynamicData);
-                                                if(_loc5_)
-                                                {
-                                                   addr124:
-                                                   §§push(§§pop().IsMapUnlocked());
-                                                   if(!(_loc6_ && Boolean(param1)))
-                                                   {
-                                                      addr132:
-                                                      if(§§pop())
-                                                      {
-                                                         if(_loc5_)
-                                                         {
-                                                            _loc3_.SetFunctions(this.BringTheMusicVolumeBackup);
-                                                            if(_loc5_)
-                                                            {
-                                                               _loc3_.BringInWithText("Use the map well.","Qui-tel Trainer");
-                                                               §§goto(addr163);
-                                                            }
-                                                         }
-                                                         else
-                                                         {
-                                                            addr175:
-                                                            _loc3_.SetFunctions(this.GotoTheBattleScreen);
-                                                            _loc3_.BringInWithText(_loc2_.m_whatTrainerSaysAtStart_notBeaten,_loc2_.m_trainerName);
-                                                            §§push(Singleton.utility);
-                                                            if(!(_loc6_ && Boolean(_loc2_)))
-                                                            {
-                                                               §§push(§§pop().m_screenControllers);
-                                                               if(_loc5_ || Boolean(_loc3_))
-                                                               {
-                                                                  §§push(§§pop().m_topDownScreen);
-                                                                  if(_loc5_ || Boolean(_loc3_))
-                                                                  {
-                                                                     §§push(§§pop().m_topDownMovementScreen);
-                                                                     if(!(_loc6_ && Boolean(this)))
-                                                                     {
-                                                                        §§pop().m_returnChatBox = _loc3_;
-                                                                        if(!_loc6_)
-                                                                        {
-                                                                           addr227:
-                                                                           Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_returnTrianerForChatBox = _loc2_;
-                                                                           if(_loc5_ || Boolean(this))
-                                                                           {
-                                                                           }
-                                                                           §§goto(addr290);
-                                                                        }
-                                                                        addr275:
-                                                                        _loc3_.BringInWithText("You already beat me!   Replay me for exp?",_loc2_.m_trainerName);
-                                                                        _loc3_.SetNumOfStars(_loc4_);
-                                                                        addr290:
-                                                                        return;
-                                                                        addr280:
-                                                                     }
-                                                                  }
-                                                               }
-                                                            }
-                                                            §§goto(addr227);
-                                                         }
-                                                      }
-                                                      else
-                                                      {
-                                                         _loc3_.SetFunctions(this.GiveMap);
-                                                         if(_loc5_)
-                                                         {
-                                                            _loc3_.BringInWithText("Here is a map to help you with this floor.","Qui-tel Trainer");
-                                                            addr163:
-                                                            return;
-                                                         }
-                                                      }
-                                                      §§goto(addr280);
-                                                   }
-                                                   else
-                                                   {
-                                                      addr174:
-                                                      if(!§§pop())
-                                                      {
-                                                         §§goto(addr175);
-                                                      }
-                                                      else
-                                                      {
-                                                         _loc3_.SetFunctions(null,this.GotoTheBattleScreen,this.BringTheMusicVolumeBackup);
-                                                         addr246:
-                                                         §§push(Singleton.dynamicData.GetStarsForCurrentFloorAndRoom());
-                                                         if(!(_loc6_ && Boolean(param1)))
-                                                         {
-                                                            addr254:
-                                                            §§push(§§pop());
-                                                            if(!_loc6_)
-                                                            {
-                                                               addr257:
-                                                               §§push(§§pop());
-                                                               if(_loc5_ || Boolean(_loc2_))
-                                                               {
-                                                                  addr272:
-                                                                  _loc4_ = §§pop();
-                                                               }
-                                                               addr274:
-                                                               if(§§pop() == §§pop())
-                                                               {
-                                                                  §§goto(addr275);
-                                                               }
-                                                               else
-                                                               {
-                                                                  _loc3_.BringInWithText(_loc2_.m_whatTrainerSaysAtStart_alreadyBeaten,_loc2_.m_trainerName);
-                                                               }
-                                                               §§goto(addr275);
-                                                            }
-                                                            §§goto(addr274);
-                                                            §§push(3);
-                                                         }
-                                                         §§goto(addr257);
-                                                      }
-                                                   }
-                                                   §§goto(addr175);
-                                                }
-                                                else
-                                                {
-                                                   addr173:
-                                                   §§goto(addr174);
-                                                   §§push(§§pop().HasBeatenCurrentTrainer());
-                                                }
-                                                §§goto(addr174);
-                                             }
-                                             else
-                                             {
-                                                addr164:
-                                                §§push(Singleton.dynamicData);
-                                                if(!(_loc6_ && Boolean(_loc2_)))
-                                                {
-                                                   §§goto(addr173);
-                                                }
-                                             }
-                                             §§goto(addr246);
-                                          }
-                                          §§goto(addr132);
-                                       }
-                                       §§goto(addr257);
-                                    }
-                                    §§goto(addr254);
-                                 }
-                                 §§goto(addr124);
-                              }
-                              §§goto(addr164);
-                           }
-                           §§goto(addr174);
-                        }
-                        §§goto(addr119);
-                     }
-                     §§goto(addr174);
-                  }
-                  §§goto(addr272);
+                  _loc3_.SetFunctions(this.GiveMap);
+                  _loc3_.BringInWithText("Here is a map to help you with this floor.","Qui-tel Trainer");
                }
-               §§goto(addr257);
+               return;
             }
-            §§goto(addr290);
+            if(!Singleton.dynamicData.HasBeatenCurrentTrainer())
+            {
+               _loc3_.SetFunctions(this.GotoTheBattleScreen);
+               _loc3_.BringInWithText(_loc2_.m_whatTrainerSaysAtStart_notBeaten,_loc2_.m_trainerName);
+               Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_returnChatBox = _loc3_;
+               Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.m_returnTrianerForChatBox = _loc2_;
+            }
+            else
+            {
+               _loc3_.SetFunctions(null,this.GotoTheBattleScreen,this.BringTheMusicVolumeBackup);
+               if((_loc4_ = Singleton.dynamicData.GetStarsForCurrentFloorAndRoom()) == 3)
+               {
+                  _loc3_.BringInWithText("You already beat me!   Replay me for exp?",_loc2_.m_trainerName);
+               }
+               else
+               {
+                  _loc3_.BringInWithText(_loc2_.m_whatTrainerSaysAtStart_alreadyBeaten,_loc2_.m_trainerName);
+               }
+               _loc3_.SetNumOfStars(_loc4_);
+            }
          }
-         §§goto(addr33);
       }
       
       private function GiveMap() : void
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_ || Boolean(this))
-         {
-            Singleton.dynamicData.SetIsMapUnlocked(true);
-            if(!(_loc1_ && Boolean(this)))
-            {
-               addr39:
-               §§push(Singleton.utility);
-               if(!(_loc1_ && Boolean(this)))
-               {
-                  §§pop().m_screenControllers.m_topDownScreen.m_topDownMovementScreen.TurnOnTheMiniMap();
-                  if(!_loc1_)
-                  {
-                     this.BringTheMusicVolumeBackup();
-                     if(_loc2_ || _loc1_)
-                     {
-                        addr72:
-                        Singleton.utility.m_soundController.PlaySound("tower_gettingMap");
-                        addr70:
-                     }
-                     return;
-                  }
-                  §§goto(addr70);
-               }
-            }
-            §§goto(addr72);
-         }
-         §§goto(addr39);
+         Singleton.dynamicData.SetIsMapUnlocked(true);
+         Singleton.utility.m_screenControllers.m_topDownScreen.m_topDownMovementScreen.TurnOnTheMiniMap();
+         this.BringTheMusicVolumeBackup();
+         Singleton.utility.m_soundController.PlaySound("tower_gettingMap");
       }
       
       private function BringTheMusicVolumeBackup() : void
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_)
-         {
-            Singleton.utility.m_soundController.FadeCurrentMusic(1,0.5);
-         }
+         Singleton.utility.m_soundController.FadeCurrentMusic(1,0.5);
       }
       
       private function GotoTheBattleScreen() : void
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_)
-         {
-            §§push(Singleton.utility);
-            if(!(_loc1_ && _loc2_))
-            {
-               §§pop().m_soundController.FadeCurrentMusic(0,0.5);
-               §§goto(addr50);
-            }
-            §§pop().m_screenControllers.SetSceneTo(GameState.BATTLE_SCREEN,true);
-         }
-         addr50:
-         if(_loc2_ || _loc2_)
-         {
-            §§push(Singleton.utility);
-         }
+         Singleton.utility.m_soundController.FadeCurrentMusic(0,0.5);
+         Singleton.utility.m_screenControllers.SetSceneTo(GameState.BATTLE_SCREEN,true);
       }
       
       public function GetLevelObjectAt(param1:int) : VisualLevelObject
@@ -2222,21 +1937,10 @@ package TopDown.Levels
       
       private function CheckForCreateRandomNumberGeneratorWithSeed(param1:int) : void
       {
-         var _loc2_:Boolean = true;
-         var _loc3_:Boolean = false;
-         if(!(_loc3_ && Boolean(this)))
+         if(this.m_randomNumberGenerator == null)
          {
-            if(this.m_randomNumberGenerator == null)
-            {
-               if(!(_loc3_ && Boolean(param1)))
-               {
-                  addr38:
-                  this.m_randomNumberGenerator = new Random(param1);
-               }
-            }
-            return;
+            this.m_randomNumberGenerator = new Random(param1);
          }
-         §§goto(addr38);
       }
    }
 }

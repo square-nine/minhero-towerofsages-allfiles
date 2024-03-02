@@ -8,19 +8,8 @@ package TopDown.LevelObjects
       
       public function BaseLevelCollObject()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_)
-         {
-            super();
-            if(_loc2_ || _loc2_)
-            {
-               addr25:
-               this.m_isSolid = true;
-            }
-            return;
-         }
-         §§goto(addr25);
+         super();
+         this.m_isSolid = true;
       }
       
       public function OnColl() : void

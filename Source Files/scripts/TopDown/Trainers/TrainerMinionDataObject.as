@@ -12,19 +12,8 @@ package TopDown.Trainers
       
       public function TrainerMinionDataObject()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!_loc1_)
-         {
-            super();
-            if(!(_loc1_ && _loc1_))
-            {
-               addr25:
-               this.m_moves = new Vector.<int>();
-            }
-            return;
-         }
-         §§goto(addr25);
+         super();
+         this.m_moves = new Vector.<int>();
       }
    }
 }

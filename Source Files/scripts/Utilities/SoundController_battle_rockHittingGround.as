@@ -9,12 +9,7 @@ package Utilities
       
       public function SoundController_battle_rockHittingGround()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

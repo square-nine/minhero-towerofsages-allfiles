@@ -15,16 +15,8 @@ package BattleSystems.Other
       
       public function AiMoveStruct()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!_loc1_)
-         {
-            super();
-            if(_loc2_ || _loc2_)
-            {
-               this.m_moveThreat = 0;
-            }
-         }
+         super();
+         this.m_moveThreat = 0;
       }
    }
 }

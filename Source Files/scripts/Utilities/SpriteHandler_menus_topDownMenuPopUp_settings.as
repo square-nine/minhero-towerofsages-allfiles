@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_menus_topDownMenuPopUp_settings()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(!_loc2_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

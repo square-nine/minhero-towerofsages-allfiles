@@ -9,12 +9,7 @@ package Utilities
       
       public function SpriteHandler_electricRoom_beakerSet2()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!(_loc1_ && _loc1_))
-         {
-            super();
-         }
+         super();
       }
    }
 }

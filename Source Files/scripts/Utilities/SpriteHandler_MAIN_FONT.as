@@ -2,7 +2,7 @@ package Utilities
 {
    import mx.core.FontAsset;
    
-   [Embed(source="/_assets/5_Preloader_LOADER_FONT___Utilities.SpriteHandler_MAIN_FONT_BurbinCasual.ttf",
+   [Embed(source="/_assets/5_BurbinCasual.ttf",
    fontName="BurbinCasual",
    fontFamily="Burbin Casual NC",
    mimeType="application/x-font",
@@ -18,12 +18,7 @@ package Utilities
       
       public function SpriteHandler_MAIN_FONT()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(_loc2_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

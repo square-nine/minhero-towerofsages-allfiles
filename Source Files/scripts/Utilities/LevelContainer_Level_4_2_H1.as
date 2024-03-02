@@ -9,12 +9,7 @@ package Utilities
       
       public function LevelContainer_Level_4_2_H1()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!_loc1_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

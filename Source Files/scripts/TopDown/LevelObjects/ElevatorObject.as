@@ -10,33 +10,14 @@ package TopDown.LevelObjects
       
       public function ElevatorObject()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!_loc1_)
-         {
-            super();
-         }
+         super();
       }
       
       override public function OnColl() : void
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_)
-         {
-            super.OnColl();
-            if(_loc1_)
-            {
-               Singleton.dynamicData.m_currTransitionID = SpecialRoom.TOWER_FLOOR_SELECT;
-               if(_loc1_ || Boolean(this))
-               {
-                  addr38:
-                  Singleton.utility.m_screenControllers.SetSceneTo(GameState.LEVEL_SELECT_SCREEN);
-               }
-               return;
-            }
-         }
-         §§goto(addr38);
+         super.OnColl();
+         Singleton.dynamicData.m_currTransitionID = SpecialRoom.TOWER_FLOOR_SELECT;
+         Singleton.utility.m_screenControllers.SetSceneTo(GameState.LEVEL_SELECT_SCREEN);
       }
    }
 }

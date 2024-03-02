@@ -9,12 +9,7 @@ package Utilities
       
       public function SoundController_battle_whoosh_falling_object()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_ || _loc1_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

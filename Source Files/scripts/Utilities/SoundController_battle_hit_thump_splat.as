@@ -9,12 +9,7 @@ package Utilities
       
       public function SoundController_battle_hit_thump_splat()
       {
-         var _loc1_:Boolean = false;
-         var _loc2_:Boolean = true;
-         if(!_loc1_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

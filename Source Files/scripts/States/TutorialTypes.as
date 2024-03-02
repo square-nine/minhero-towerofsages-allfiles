@@ -56,94 +56,11 @@ package States
       public static const TUTORIAL_RESURECTION_BATTLE_MOD:int = 25;
       
       public static const NUM_OF_TUTORIALS:int = 26;
-      
-      {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_)
-         {
-            TUTORIAL_MOVEMENT = 0;
-            TUTORIAL_KEY_KEEPERS = 1;
-            TUTORIAL_BATTLE_BASICS = 2;
-            TUTORIAL_MOVE_SELECT = 3;
-            TUTORIAL_ENEMY_SELECT = 4;
-            if(!(_loc2_ && _loc1_))
-            {
-               TUTORIAL_SELECT_YOUR_MINION = 5;
-               if(_loc1_ || _loc2_)
-               {
-                  TUTORIAL_DESELECT_WRONG_MINION = 6;
-                  TUTORIAL_ENERGY = 7;
-                  TUTORIAL_TYPE_EFFECTIVENESS = 8;
-                  TUTORIAL_FOCUS_TARGETS = 9;
-                  if(_loc1_)
-                  {
-                     TUTORIAL_TANKS = 10;
-                     TUTORIAL_HEALERS = 11;
-                     TUTORIAL_GEMS = 12;
-                     TUTORIAL_GEM_MENU = 13;
-                  }
-                  §§goto(addr114);
-               }
-               TUTORIAL_REPLAY_FLOORS = 14;
-               if(_loc1_ || TutorialTypes)
-               {
-                  TUTORIAL_DEATH = 15;
-                  TUTORIAL_DEATH_EXP = 16;
-                  if(!(_loc2_ && TutorialTypes))
-                  {
-                     §§goto(addr103);
-                  }
-                  §§goto(addr149);
-               }
-               addr103:
-               TUTORIAL_SWAP_MINIONS = 17;
-               if(_loc1_)
-               {
-                  TUTORIAL_BOSS_ROOM = 18;
-               }
-               TUTORIAL_DEATH_2 = 19;
-               §§goto(addr114);
-            }
-            addr114:
-            TUTORIAL_DONT_HAVE_TO_BEAT_HARD_AND_EXPERT_TRAINERS = 20;
-            if(!_loc2_)
-            {
-               addr119:
-               TUTORIAL_BONUS_LEVEL = 21;
-            }
-            TUTORIAL_SHIELD_BATTLE_MOD = 22;
-            if(!(_loc2_ && _loc2_))
-            {
-               TUTORIAL_EXTRA_MOVES_BATTLE_MOD = 23;
-               if(!(_loc2_ && _loc1_))
-               {
-                  addr149:
-                  TUTORIAL_EXTRA_MINIONS_BATTLE_MOD = 24;
-                  if(_loc1_ || _loc1_)
-                  {
-                     addr159:
-                     TUTORIAL_RESURECTION_BATTLE_MOD = 25;
-                  }
-                  NUM_OF_TUTORIALS = 26;
-                  §§goto(addr165);
-               }
-               §§goto(addr159);
-            }
-            addr165:
-            return;
-         }
-         §§goto(addr119);
-      }
+       
       
       public function TutorialTypes()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_)
-         {
-            super();
-         }
+         super();
       }
    }
 }

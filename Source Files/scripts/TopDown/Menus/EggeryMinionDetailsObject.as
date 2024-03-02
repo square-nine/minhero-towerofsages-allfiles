@@ -22,181 +22,74 @@ package TopDown.Menus
       
       public function EggeryMinionDetailsObject()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(!(_loc2_ && _loc1_))
-         {
-            super();
-         }
+         super();
       }
       
       private function AddMinionSprite(param1:String) : void
       {
-         var _loc2_:Boolean = true;
-         var _loc3_:Boolean = false;
-         if(!(_loc3_ && _loc2_))
-         {
-            this.m_minionSprite = Singleton.utility.m_spriteHandler.CreateSprite(param1);
-         }
+         this.m_minionSprite = Singleton.utility.m_spriteHandler.CreateSprite(param1);
          this.m_minionSprite.scaleX = -1;
-         if(_loc2_)
-         {
-            this.m_minionSprite.scaleX *= 0.85;
-         }
+         this.m_minionSprite.scaleX *= 0.85;
          this.m_minionSprite.scaleY *= 0.85;
-         if(!_loc3_)
-         {
-            this.m_minionSprite.x = 83 + this.m_minionSprite.width / 2;
-            this.m_minionSprite.y = 145 - this.m_minionSprite.height;
-            addChild(this.m_minionSprite);
-         }
+         this.m_minionSprite.x = 83 + this.m_minionSprite.width / 2;
+         this.m_minionSprite.y = 145 - this.m_minionSprite.height;
+         addChild(this.m_minionSprite);
       }
       
       public function LoadSprites() : void
       {
-         var _loc2_:Boolean = true;
-         var _loc3_:Boolean = false;
-         if(_loc2_ || Boolean(this))
-         {
-            this.m_background = Singleton.utility.m_spriteHandler.CreateSprite("eggery_minionDetailsBackground");
-            if(!_loc3_)
-            {
-               addChild(this.m_background);
-               if(_loc3_)
-               {
-               }
-               addr38:
-               var _loc1_:TextFormat = new TextFormat();
-               _loc1_.color = 10464964;
-               if(_loc2_)
-               {
-                  _loc1_.size = 16;
-                  _loc1_.font = "BurbinCasual";
-                  if(!_loc3_)
-                  {
-                     _loc1_.align = TextFormatAlign.LEFT;
-                     if(_loc2_ || Boolean(_loc1_))
-                     {
-                        this.m_minionNameAndLevelText = new TextField();
-                        this.m_minionNameAndLevelText.x = 14;
-                        this.m_minionNameAndLevelText.y = 9;
-                        this.m_minionNameAndLevelText.embedFonts = true;
-                        if(!_loc3_)
-                        {
-                           this.m_minionNameAndLevelText.defaultTextFormat = _loc1_;
-                           §§goto(addr95);
-                        }
-                        §§goto(addr132);
-                     }
-                     addr95:
-                     this.m_minionNameAndLevelText.text = "lv. 99";
-                     this.m_minionNameAndLevelText.width = 75;
-                     this.m_minionNameAndLevelText.selectable = false;
-                     if(_loc2_ || Boolean(_loc1_))
-                     {
-                        addr114:
-                        addChild(this.m_minionNameAndLevelText);
-                        this.m_minionStatBonusIcon = Singleton.utility.m_spriteHandler.CreateSprite("hud_statBonus_0");
-                        if(!(_loc3_ && Boolean(_loc1_)))
-                        {
-                           addr132:
-                           this.m_minionStatBonusIcon.x = 144;
-                           if(_loc2_)
-                           {
-                              this.m_minionStatBonusIcon.y = 144;
-                              §§goto(addr138);
-                           }
-                        }
-                        §§goto(addr156);
-                     }
-                     addr138:
-                     if(_loc2_ || Boolean(_loc1_))
-                     {
-                        addr156:
-                        addChild(this.m_minionStatBonusIcon);
-                        if(!(_loc3_ && _loc2_))
-                        {
-                           addr167:
-                           visible = false;
-                        }
-                     }
-                     return;
-                  }
-                  §§goto(addr114);
-               }
-               §§goto(addr167);
-            }
-            this.AddMinionSprite("fireMage");
-         }
-         §§goto(addr38);
+         this.m_background = Singleton.utility.m_spriteHandler.CreateSprite("eggery_minionDetailsBackground");
+         addChild(this.m_background);
+         this.AddMinionSprite("fireMage");
+         var _loc1_:TextFormat = new TextFormat();
+         _loc1_.color = 10464964;
+         _loc1_.size = 16;
+         _loc1_.font = "BurbinCasual";
+         _loc1_.align = TextFormatAlign.LEFT;
+         this.m_minionNameAndLevelText = new TextField();
+         this.m_minionNameAndLevelText.x = 14;
+         this.m_minionNameAndLevelText.y = 9;
+         this.m_minionNameAndLevelText.embedFonts = true;
+         this.m_minionNameAndLevelText.defaultTextFormat = _loc1_;
+         this.m_minionNameAndLevelText.text = "lv. 99";
+         this.m_minionNameAndLevelText.width = 75;
+         this.m_minionNameAndLevelText.selectable = false;
+         addChild(this.m_minionNameAndLevelText);
+         this.m_minionStatBonusIcon = Singleton.utility.m_spriteHandler.CreateSprite("hud_statBonus_0");
+         this.m_minionStatBonusIcon.x = 144;
+         this.m_minionStatBonusIcon.y = 144;
+         addChild(this.m_minionStatBonusIcon);
+         visible = false;
       }
       
       public function BringInWithMinion(param1:OwnedMinion) : void
       {
-         var _loc2_:Boolean = false;
-         var _loc3_:Boolean = true;
          removeChild(this.m_minionSprite);
          this.AddMinionSprite(param1.m_baseMinion.m_minionBattleSprite);
          this.m_minionNameAndLevelText.text = "lv. " + param1.m_currLevel;
          visible = true;
          alpha = 0;
-         if(_loc3_ || _loc3_)
-         {
-            scaleX = 0.9;
-         }
+         scaleX = 0.9;
          scaleY = 0.9;
-         if(!_loc2_)
-         {
-            TweenLite.to(this,0.2,{"alpha":1});
-            if(!_loc2_)
-            {
-               removeChild(this.m_minionStatBonusIcon);
-               §§goto(addr71);
-            }
-            §§goto(addr97);
-         }
-         addr71:
-         §§push(this);
-         §§push(Singleton.utility.m_spriteHandler);
-         §§push("hud_statBonus_");
-         if(!(_loc2_ && _loc2_))
-         {
-            §§push(§§pop() + param1.m_statBonus);
-         }
-         §§pop().m_minionStatBonusIcon = §§pop().CreateSprite(§§pop());
-         if(!_loc2_)
-         {
-            addr97:
-            this.m_minionStatBonusIcon.x = 144;
-         }
+         TweenLite.to(this,0.2,{"alpha":1});
+         removeChild(this.m_minionStatBonusIcon);
+         this.m_minionStatBonusIcon = Singleton.utility.m_spriteHandler.CreateSprite("hud_statBonus_" + param1.m_statBonus);
+         this.m_minionStatBonusIcon.x = 144;
          this.m_minionStatBonusIcon.y = 144;
-         if(!(_loc2_ && _loc3_))
-         {
-            addChild(this.m_minionStatBonusIcon);
-         }
+         addChild(this.m_minionStatBonusIcon);
       }
       
       public function ExitOut() : void
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_ || Boolean(this))
-         {
-            TweenLite.to(this,0.2,{
-               "alpha":0,
-               "onComplete":this.FinishExitOut
-            });
-         }
+         TweenLite.to(this,0.2,{
+            "alpha":0,
+            "onComplete":this.FinishExitOut
+         });
       }
       
       private function FinishExitOut() : void
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_ || _loc1_)
-         {
-            visible = false;
-         }
+         visible = false;
       }
    }
 }

@@ -4,17 +4,12 @@ package Utilities
    
    [Embed(source="/_assets/1666_Utilities.LevelContainer_Level_1_1_A.bin", mimeType="application/octet-stream")]
    public class LevelContainer_Level_1_1_A extends ByteArrayAsset
-   {  
+   {
        
       
       public function LevelContainer_Level_1_1_A()
       {
-         var _loc1_:Boolean = true;
-         var _loc2_:Boolean = false;
-         if(_loc1_ || _loc1_)
-         {
-            super();
-         }
+         super();
       }
    }
 }
