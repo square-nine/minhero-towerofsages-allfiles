@@ -175,3 +175,102 @@ LoadUpTheQueueAndPlayMoves -> around 1k lines of just executing a moves
 overall, seems too cumbersome, and hopefully I can rework around it
 
 PlayerMoveSystem, however, seems interesting.
+
+
+Now i can see the light (by exporting properly), time to looksee
+
+Within Singleton.StaticData.CalculateDamageOrHealingAmount:
+
+For damage
+Takes in 5 parameters:
+1: Current move damage
+2: Current additional random damage
+3: Current minion's max attack stat
+4: Current minion's level
+5: [defaults to False] 
+
+For healing
+Takes in 5 parameters:
+1: Current move heal amount
+2: Current additional random healing
+3: Current minion's max healing stat
+4: Current minion's level
+5: [defaults to False] 
+
+For shielding
+Takes in 5 parameters:
+1: Current move shield amount
+2: [defaults to zero]
+3: Current minion's max healing stat
+4: Current minion's level
+5: [defaults to True] 
+
+All use the same formula, which is:
+
+l7 = param1 + param2*math.random()
+l10 = (_loc10_ = (_loc10_ = (_loc10_ = (_loc10_ = param4 * 3 / 5 + 2) * l7) * param3) * 1) / 3000
+the above long formula simplifies into:
+l10 = ((param4 *3/5 + 2)*l7)*param3/3000
+
+so, in eenglis:
+
+multiply the level by 3/5, and then add 2
+then multiple by (current amount + (extra amount * random between 0-1))
+then multiply by max stat and divide by 3000
+
+i guess?
+
+
+Within BaseMoveSystem.ApplyEffectsOfCurrentMove:
+logical talk about it:
+first, setup vars to use:
+var _loc4_:Number = NaN;
+var _loc5_:Number = NaN;
+var _loc6_:Number = NaN;
+var _loc12_:Number = NaN;
+var _loc13_:int = 0;
+var _loc14_:Number = NaN;
+var _loc15_:int = 0;
+var _loc16_:int = 0;
+
+then, subtract energy from minion by the amount of energy cost
+then, if the energy restoring amount is > 0 (i.e exists), then this.m_currMinion.m_currEnergy += this.m_currMinion.m_currEnergyStat * (this.m_currMove.m_energyPercentageRestored / 100)
+then, if the accuracy is less than the "apply miss chance" var, then just return and SetupForCombat
+if continuing:
+set the minion's exhaust time to the move's exhaust time
+set l1 to the damage
+set l2 to the healing amount
+set l3 to the shield amount
+then, if the minion's types equal the move's type, then apply a stab modifier (1.1x) to l1 and l2 
+setup more vars:
+var _loc7_:Number = 1;
+var _loc8_:Vector.<OwnedMinion> = new Vector.<OwnedMinion>();
+var _loc9_:Number = 0;
+var _loc10_:int = 0;
+
+SEARCH FOR ANY MINIONS THAT REDIRECT DAMAGE
+now, while _loc10_ < 5:
+if the this.m_isPlayerMoveSystem is true (i.e if its the player's turn to attack):
+ if there is a minion at index _loc10_ and their health is above zero:
+ if target's redirect damage is above zero:
+ set loc8 to the opponent minion
+ add redirect damage to _loc9_
+ if the move damage is above zero or there is additional random damage:
+ play a redirect animation of the target minion
+ 
+else if(Singleton.dynamicData.GetOwnedMinionAt(_loc10_) != null && Singleton.dynamicData.GetOwnedMinionAt(_loc10_).m_currHealth > 0)
+or: if instead, there is an owned minion at that position and their health is above zero (i.e the enemie's turn and you got a minion able to be targeted)
+ if your minion has redirect damage
+ set loc8 to that minion
+ set loc9 to the redirect damage
+ if the move damage is not zero or there is random damage:
+ play a redirect animation of the target minion
+
+then increase loc10 by one (progress loop)
+
+
+now make loc11 exist as 0
+
+while loc11 is less than the number of enemies it hits:
+ 
+ I'M ON LINE 476 OF DECODING BASEMOVESYSTEM
