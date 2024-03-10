@@ -222,8 +222,9 @@ i guess?
 
 
 Within BaseMoveSystem.ApplyEffectsOfCurrentMove:
-logical talk about it:
-first, setup vars to use:
+more of a half-shitpost half-logic, trust it will be cleared up hopefully later
+
+first, setup vars to use basically placeholders:
 var _loc4_:Number = NaN;
 var _loc5_:Number = NaN;
 var _loc6_:Number = NaN;
@@ -235,7 +236,7 @@ var _loc16_:int = 0;
 
 then, subtract energy from minion by the amount of energy cost
 then, if the energy restoring amount is > 0 (i.e exists), then this.m_currMinion.m_currEnergy += this.m_currMinion.m_currEnergyStat * (this.m_currMove.m_energyPercentageRestored / 100)
-then, if the accuracy is less than the "apply miss chance" var, then just return and SetupForCombat
+then, if the accuracy is less than the "apply miss chance" var, then just return. Essentially  skipping everything else.
 if continuing:
 set the minion's exhaust time to the move's exhaust time
 set l1 to the damage
@@ -243,34 +244,184 @@ set l2 to the healing amount
 set l3 to the shield amount
 then, if the minion's types equal the move's type, then apply a stab modifier (1.1x) to l1 and l2 
 setup more vars:
-var _loc7_:Number = 1;
-var _loc8_:Vector.<OwnedMinion> = new Vector.<OwnedMinion>();
-var _loc9_:Number = 0;
-var _loc10_:int = 0;
+var _loc7_:Number = 1
+var _loc8_:Vector.<OwnedMinion> = new Vector.<OwnedMinion>() # the minion to receive damage
+var _loc9_:Number = 0
+var _loc10_:int = 0  #for the for loop
 
 SEARCH FOR ANY MINIONS THAT REDIRECT DAMAGE
 now, while _loc10_ < 5:
-if the this.m_isPlayerMoveSystem is true (i.e if its the player's turn to attack):
- if there is a minion at index _loc10_ and their health is above zero:
- if target's redirect damage is above zero:
- set loc8 to the opponent minion
- add redirect damage to _loc9_
- if the move damage is above zero or there is additional random damage:
- play a redirect animation of the target minion
+ if the this.m_isPlayerMoveSystem is true (i.e if its the player's turn to attack):
+  if there is a minion at index _loc10_ and their health is above zero:
+  if target's redirect damage is above zero:
+  set loc8 to the opponent minion
+  add redirect damage to _loc9_
+  if the move damage is above zero or there is additional random damage:
+  play a redirect animation of the target minion
+  
+ else if(Singleton.dynamicData.GetOwnedMinionAt(_loc10_) != null && Singleton.dynamicData.GetOwnedMinionAt(_loc10_).m_currHealth > 0)
+ or: if instead, there is an owned minion at that position and their health is above zero (i.e the enemie's turn and you got a minion able to be targeted)
+  if your minion has redirect damage
+  set loc8 to that minion
+  set loc9 to the redirect damage
+  if the move damage is not zero or there is random damage:
+  play a redirect animation of the target minion
  
-else if(Singleton.dynamicData.GetOwnedMinionAt(_loc10_) != null && Singleton.dynamicData.GetOwnedMinionAt(_loc10_).m_currHealth > 0)
-or: if instead, there is an owned minion at that position and their health is above zero (i.e the enemie's turn and you got a minion able to be targeted)
- if your minion has redirect damage
- set loc8 to that minion
- set loc9 to the redirect damage
- if the move damage is not zero or there is random damage:
- play a redirect animation of the target minion
-
-then increase loc10 by one (progress loop)
-
+  then increase loc10 by one (progress loop)
 
 now make loc11 exist as 0
 
 while loc11 is less than the number of enemies it hits:
+ make loc4 equal to loc1, for some reason 
+ if ((_loc7_ = (_loc7_ = (_loc7_ = 1) * Singleton.staticData.CalculateEffectivenessModifier(this.m_currMove.m_moveType,this.m_enemiesItHits[_loc11_].m_baseMinion.m_minionType1)) * Singleton.staticData.CalculateEffectivenessModifier(this.m_currMove.m_moveType,this.m_enemiesItHits[_loc11_].m_baseMinion.m_minionType2)) > 1.4)
+ which means, i think if you multiply the effectiveness and check if it's > 1.4
+        then play the super effective animation
+ if it's instead < 0.7
+         then play the not effective modifier
+ multiply loc4 by loc7 
+ if the crit chance is above random*100
+         double loc4
+         play critical animation 
+ divide loc9 by 100
+ loc12 equals loc4 now
+ loc13 exists now as zero
+ while loc13 is less than len(loc8):
+  loc14 is equal to the ((loc13)th index of loc8) current redirect damage property divided by 100
+  if loc9 is larger than 1:
+   loc15 is equal to loc12 * (loc14/loc9)
+  if not:
+  loc15 is equal to loc12*loc14
+  loc4 gets minused by loc15
+  add to the current minion the health (loc15 *-1* [loc11]th index of enemy reflect damage percent)
+  multiply loc15 by _loc8_[_loc13_].m_currArmorModRate
+  add loc15 * -1 HP to _loc8_[_loc13_]
+  loc13 += 1
  
- I'M ON LINE 476 OF DECODING BASEMOVESYSTEM
+ now do this.m_currMinion.AddToHealth(-_loc4_ * this.m_enemiesItHits[_loc11_].m_currReflectDamagePercentage) 
+ ahh so then apply any damage to self due to the reflect of the minion.
+ then loc4 is multiplied by this.m_enemiesItHits[_loc11_].m_currArmorModRate (the armour of the enemy)
+ then this.m_enemiesItHits[_loc11_].AddToHealth(-_loc4_) (remove loc4 worth of health from current enemy)
+ if this.m_currMove.m_DOTDamage > 0 || this.m_currMove.m_additionalDOTDamage > 0 || this.m_currMove.m_armor != 0 || this.m_currMove.m_setReflectDamageAmount > 0:
+ or: if the DOT damage is above 0 or the additional DOT damage is > 0 or the current move's armour is not 0 or if the move sets a reflect amount > 0:
+  if the enemy doesn't have a mod shield:
+   Add the DOT to the current enemy minion using AddDotOrHot(current move ID, current minion)
+if the ClearBuffsAndDebuffs chance is above random*100:
+ clear the minions buffs and debuffs
+if the current move's freeze chance is above this.m_freezeChance (??):
+ set the current enemy minion to frozen, and set the number of turns of it to zero
+ adjust the tint to 3381759 by 0.5 for the enemy current minion, using the TweenLite module
+if the current move's stun chance is above this.m_stunChance (??):
+ set the current enemy minion to stunned
+ adjust the tint to 16777062 by 0.5 for the enemy current minion using the TweenLite module
+
+ increase loc11 by +1
+
+reset loc11 to zero
+while loc11 is less than the number of allies it hits:
+ _loc5_ = _loc2_
+ _loc6_ = _loc3_
+ if (_loc7_ = (_loc7_ = (_loc7_ = 1) * Singleton.staticData.CalculateHealingEffectivenessModifier(this.m_currMove.m_moveType,this.m_alliesItHits[_loc11_].m_baseMinion.m_minionType1)) * Singleton.staticData.CalculateHealingEffectivenessModifier(this.m_currMove.m_moveType,this.m_alliesItHits[_loc11_].m_baseMinion.m_minionType2)) > 1.4 && _loc5_ > 0)
+ or: if Singleton.staticData.CalculateHealingEffectivenessModifier(this.m_currMove.m_moveType,this.m_alliesItHits[_loc11_].m_baseMinion.m_minionType1) * Singleton.staticData.CalculateHealingEffectivenessModifier(this.m_currMove.m_moveType,this.m_alliesItHits[_loc11_].m_baseMinion.m_minionType2) > 1.4 and loc5 is above zero
+ or: if the product of the healing effectiveness modifiers due to the move and the target ally's first and second types is larger than 1.4 and if loc5 is larger than zero:
+  play the super effective animation
+ else if that product is less than 0.7 and loc5 is greater than zero:
+  play the not effective animation
+ multiply loc5 by loc7
+ if the current minion's crit chance is larger than random *100:
+  double loc5, and if that's larger than zero:
+   play crit hit animation 
+ heal the current ally by loc5 amount
+ shield the current ally by the amount in loc6 
+ if the chance to clear buffs and debuffs is larger than random*100:
+  clear that ally's buffs and debuffs
+ if the move's HOThealing is above zero, or the additional HOT healing is above zero, or the move's armour is not zero, or the amount to set reflect damage is above zero
+  use AddDotOrHot(current move ID, current minion) on the current ally
+ loc11 += 1
+
+now loc1 = Singleton.staticData.CalculateDamageOrHealingAmount(this.m_currMove.m_selfDamage,this.m_currMove.m_additionalRandomSelfDamage,this.m_currMinion.m_maxAttackStat,this.m_currMinion.m_currLevel)
+which just makes loc1 equal the damage or healing amount using CalculateDamageOrHealingAmount, with params of move's self damage, self random additional damage, current minion's ATKstat, current level
+now subtract loc1 from the current minion's health (i.e calculate the initial self damage)
+now subtract -(this.m_currMove.m_selfPercentageDamage / 100) * this.m_currMinion.m_currHealthStat from the current minions health (i.e percentage damage)
+loc2 equals Singleton.staticData.CalculateDamageOrHealingAmount(this.m_currMove.m_selfHeal,this.m_currMove.m_additionalRandomSelfHeal,this.m_currMinion.m_maxHealingStat,this.m_currMinion.m_currLevel)
+which just means to find the self healing amount of the move due to the level+stat of minion
+add loc2 to the current minion
+if the cooldown time is above zer (i.e cooldown exists):
+ add the moveID to the current minion's cooldowns
+if the move does buff itself:
+ loc16 equals zero
+ while loc16 is less than len(move's stat types to buff):
+  if the apply buff chance is less than current move's chance to buff:
+   this.m_currMinion.AddToStatStages(this.m_currMove.m_statTypesToBuff[_loc16_],this.m_currMove.m_stagesOfStatTypeToBuff)
+   or: add to the stats the buff amount at the loc16th index and also the the buff amount recorded in the current move
+  loc16 += 1
+
+if the move does debuff itself:
+ do the same as if it buffed itself, except replacing debuff with buff
+
+if the move does buff targets:
+ for loc11 in range(0, len(alliesItHits)):
+  do the same as if it buffed itself, except replace current minion with the loc11th index of alliesItHits
+ repeat the above except replace allies with enemies
+
+if the move does debuff targets:
+ do the same as if it does buff targets but replace all cases of buffing with debuffing
+
+then, update the minion's health
+
+ 
+
+Now to make sense of this as Python...................................................
+
+OKAY PLS NOT This
+i guess I will just code with da flow, only way for it to work properly
+
+
+1. Setups
+_loc4_ = None
+_loc5_ = None
+_loc6_ = None
+_loc12_ = None
+_loc13_ = 0
+_loc14_ = None
+_loc15_ = 0
+_loc16_ = 0
+
+then, subtract energy from minion by the amount of energy cost
+so, currMinion.energy -= currMove.energycost
+then, add energy from minion by percentage amount if that property exists
+so, if (currMove.energyPercentRestored > 0): currMinion.energy += currMinion.energyStat * currMove.energyPercentRestored /100
+
+if the accuracy is below the chance to miss (global chance for the move)
+return and stop playing the moves.
+
+currMinion.exhaust = currMove.exhaustAmount
+
+2. Get common properties (Damage, Heal, Shield)
+_loc1_ = CalcDamageOrHealing(currMove.damage, currMove.AdditionalDamage, currMinion.maxATK, currMinion.level)
+_loc2_ = CalcDamageOrHealing(currMove.healing, currMove.AdditionalHealing, currMinion.maxHeal, currMinion.level)
+_loc3_ = CalcDamageOrHealing(currMove.ShieldAmount, 0, currMinion.maxHeal, currMinion.level, false)
+
+if either minion type equals the move's moveType1
+so if currMinion.type1 == currMove.type OR currMinion.type2 == currMove.type:
+ loc1 *= 1.1
+ loc2 *= 1.1
+
+setup more vars:
+var _loc7_:Number = 1
+var _loc8_:Vector.<OwnedMinion> = new Vector.<OwnedMinion>() # the minion to receive damage
+var _loc9_:Number = 0
+
+Get redireting minion.
+for loc10 in range(5):
+ if it is the player's move:
+  if there is an opponent at position loc10 and it has health above zero:
+   if that minion has redirect damage:
+    loc8 gets  added with that minion
+    loc9 += that minion's redirect damage
+    if the current move's damage is above zero or there is additional random damage:
+     play a redirected animation
+ else if the player has a minion at position loc10 and its health is above zero:
+  if that minion has redirect damage above zero:
+
+  
+ 

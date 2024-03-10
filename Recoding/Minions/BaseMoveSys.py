@@ -1,0 +1,61 @@
+#see DictOfCodes about why this exists
+
+#but essentially, this will be a place to put all of the modules re-coded
+
+import MoveHandler #proxy for handling special playbacks
+
+
+#constants to be accessed everywhere, all in one dictionary!
+global consts
+consts = {}
+
+def ApplyEffectsOfCurrentMove(currMinion, #the executing minion
+                              currMove, #the move being executed
+                              targets, #all of the targets
+                              StageState # the whole arena, so basically all of the enemies and allies on the board
+                              ):
+    " Call when a move actually needs to be done "
+    #setups - probably can be destroyed
+    _loc4_ = None
+    _loc5_ = None
+    _loc6_ = None
+    _loc12_ = None
+    _loc13_ = 0
+    _loc14_ = None
+    _loc15_ = 0
+    _loc16_ = 0
+    #energy calculations
+    currMinion.energy -= currMove.energycost
+    if currMove.energyPercentRestored > 0: 
+        currMinion.energy += currMinion.energyStat * currMove.energyPercentRestored /100
+    #calculate if move is missed, and continue if not
+    if currMove.accuracy < consts["applyMissChance"]:
+        return "Move has missed!"
+    
+    #claculate exhausts:
+    currMinion.exhaust = currMove.exhaustAmount
+
+    #get common calculations
+    _loc1_ = CalcDamageOrHealing(currMove.damage, currMove.AdditionalDamage, currMinion.maxATK, currMinion.level) #damage of move
+    _loc2_ = CalcDamageOrHealing(currMove.healing, currMove.AdditionalHealing, currMinion.maxHeal, currMinion.level) #healing of move
+    _loc3_ = CalcDamageOrHealing(currMove.ShieldAmount, 0, currMinion.maxHeal, currMinion.level, False) #sheilding of move
+    #check if move is better due to "type resonance"
+    if currMinion.type1 == currMove.type or currMinion.type2 == currMove.type:
+        _loc1_ *= 1.1
+        _loc2_ *= 1.1
+    
+    _loc7_ = 1
+    _loc8_ = [] # the minion(s) to receive effects of move. basically targets, but eHH
+    _loc9_ = 0
+
+    for loc10 in range(5):
+        if isPlayerMove:
+            if targets[loc10].health > 0:
+                if targets[loc10].redirectDamage > 0:
+                    _loc8_.append(targets[loc10])
+                    loc9 += targets[loc10].redirectDamage
+                    if currMove.damage >0 or currMove.AdditionalDamage > 0:
+                        #play redirected animation on the target minion
+        else if the player has a minion at position loc10 and its health is above zero:
+            if that minion has redirect damage above zero:
+
