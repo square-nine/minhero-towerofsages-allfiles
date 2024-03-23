@@ -10,6 +10,35 @@ import random #doing random stuff
 global consts
 consts = {}
 
+global TypeEffectivenessArray
+TypeEffectivenessArray = [
+    #https://minhero.fandom.com/wiki/Elements_List
+    #Normal, Flying, Plant, Water, Earth, Ice, Fire, Electric, Robot, Dino, Undead, Demonic, Holy, Titan
+    #same order downwards
+    [1,1,1,1,1,1,1,1,1,1,1,1,1.5,0.66],
+    [1,1,1.5,1.5,1,1.5,1,0.66,1,1,1,1,1,0.66],
+    [1,1,0.66,1.5,1.5,1,0.66,1,0.66,0.66,1.5,1,1,1],
+    [1,1,0.66,0.66,1.5,1,1.5,0.66,1.5,0.66,1,1.5,0.66,1],
+    [1,1.5,0.66,0.66,0.66,1,1.5,1.5,1,1.5,0.66,1,1,1],
+    [1,1,1.5,1,1,0.66,0.66,1,1,1.5,1,1,1,1.5],
+    [1,1,1.5,0.66,1,1.5,0.66,1,1.5,1,1.5,0.66,1,1],
+    [1,1.5,1,1.5,0.66,1,1,0.66,1.5,0.66,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1.5,1,0.66,0.66,1,1.5,1.5,1,1,1,1,1],
+    [1.5,1,0.66,1,1.5,1,0.66,1,1,1,0.66,0.66,0.66,1],
+    [1.5,1,1.5,1,1,1,0.66,1,1,1,0.66,0.66,1.5,1],
+    [0.66,0.66,1,1,1,1,1,1,1,1,1.5,1.5,0.66,1.5],
+    [1,1,1,1,0.66,1.5,1,1,1,1.5,1,1,0.66,1.5],
+
+]
+
+def CalcEffectivenessMod(movetype1, movetype2=None):
+    '''Returns the effectiveness modifier depending on the types'''
+    if movetype2 == None:
+        return 1
+    else:
+        return 
+
 def CalcDamageOrHealing(damage, extraDamage, minionMax, level, param5=False):
     '''Calculates the damage/healing/shield amount from minion stat + level, and move stats.
        Param5 so far doesn't seem to have an effect, but set it as True for shields (for some reasons)
@@ -27,7 +56,7 @@ def ApplyEffectsOfCurrentMove(currMinion, #the executing minion
                               targets, #all of the targets
                               StageState # the whole arena, so basically all of the enemies and allies on the board
                               ):
-    " Call when a move actually needs to be done "
+    " Call when a move actually needs to be done, essentially the intial implementation."
     #setups - probably can be destroyed
     _loc4_ = None
     _loc5_ = None
@@ -71,7 +100,9 @@ def ApplyEffectsOfCurrentMove(currMinion, #the executing minion
                         #play redirected animation on the target minion
         elif StageState["player"][loc10] != None and StageState["player"][loc10].health > 0:
             if StageState["player"][loc10].redirectDMG > 0:
-                loc8 = StageState["player"][loc10]
+                _loc8_.append(StageState["player"][loc10])
                 loc9 = StageState["player"][loc10].redirectDMG
                 if currMove.damage >0 or currMove.AdditionalDamage > 0:
                     #play redirected animation on the target minion
+    for _loc11_ in range(len(targets)):
+        if CalculateEffectivenessModifier(this.m_currMove.m_moveType,this.m_enemiesItHits[_loc11_].m_baseMinion.m_minionType1) * Singleton.staticData.CalculateEffectivenessModifier(this.m_currMove.m_moveType,this.m_enemiesItHits[_loc11_].m_baseMinion.m_minionType2) > 1.4:
