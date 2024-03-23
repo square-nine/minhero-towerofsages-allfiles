@@ -53,8 +53,8 @@ def CalcDamageOrHealing(damage, extraDamage, minionMax, level, param5=False):
 
 def ApplyEffectsOfCurrentMove(currMinion, #the executing minion
                               currMove, #the move being executed
-                              targets, #all of the targets
-                              StageState # the whole arena, so basically all of the enemies and allies on the board
+                              targets: list, #all of the targets
+                              StageState: list # the whole arena, so basically all of the enemies and allies on the board
                               ):
     " Call when a move actually needs to be done, essentially the intial implementation."
     #setups - probably can be destroyed
@@ -104,5 +104,31 @@ def ApplyEffectsOfCurrentMove(currMinion, #the executing minion
                 loc9 = StageState["player"][loc10].redirectDMG
                 if currMove.damage >0 or currMove.AdditionalDamage > 0:
                     #play redirected animation on the target minion
+        else: raise Exception("Oopsie")
     for _loc11_ in range(len(targets)):
-        if CalculateEffectivenessModifier(this.m_currMove.m_moveType,this.m_enemiesItHits[_loc11_].m_baseMinion.m_minionType1) * Singleton.staticData.CalculateEffectivenessModifier(this.m_currMove.m_moveType,this.m_enemiesItHits[_loc11_].m_baseMinion.m_minionType2) > 1.4:
+        _loc7_ = CalcEffectivenessMod(currMove.type,targets[_loc11_].Type1) * CalcEffectivenessMod(currMove.type,targets[_loc11_].Type2)
+        if _loc7_ > 1.4:
+            print("Super effective!")
+        elif _loc7_ < 0.7:
+            print("Not Effective")
+        else: pass
+        _loc4_ *= _loc7_
+        if critChance > random.random()*100:
+            _loc4_ *= 2
+            print("Critical")
+        _loc9_ = _loc9_/100
+        _loc12_ = _loc4_
+        
+        for _loc13_ in range(len(_loc8_)):
+            _loc14_ = _loc8_[_loc13_].redirectDamage / 100
+            if loc9 > 1:
+                _loc15_ = _loc12_ * (_loc14_/_loc9_)
+            else: _loc15_ = _loc12_ * _loc14_
+            _loc4_ -= _loc15_
+            currMinion.health -= (_loc15_ * StageState[_loc11_].reflectDamagePercent)
+            _loc15_ *= _loc8_[_loc13_].armourModRate
+            _loc8_[_loc13_].health += -_loc15_
+
+        currMinion.health -= (_loc4_ * targets[_loc11_].m_currReflectDamagePercentage) 
+        
+
