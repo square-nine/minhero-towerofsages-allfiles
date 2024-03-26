@@ -1,4 +1,5 @@
 why am I getting distracted from the recoding?
+brought a copy to mess with
 
 it's because if I can understand how the levels can load, I might be able to create my own levels
 if i can do that, it means that not only might it be an easy way to mod, but I can see how the sprites interface, so I can trial out the texturepacks.
@@ -26,6 +27,15 @@ The floor tiles are unneccesarily unique:
 The *tiles* set the backing music, and have a unique generation function for small details on the floor, depending on the floor
 There are music override objects as well (i.e intro), and options to override with a louder/quieter noise
 
+Adding an object ususally requires these parameters:
+The name of the sprite
+X and Y coordinates
+X and Y scaling
+Rotation
+And that seems to be it for visuals :D
+I believe that depending on the name, different things (like overlays) happen as unique identifiers
+
+StaticData seems to reference BaseTopDownLevel a lot
 
 Quite a lot, and this is is not even the actual functions!
 
