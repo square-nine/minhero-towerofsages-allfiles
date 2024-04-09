@@ -1,0 +1,21 @@
+Notes about the save files:
+
+THE FORMAT:
+Files are saved in the .sol format at "~\AppData\Roaming\Macromedia\Flash Player\#SharedObjects" on Windows.
+The .sol format stands for "SharedObject", which means that it stores data useful for the game, but not for reading.
+There will be several .sol files there:
+The "TCrpgInitialData.sol" file stores metadata about each save slot, like the name, stars, seals
+The "TCrpgSaveSlot0" or other numbers from 0-2 represent the save files 1-3 from top-down.
+
+WHY:
+These .sol files are meant to originally be used for cookie data, so technically the save files are nothing more than elaborate cookies!
+
+EDITING:
+If you use .minerva (https://mariani.life/projects/minerva/), you can edit these files.
+Open the link, and then click "Open", then "Choose File", picking a .sol file corresponding to your save location.
+For example, if my save file was the top slot, I'd pick "TCrpgSaveSlot0.sol" as my file.
+When you open it, there will be a looong list to the left. These are all of the configurable settings, and I'll go through them all.
+
+THE SETTINGS:
+There is a maximum of 102 (0-101) minions to 
+
