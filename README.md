@@ -3,7 +3,7 @@ This hosts all of the source files for Min Hero: Tower of Sages, as well as my p
 All credits and rights go to Toy Chest Games, who are the orignal developers of the game
 
 
-##layout
+## layout
 Inside the "Source Files" folder, I have stored the original files.
 
 ALright, not exactly. I have renamed several files to make things easier to read. To get the pure extraced files, follow the instructions below:
