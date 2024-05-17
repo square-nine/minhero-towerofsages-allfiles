@@ -1,4 +1,3 @@
-
 # Editing Min Hero Save Files
 
 Here is a guide to edit save files for Min Hero: Tower of Sages, if you play this game with my provided files or on Flashpoint. Currently unsure about editing/retrieving website save files, so I'd avoid those sites to play Min Hero if you want to be able to back up, modify or share your save file.
