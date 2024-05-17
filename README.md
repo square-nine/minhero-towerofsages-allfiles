@@ -16,8 +16,7 @@ Alright, not exactly. I have renamed several files to make things easier to read
 
 ## Recoding the game
 
-Inside the 'recoding' folder is my current progress in converting the source code from action script to a python-based implementation.
-It's a long, tedial process to rework the original code, already being half-compiled. Any help with menial tasks (database writing, formatting images) would be greatly appreciated!
+You can find a project to re-code the game at [this link].
 
 ## Executeables
 
@@ -42,3 +41,4 @@ GitHub: right here
 [Wine]: https://wiki.winehq.org/Download
 [FlashArch]: https://flasharch.com/en
 [Ruffle]: https://ruffle.rs/
+[this link]: https://github.com/AzzaamNasir/Min-Hero/
