@@ -3,6 +3,8 @@ This hosts all of the source files for Min Hero: Tower of Sages, as well as my p
 All credits and rights for the source files go to Toy Chest Games and their developers, who are the orignal developers of the game
 The "Recoding" and "Executeable" sections are created by me, and feel free to use them!
 
+Archived file: https://archive.org/details/min-hero-flash-file
+
 ## layout
 Inside the "Source Files" folder, I have stored the original files.
 
