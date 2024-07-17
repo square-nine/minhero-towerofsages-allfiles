@@ -34,9 +34,10 @@ Use either [Wine] and use the .exe file or use
 Check the "releases" tag for more information.
 
 message me if you are interested in contributing or supporting:
-discord: square_nine
-Reddit: u/square_nine
+discord: `square_nine`
+Reddit: `u/square_nine`
 GitHub: right here
+email: `minherotowerofsages@gmail.com`
 
 
 [WineBottler]: https://winebottler.kronenberg.org/

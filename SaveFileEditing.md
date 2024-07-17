@@ -31,7 +31,7 @@ Once you have the minion you want, then here's what you can change: These code l
 * The actual minion it is: Type `minion[number]dexID`. This is the ID of the minion it references, for all base stats. 0-101 corresponding to 1-102 in the minion list you can find on the [Wiki](https://minhero.fandom.com/wiki/Minion_List) 
 * The name: Type `minion[number]name`. This is just the name you gave the minion. Not really useful as you can change it anyway in the game.
 * Prescence of a minion: Type `minion[number]`. Lets the game know there is actually a minion there! Essential if you want to spawn a minion in or completely remove one, as it *could* break the game.
-* Moves: Type `minion[number]move[move_num]`. Decides what moves the minion can have, with -99 as a placeholder for no move, and 0-892 being different moves and move tiers in-game. Will try to create a spreadsheet for that to share, but for now just DM me for a specific move.
+* Moves: Type `minion[number]move[move_num]`. Decides what moves the minion can have, with -99 as a placeholder for no move, and 0-892 being different moves and move tiers in-game. See the spreadsheet of moves at [this link](https://drive.google.com/file/d/104KDaUQl1iR7LCvlrjQEwuq0mzWjY_NO/view?usp=sharing)
 
 ### Gem modification:
 There are variables for gems (0-149) and there are gem variables for the minions themselves, but I have yet to experiment with them
