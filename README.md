@@ -1,6 +1,6 @@
-This hosts all of the source files for Min Hero: Tower of Sages, as well as my progress in converting it.
+This hosts all of the source files for Min Hero: Tower of Sages, including a way to play offline and extra information about Min Hero in general.
 
-All credits and rights for the source files go to Toy Chest Games and their developers, who are the orignal developers of the game
+All credits and rights for the source files go to Toy Chest Games and their developers, who are the orignal makers of the game
 The "Recoding" and "Executeable" sections are created by me, and feel free to use them!
 
 Archived file: https://archive.org/details/min-hero-flash-file
@@ -16,32 +16,16 @@ Alright, not exactly. I have renamed several files to make things easier to read
 * Choose the desired output formats, and then click "OK".
 * Choose the destination and done!
 
-## Recoding the game
+## Playing
+Follow instructions in the [Releases](https://github.com/square-nine/minhero-towerofsages-allfiles/releases) section for playing the game.
 
-You can find a project to re-code the game at [this link].
+## Other info:
 
-## Executeables
+### Contact
+Feel free to contact me (details in profile) for any specific questions!
+There is also a [website](https://min-hero.nekoweb.org/) for Min Hero as well for more information!
 
-Inside the "Executeable" folder is the packaged release of the original game as an .exe for Windows-based desktops!
+There is some _special_ development being worked on to bring a remaster of Min Hero. So far, it is very new, but you can get updates that from the Discord server linked in the website.
 
-If you want to play Min Hero on other platforms, please use your respective emulator/compatiability layer to run the .exe or .swf directly, or use another player tool like [Ruffle], or a website like [FlashArch] to run the game!
+Enjoy using this!
 
-### For MacOS:
-Use [WineBottler].
-### For Linux
-Use either [Wine] and use the .exe file or use 
-
-Check the "releases" tag for more information.
-
-message me if you are interested in contributing or supporting:
-discord: `square_nine`
-Reddit: `u/square_nine`
-GitHub: right here
-email: `minherotowerofsages@gmail.com`
-
-
-[WineBottler]: https://winebottler.kronenberg.org/
-[Wine]: https://wiki.winehq.org/Download
-[FlashArch]: https://flasharch.com/en
-[Ruffle]: https://ruffle.rs/
-[this link]: https://github.com/AzzaamNasir/Min-Hero/
