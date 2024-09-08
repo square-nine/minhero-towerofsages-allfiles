@@ -20,6 +20,8 @@ Alright, not exactly. I have renamed several files to make things easier to read
 Follow instructions in the [Releases](https://github.com/square-nine/minhero-towerofsages-allfiles/releases) section for playing the game.
 
 ## Other info:
+The `decrypted_bins` folder contains all of the decrypted `.bin` files from `database/binaryData`
+The `images_sorted` folder contains easier-to-read images than the original names in `images_source`
 
 ### Contact
 Feel free to contact me (details in profile) for any specific questions!
