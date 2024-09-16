@@ -23,6 +23,9 @@ Follow instructions in the [Releases](https://github.com/square-nine/minhero-tow
 The `decrypted_bins` folder contains all of the decrypted `.bin` files from `database/binaryData`
 The `images_sorted` folder contains easier-to-read images than the original names in `images_source`
 
+If you are interested in modding any part of the game, I have started to create a document that compiles everything you will need to know! Currently in the works, but when it's finished it should be a definitive guide.
+Link to the Google Doc [here](https://docs.google.com/document/d/156yBidZdwGSy2RCfFcGovTmjzdml6WdHGLxoREKdkU8/edit?usp=sharing)
+
 ### Contact
 Feel free to contact me (details in profile) for any specific questions!
 There is also a [website](https://min-hero.nekoweb.org/) for Min Hero as well for more information!
