@@ -1,7 +1,7 @@
 This hosts all of the source files for Min Hero: Tower of Sages, including a way to play offline and extra information about Min Hero in general.
+Other Min Hero-related tools are also going to migrate here (like self-made mods)
 
-All credits and rights for the source files go to Toy Chest Games and their developers, who are the orignal makers of the game
-The "Recoding" and "Executeable" sections are created by me, and feel free to use them!
+All credits and rights for the source files go to Toy Chest Games and their developers, who are the orignal makers of the game.
 
 Archived file: https://archive.org/details/min-hero-flash-file
 
@@ -23,8 +23,7 @@ Follow instructions in the [Releases](https://github.com/square-nine/minhero-tow
 The `decrypted_bins` folder contains all of the decrypted `.bin` files from `database/binaryData`
 The `images_sorted` folder contains easier-to-read images than the original names in `images_source`
 
-If you are interested in modding any part of the game, I have started to create a document that compiles everything you will need to know! Currently in the works, but when it's finished it should be a definitive guide.
-Link to the Google Doc [here](https://docs.google.com/document/d/156yBidZdwGSy2RCfFcGovTmjzdml6WdHGLxoREKdkU8/edit?usp=sharing)
+If you are interested in modding any part of the game, I have started to create a document that compiles everything you will need to know! For now, just reach out to me (square_nine) by checking my contact details on my account page!
 
 ### Contact
 Feel free to contact me (details in profile) for any specific questions!
