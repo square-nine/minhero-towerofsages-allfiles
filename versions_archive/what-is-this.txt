@@ -1,0 +1,5 @@
+This acts as an archive of all the versions I have made currently.
+
+v0 -> The "Vanilla" Min Hero. Unmodded
+
+Later versions will be added
